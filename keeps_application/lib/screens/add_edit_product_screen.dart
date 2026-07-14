@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../data/database.dart';
 import '../providers/database_provider.dart';
 import '../services/notification_service.dart';
+import 'package:drift/drift.dart';
 
 class AddEditProductScreen extends ConsumerStatefulWidget {
   const AddEditProductScreen({super.key});

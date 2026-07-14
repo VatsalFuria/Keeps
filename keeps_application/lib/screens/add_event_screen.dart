@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+import 'package:drift/drift.dart';
 import '../data/database.dart';
 import '../providers/database_provider.dart';
 import '../models/event_types.dart';
