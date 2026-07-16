@@ -22,7 +22,12 @@ class ExportService {
     final dir = await getApplicationDocumentsDirectory();
     final file = File('${dir.path}/${product.name.replaceAll(RegExp(r"\s+"), "_")}.json');
     await file.writeAsString(const JsonEncoder.withIndent('  ').convert(payload));
-    await Share.shareXFiles([XFile(file.path)], text: 'Keeps export: ${product.name}');
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(file.path)],
+        text: 'Keeps export: ${product.name}',
+      ),
+    );
   }
 
   // Markdown and PDF export consume the same product+events+journal payload

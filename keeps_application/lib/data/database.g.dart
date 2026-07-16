@@ -11,123 +11,196 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _categoryMeta =
-      const VerificationMeta('category');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _categoryMeta = const VerificationMeta(
+    'category',
+  );
   @override
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'category',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _brandMeta = const VerificationMeta('brand');
   @override
   late final GeneratedColumn<String> brand = GeneratedColumn<String>(
-      'brand', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'brand',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _modelMeta = const VerificationMeta('model');
   @override
   late final GeneratedColumn<String> model = GeneratedColumn<String>(
-      'model', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _serialNumberMeta =
-      const VerificationMeta('serialNumber');
+    'model',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _serialNumberMeta = const VerificationMeta(
+    'serialNumber',
+  );
   @override
   late final GeneratedColumn<String> serialNumber = GeneratedColumn<String>(
-      'serial_number', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'serial_number',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _sellerMeta = const VerificationMeta('seller');
   @override
   late final GeneratedColumn<String> seller = GeneratedColumn<String>(
-      'seller', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _purchaseLocationMeta =
-      const VerificationMeta('purchaseLocation');
+    'seller',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _purchaseLocationMeta = const VerificationMeta(
+    'purchaseLocation',
+  );
   @override
   late final GeneratedColumn<String> purchaseLocation = GeneratedColumn<String>(
-      'purchase_location', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _purchasePriceMeta =
-      const VerificationMeta('purchasePrice');
+    'purchase_location',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _purchasePriceMeta = const VerificationMeta(
+    'purchasePrice',
+  );
   @override
   late final GeneratedColumn<double> purchasePrice = GeneratedColumn<double>(
-      'purchase_price', aliasedName, false,
-      type: DriftSqlType.double,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
-  static const VerificationMeta _purchaseDateMeta =
-      const VerificationMeta('purchaseDate');
+    'purchase_price',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _purchaseDateMeta = const VerificationMeta(
+    'purchaseDate',
+  );
   @override
   late final GeneratedColumn<DateTime> purchaseDate = GeneratedColumn<DateTime>(
-      'purchase_date', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _warrantyExpiryMeta =
-      const VerificationMeta('warrantyExpiry');
+    'purchase_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _warrantyExpiryMeta = const VerificationMeta(
+    'warrantyExpiry',
+  );
   @override
   late final GeneratedColumn<DateTime> warrantyExpiry =
-      GeneratedColumn<DateTime>('warranty_expiry', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+      GeneratedColumn<DateTime>(
+        'warranty_expiry',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   static const VerificationMeta _statusMeta = const VerificationMeta('status');
   @override
   late final GeneratedColumn<String> status = GeneratedColumn<String>(
-      'status', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('Active'));
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('Active'),
+  );
   static const VerificationMeta _expectedLifetimeMonthsMeta =
       const VerificationMeta('expectedLifetimeMonths');
   @override
   late final GeneratedColumn<int> expectedLifetimeMonths = GeneratedColumn<int>(
-      'expected_lifetime_months', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+    'expected_lifetime_months',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _tagsMeta = const VerificationMeta('tags');
   @override
   late final GeneratedColumn<String> tags = GeneratedColumn<String>(
-      'tags', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'tags',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _updatedAtMeta =
-      const VerificationMeta('updatedAt');
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
-      'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        category,
-        brand,
-        model,
-        serialNumber,
-        seller,
-        purchaseLocation,
-        purchasePrice,
-        purchaseDate,
-        warrantyExpiry,
-        status,
-        expectedLifetimeMonths,
-        tags,
-        createdAt,
-        updatedAt
-      ];
+    id,
+    name,
+    category,
+    brand,
+    model,
+    serialNumber,
+    seller,
+    purchaseLocation,
+    purchasePrice,
+    purchaseDate,
+    warrantyExpiry,
+    status,
+    expectedLifetimeMonths,
+    tags,
+    createdAt,
+    updatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'products';
   @override
-  VerificationContext validateIntegrity(Insertable<Product> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<Product> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -137,81 +210,117 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('category')) {
-      context.handle(_categoryMeta,
-          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+      context.handle(
+        _categoryMeta,
+        category.isAcceptableOrUnknown(data['category']!, _categoryMeta),
+      );
     }
     if (data.containsKey('brand')) {
       context.handle(
-          _brandMeta, brand.isAcceptableOrUnknown(data['brand']!, _brandMeta));
+        _brandMeta,
+        brand.isAcceptableOrUnknown(data['brand']!, _brandMeta),
+      );
     }
     if (data.containsKey('model')) {
       context.handle(
-          _modelMeta, model.isAcceptableOrUnknown(data['model']!, _modelMeta));
+        _modelMeta,
+        model.isAcceptableOrUnknown(data['model']!, _modelMeta),
+      );
     }
     if (data.containsKey('serial_number')) {
       context.handle(
+        _serialNumberMeta,
+        serialNumber.isAcceptableOrUnknown(
+          data['serial_number']!,
           _serialNumberMeta,
-          serialNumber.isAcceptableOrUnknown(
-              data['serial_number']!, _serialNumberMeta));
+        ),
+      );
     }
     if (data.containsKey('seller')) {
-      context.handle(_sellerMeta,
-          seller.isAcceptableOrUnknown(data['seller']!, _sellerMeta));
+      context.handle(
+        _sellerMeta,
+        seller.isAcceptableOrUnknown(data['seller']!, _sellerMeta),
+      );
     }
     if (data.containsKey('purchase_location')) {
       context.handle(
+        _purchaseLocationMeta,
+        purchaseLocation.isAcceptableOrUnknown(
+          data['purchase_location']!,
           _purchaseLocationMeta,
-          purchaseLocation.isAcceptableOrUnknown(
-              data['purchase_location']!, _purchaseLocationMeta));
+        ),
+      );
     }
     if (data.containsKey('purchase_price')) {
       context.handle(
+        _purchasePriceMeta,
+        purchasePrice.isAcceptableOrUnknown(
+          data['purchase_price']!,
           _purchasePriceMeta,
-          purchasePrice.isAcceptableOrUnknown(
-              data['purchase_price']!, _purchasePriceMeta));
+        ),
+      );
     }
     if (data.containsKey('purchase_date')) {
       context.handle(
+        _purchaseDateMeta,
+        purchaseDate.isAcceptableOrUnknown(
+          data['purchase_date']!,
           _purchaseDateMeta,
-          purchaseDate.isAcceptableOrUnknown(
-              data['purchase_date']!, _purchaseDateMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_purchaseDateMeta);
     }
     if (data.containsKey('warranty_expiry')) {
       context.handle(
+        _warrantyExpiryMeta,
+        warrantyExpiry.isAcceptableOrUnknown(
+          data['warranty_expiry']!,
           _warrantyExpiryMeta,
-          warrantyExpiry.isAcceptableOrUnknown(
-              data['warranty_expiry']!, _warrantyExpiryMeta));
+        ),
+      );
     }
     if (data.containsKey('status')) {
-      context.handle(_statusMeta,
-          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
     }
     if (data.containsKey('expected_lifetime_months')) {
       context.handle(
+        _expectedLifetimeMonthsMeta,
+        expectedLifetimeMonths.isAcceptableOrUnknown(
+          data['expected_lifetime_months']!,
           _expectedLifetimeMonthsMeta,
-          expectedLifetimeMonths.isAcceptableOrUnknown(
-              data['expected_lifetime_months']!, _expectedLifetimeMonthsMeta));
+        ),
+      );
     }
     if (data.containsKey('tags')) {
       context.handle(
-          _tagsMeta, tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta));
+        _tagsMeta,
+        tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(_updatedAtMeta,
-          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -224,38 +333,70 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
   Product map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Product(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      category: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}category']),
-      brand: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}brand']),
-      model: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}model']),
-      serialNumber: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}serial_number']),
-      seller: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}seller']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      category: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category'],
+      ),
+      brand: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}brand'],
+      ),
+      model: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}model'],
+      ),
+      serialNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}serial_number'],
+      ),
+      seller: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}seller'],
+      ),
       purchaseLocation: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}purchase_location']),
-      purchasePrice: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}purchase_price'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}purchase_location'],
+      ),
+      purchasePrice: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}purchase_price'],
+      )!,
       purchaseDate: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}purchase_date'])!,
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}purchase_date'],
+      )!,
       warrantyExpiry: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}warranty_expiry']),
-      status: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}warranty_expiry'],
+      ),
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
       expectedLifetimeMonths: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}expected_lifetime_months']),
-      tags: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}tags']),
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+        DriftSqlType.int,
+        data['${effectivePrefix}expected_lifetime_months'],
+      ),
+      tags: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tags'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
     );
   }
 
@@ -282,23 +423,24 @@ class Product extends DataClass implements Insertable<Product> {
   final String? tags;
   final DateTime createdAt;
   final DateTime updatedAt;
-  const Product(
-      {required this.id,
-      required this.name,
-      this.category,
-      this.brand,
-      this.model,
-      this.serialNumber,
-      this.seller,
-      this.purchaseLocation,
-      required this.purchasePrice,
-      required this.purchaseDate,
-      this.warrantyExpiry,
-      required this.status,
-      this.expectedLifetimeMonths,
-      this.tags,
-      required this.createdAt,
-      required this.updatedAt});
+  const Product({
+    required this.id,
+    required this.name,
+    this.category,
+    this.brand,
+    this.model,
+    this.serialNumber,
+    this.seller,
+    this.purchaseLocation,
+    required this.purchasePrice,
+    required this.purchaseDate,
+    this.warrantyExpiry,
+    required this.status,
+    this.expectedLifetimeMonths,
+    this.tags,
+    required this.createdAt,
+    required this.updatedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -346,15 +488,18 @@ class Product extends DataClass implements Insertable<Product> {
       category: category == null && nullToAbsent
           ? const Value.absent()
           : Value(category),
-      brand:
-          brand == null && nullToAbsent ? const Value.absent() : Value(brand),
-      model:
-          model == null && nullToAbsent ? const Value.absent() : Value(model),
+      brand: brand == null && nullToAbsent
+          ? const Value.absent()
+          : Value(brand),
+      model: model == null && nullToAbsent
+          ? const Value.absent()
+          : Value(model),
       serialNumber: serialNumber == null && nullToAbsent
           ? const Value.absent()
           : Value(serialNumber),
-      seller:
-          seller == null && nullToAbsent ? const Value.absent() : Value(seller),
+      seller: seller == null && nullToAbsent
+          ? const Value.absent()
+          : Value(seller),
       purchaseLocation: purchaseLocation == null && nullToAbsent
           ? const Value.absent()
           : Value(purchaseLocation),
@@ -373,8 +518,10 @@ class Product extends DataClass implements Insertable<Product> {
     );
   }
 
-  factory Product.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory Product.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Product(
       id: serializer.fromJson<String>(json['id']),
@@ -389,8 +536,9 @@ class Product extends DataClass implements Insertable<Product> {
       purchaseDate: serializer.fromJson<DateTime>(json['purchaseDate']),
       warrantyExpiry: serializer.fromJson<DateTime?>(json['warrantyExpiry']),
       status: serializer.fromJson<String>(json['status']),
-      expectedLifetimeMonths:
-          serializer.fromJson<int?>(json['expectedLifetimeMonths']),
+      expectedLifetimeMonths: serializer.fromJson<int?>(
+        json['expectedLifetimeMonths'],
+      ),
       tags: serializer.fromJson<String?>(json['tags']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
@@ -419,47 +567,47 @@ class Product extends DataClass implements Insertable<Product> {
     };
   }
 
-  Product copyWith(
-          {String? id,
-          String? name,
-          Value<String?> category = const Value.absent(),
-          Value<String?> brand = const Value.absent(),
-          Value<String?> model = const Value.absent(),
-          Value<String?> serialNumber = const Value.absent(),
-          Value<String?> seller = const Value.absent(),
-          Value<String?> purchaseLocation = const Value.absent(),
-          double? purchasePrice,
-          DateTime? purchaseDate,
-          Value<DateTime?> warrantyExpiry = const Value.absent(),
-          String? status,
-          Value<int?> expectedLifetimeMonths = const Value.absent(),
-          Value<String?> tags = const Value.absent(),
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
-      Product(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        category: category.present ? category.value : this.category,
-        brand: brand.present ? brand.value : this.brand,
-        model: model.present ? model.value : this.model,
-        serialNumber:
-            serialNumber.present ? serialNumber.value : this.serialNumber,
-        seller: seller.present ? seller.value : this.seller,
-        purchaseLocation: purchaseLocation.present
-            ? purchaseLocation.value
-            : this.purchaseLocation,
-        purchasePrice: purchasePrice ?? this.purchasePrice,
-        purchaseDate: purchaseDate ?? this.purchaseDate,
-        warrantyExpiry:
-            warrantyExpiry.present ? warrantyExpiry.value : this.warrantyExpiry,
-        status: status ?? this.status,
-        expectedLifetimeMonths: expectedLifetimeMonths.present
-            ? expectedLifetimeMonths.value
-            : this.expectedLifetimeMonths,
-        tags: tags.present ? tags.value : this.tags,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+  Product copyWith({
+    String? id,
+    String? name,
+    Value<String?> category = const Value.absent(),
+    Value<String?> brand = const Value.absent(),
+    Value<String?> model = const Value.absent(),
+    Value<String?> serialNumber = const Value.absent(),
+    Value<String?> seller = const Value.absent(),
+    Value<String?> purchaseLocation = const Value.absent(),
+    double? purchasePrice,
+    DateTime? purchaseDate,
+    Value<DateTime?> warrantyExpiry = const Value.absent(),
+    String? status,
+    Value<int?> expectedLifetimeMonths = const Value.absent(),
+    Value<String?> tags = const Value.absent(),
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => Product(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    category: category.present ? category.value : this.category,
+    brand: brand.present ? brand.value : this.brand,
+    model: model.present ? model.value : this.model,
+    serialNumber: serialNumber.present ? serialNumber.value : this.serialNumber,
+    seller: seller.present ? seller.value : this.seller,
+    purchaseLocation: purchaseLocation.present
+        ? purchaseLocation.value
+        : this.purchaseLocation,
+    purchasePrice: purchasePrice ?? this.purchasePrice,
+    purchaseDate: purchaseDate ?? this.purchaseDate,
+    warrantyExpiry: warrantyExpiry.present
+        ? warrantyExpiry.value
+        : this.warrantyExpiry,
+    status: status ?? this.status,
+    expectedLifetimeMonths: expectedLifetimeMonths.present
+        ? expectedLifetimeMonths.value
+        : this.expectedLifetimeMonths,
+    tags: tags.present ? tags.value : this.tags,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
   Product copyWithCompanion(ProductsCompanion data) {
     return Product(
       id: data.id.present ? data.id.value : this.id,
@@ -518,22 +666,23 @@ class Product extends DataClass implements Insertable<Product> {
 
   @override
   int get hashCode => Object.hash(
-      id,
-      name,
-      category,
-      brand,
-      model,
-      serialNumber,
-      seller,
-      purchaseLocation,
-      purchasePrice,
-      purchaseDate,
-      warrantyExpiry,
-      status,
-      expectedLifetimeMonths,
-      tags,
-      createdAt,
-      updatedAt);
+    id,
+    name,
+    category,
+    brand,
+    model,
+    serialNumber,
+    seller,
+    purchaseLocation,
+    purchasePrice,
+    purchaseDate,
+    warrantyExpiry,
+    status,
+    expectedLifetimeMonths,
+    tags,
+    createdAt,
+    updatedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -611,11 +760,11 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
-        purchaseDate = Value(purchaseDate),
-        createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt);
+  }) : id = Value(id),
+       name = Value(name),
+       purchaseDate = Value(purchaseDate),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
   static Insertable<Product> custom({
     Expression<String>? id,
     Expression<String>? name,
@@ -657,24 +806,25 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     });
   }
 
-  ProductsCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? name,
-      Value<String?>? category,
-      Value<String?>? brand,
-      Value<String?>? model,
-      Value<String?>? serialNumber,
-      Value<String?>? seller,
-      Value<String?>? purchaseLocation,
-      Value<double>? purchasePrice,
-      Value<DateTime>? purchaseDate,
-      Value<DateTime?>? warrantyExpiry,
-      Value<String>? status,
-      Value<int?>? expectedLifetimeMonths,
-      Value<String?>? tags,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
-      Value<int>? rowid}) {
+  ProductsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? name,
+    Value<String?>? category,
+    Value<String?>? brand,
+    Value<String?>? model,
+    Value<String?>? serialNumber,
+    Value<String?>? seller,
+    Value<String?>? purchaseLocation,
+    Value<double>? purchasePrice,
+    Value<DateTime>? purchaseDate,
+    Value<DateTime?>? warrantyExpiry,
+    Value<String>? status,
+    Value<int?>? expectedLifetimeMonths,
+    Value<String?>? tags,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
     return ProductsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -737,8 +887,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       map['status'] = Variable<String>(status.value);
     }
     if (expectedLifetimeMonths.present) {
-      map['expected_lifetime_months'] =
-          Variable<int>(expectedLifetimeMonths.value);
+      map['expected_lifetime_months'] = Variable<int>(
+        expectedLifetimeMonths.value,
+      );
     }
     if (tags.present) {
       map['tags'] = Variable<String>(tags.value);
@@ -788,69 +939,108 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _productIdMeta =
-      const VerificationMeta('productId');
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _productIdMeta = const VerificationMeta(
+    'productId',
+  );
   @override
   late final GeneratedColumn<String> productId = GeneratedColumn<String>(
-      'product_id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES products (id)'));
+    'product_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES products (id)',
+    ),
+  );
   static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
   late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
-      'date', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
-      'type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _costMeta = const VerificationMeta('cost');
   @override
   late final GeneratedColumn<double> cost = GeneratedColumn<double>(
-      'cost', aliasedName, true,
-      type: DriftSqlType.double, requiredDuringInsert: false);
-  static const VerificationMeta _warrantyExpiryMeta =
-      const VerificationMeta('warrantyExpiry');
+    'cost',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _warrantyExpiryMeta = const VerificationMeta(
+    'warrantyExpiry',
+  );
   @override
   late final GeneratedColumn<DateTime> warrantyExpiry =
-      GeneratedColumn<DateTime>('warranty_expiry', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _markdownNoteMeta =
-      const VerificationMeta('markdownNote');
+      GeneratedColumn<DateTime>(
+        'warranty_expiry',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _markdownNoteMeta = const VerificationMeta(
+    'markdownNote',
+  );
   @override
   late final GeneratedColumn<String> markdownNote = GeneratedColumn<String>(
-      'markdown_note', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'markdown_note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        productId,
-        date,
-        type,
-        cost,
-        warrantyExpiry,
-        markdownNote,
-        createdAt
-      ];
+    id,
+    productId,
+    date,
+    type,
+    cost,
+    warrantyExpiry,
+    markdownNote,
+    createdAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'events';
   @override
-  VerificationContext validateIntegrity(Insertable<Event> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<Event> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -859,42 +1049,58 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
       context.missing(_idMeta);
     }
     if (data.containsKey('product_id')) {
-      context.handle(_productIdMeta,
-          productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta));
+      context.handle(
+        _productIdMeta,
+        productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_productIdMeta);
     }
     if (data.containsKey('date')) {
       context.handle(
-          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
     } else if (isInserting) {
       context.missing(_dateMeta);
     }
     if (data.containsKey('type')) {
       context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+        _typeMeta,
+        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
+      );
     } else if (isInserting) {
       context.missing(_typeMeta);
     }
     if (data.containsKey('cost')) {
       context.handle(
-          _costMeta, cost.isAcceptableOrUnknown(data['cost']!, _costMeta));
+        _costMeta,
+        cost.isAcceptableOrUnknown(data['cost']!, _costMeta),
+      );
     }
     if (data.containsKey('warranty_expiry')) {
       context.handle(
+        _warrantyExpiryMeta,
+        warrantyExpiry.isAcceptableOrUnknown(
+          data['warranty_expiry']!,
           _warrantyExpiryMeta,
-          warrantyExpiry.isAcceptableOrUnknown(
-              data['warranty_expiry']!, _warrantyExpiryMeta));
+        ),
+      );
     }
     if (data.containsKey('markdown_note')) {
       context.handle(
+        _markdownNoteMeta,
+        markdownNote.isAcceptableOrUnknown(
+          data['markdown_note']!,
           _markdownNoteMeta,
-          markdownNote.isAcceptableOrUnknown(
-              data['markdown_note']!, _markdownNoteMeta));
+        ),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
@@ -907,22 +1113,38 @@ class $EventsTable extends Events with TableInfo<$EventsTable, Event> {
   Event map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Event(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      productId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}product_id'])!,
-      date: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
-      type: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
-      cost: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}cost']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      productId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}product_id'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+      cost: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}cost'],
+      ),
       warrantyExpiry: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}warranty_expiry']),
-      markdownNote: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}markdown_note']),
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}warranty_expiry'],
+      ),
+      markdownNote: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}markdown_note'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
     );
   }
 
@@ -941,15 +1163,16 @@ class Event extends DataClass implements Insertable<Event> {
   final DateTime? warrantyExpiry;
   final String? markdownNote;
   final DateTime createdAt;
-  const Event(
-      {required this.id,
-      required this.productId,
-      required this.date,
-      required this.type,
-      this.cost,
-      this.warrantyExpiry,
-      this.markdownNote,
-      required this.createdAt});
+  const Event({
+    required this.id,
+    required this.productId,
+    required this.date,
+    required this.type,
+    this.cost,
+    this.warrantyExpiry,
+    this.markdownNote,
+    required this.createdAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -987,8 +1210,10 @@ class Event extends DataClass implements Insertable<Event> {
     );
   }
 
-  factory Event.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory Event.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Event(
       id: serializer.fromJson<String>(json['id']),
@@ -1016,27 +1241,27 @@ class Event extends DataClass implements Insertable<Event> {
     };
   }
 
-  Event copyWith(
-          {String? id,
-          String? productId,
-          DateTime? date,
-          String? type,
-          Value<double?> cost = const Value.absent(),
-          Value<DateTime?> warrantyExpiry = const Value.absent(),
-          Value<String?> markdownNote = const Value.absent(),
-          DateTime? createdAt}) =>
-      Event(
-        id: id ?? this.id,
-        productId: productId ?? this.productId,
-        date: date ?? this.date,
-        type: type ?? this.type,
-        cost: cost.present ? cost.value : this.cost,
-        warrantyExpiry:
-            warrantyExpiry.present ? warrantyExpiry.value : this.warrantyExpiry,
-        markdownNote:
-            markdownNote.present ? markdownNote.value : this.markdownNote,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  Event copyWith({
+    String? id,
+    String? productId,
+    DateTime? date,
+    String? type,
+    Value<double?> cost = const Value.absent(),
+    Value<DateTime?> warrantyExpiry = const Value.absent(),
+    Value<String?> markdownNote = const Value.absent(),
+    DateTime? createdAt,
+  }) => Event(
+    id: id ?? this.id,
+    productId: productId ?? this.productId,
+    date: date ?? this.date,
+    type: type ?? this.type,
+    cost: cost.present ? cost.value : this.cost,
+    warrantyExpiry: warrantyExpiry.present
+        ? warrantyExpiry.value
+        : this.warrantyExpiry,
+    markdownNote: markdownNote.present ? markdownNote.value : this.markdownNote,
+    createdAt: createdAt ?? this.createdAt,
+  );
   Event copyWithCompanion(EventsCompanion data) {
     return Event(
       id: data.id.present ? data.id.value : this.id,
@@ -1071,7 +1296,15 @@ class Event extends DataClass implements Insertable<Event> {
 
   @override
   int get hashCode => Object.hash(
-      id, productId, date, type, cost, warrantyExpiry, markdownNote, createdAt);
+    id,
+    productId,
+    date,
+    type,
+    cost,
+    warrantyExpiry,
+    markdownNote,
+    createdAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1117,11 +1350,11 @@ class EventsCompanion extends UpdateCompanion<Event> {
     this.markdownNote = const Value.absent(),
     required DateTime createdAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        productId = Value(productId),
-        date = Value(date),
-        type = Value(type),
-        createdAt = Value(createdAt);
+  }) : id = Value(id),
+       productId = Value(productId),
+       date = Value(date),
+       type = Value(type),
+       createdAt = Value(createdAt);
   static Insertable<Event> custom({
     Expression<String>? id,
     Expression<String>? productId,
@@ -1146,16 +1379,17 @@ class EventsCompanion extends UpdateCompanion<Event> {
     });
   }
 
-  EventsCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? productId,
-      Value<DateTime>? date,
-      Value<String>? type,
-      Value<double?>? cost,
-      Value<DateTime?>? warrantyExpiry,
-      Value<String?>? markdownNote,
-      Value<DateTime>? createdAt,
-      Value<int>? rowid}) {
+  EventsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? productId,
+    Value<DateTime>? date,
+    Value<String>? type,
+    Value<double?>? cost,
+    Value<DateTime?>? warrantyExpiry,
+    Value<String?>? markdownNote,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
     return EventsCompanion(
       id: id ?? this.id,
       productId: productId ?? this.productId,
@@ -1228,29 +1462,48 @@ class $JournalRevisionsTable extends JournalRevisions
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _productIdMeta =
-      const VerificationMeta('productId');
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _productIdMeta = const VerificationMeta(
+    'productId',
+  );
   @override
   late final GeneratedColumn<String> productId = GeneratedColumn<String>(
-      'product_id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES products (id)'));
-  static const VerificationMeta _contentMeta =
-      const VerificationMeta('content');
+    'product_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES products (id)',
+    ),
+  );
+  static const VerificationMeta _contentMeta = const VerificationMeta(
+    'content',
+  );
   @override
   late final GeneratedColumn<String> content = GeneratedColumn<String>(
-      'content', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'content',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, productId, content, createdAt];
   @override
@@ -1259,8 +1512,10 @@ class $JournalRevisionsTable extends JournalRevisions
   String get actualTableName => $name;
   static const String $name = 'journal_revisions';
   @override
-  VerificationContext validateIntegrity(Insertable<JournalRevision> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<JournalRevision> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1269,20 +1524,26 @@ class $JournalRevisionsTable extends JournalRevisions
       context.missing(_idMeta);
     }
     if (data.containsKey('product_id')) {
-      context.handle(_productIdMeta,
-          productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta));
+      context.handle(
+        _productIdMeta,
+        productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_productIdMeta);
     }
     if (data.containsKey('content')) {
-      context.handle(_contentMeta,
-          content.isAcceptableOrUnknown(data['content']!, _contentMeta));
+      context.handle(
+        _contentMeta,
+        content.isAcceptableOrUnknown(data['content']!, _contentMeta),
+      );
     } else if (isInserting) {
       context.missing(_contentMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
@@ -1295,14 +1556,22 @@ class $JournalRevisionsTable extends JournalRevisions
   JournalRevision map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return JournalRevision(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      productId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}product_id'])!,
-      content: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      productId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}product_id'],
+      )!,
+      content: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}content'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
     );
   }
 
@@ -1317,11 +1586,12 @@ class JournalRevision extends DataClass implements Insertable<JournalRevision> {
   final String productId;
   final String content;
   final DateTime createdAt;
-  const JournalRevision(
-      {required this.id,
-      required this.productId,
-      required this.content,
-      required this.createdAt});
+  const JournalRevision({
+    required this.id,
+    required this.productId,
+    required this.content,
+    required this.createdAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1341,8 +1611,10 @@ class JournalRevision extends DataClass implements Insertable<JournalRevision> {
     );
   }
 
-  factory JournalRevision.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory JournalRevision.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return JournalRevision(
       id: serializer.fromJson<String>(json['id']),
@@ -1362,17 +1634,17 @@ class JournalRevision extends DataClass implements Insertable<JournalRevision> {
     };
   }
 
-  JournalRevision copyWith(
-          {String? id,
-          String? productId,
-          String? content,
-          DateTime? createdAt}) =>
-      JournalRevision(
-        id: id ?? this.id,
-        productId: productId ?? this.productId,
-        content: content ?? this.content,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  JournalRevision copyWith({
+    String? id,
+    String? productId,
+    String? content,
+    DateTime? createdAt,
+  }) => JournalRevision(
+    id: id ?? this.id,
+    productId: productId ?? this.productId,
+    content: content ?? this.content,
+    createdAt: createdAt ?? this.createdAt,
+  );
   JournalRevision copyWithCompanion(JournalRevisionsCompanion data) {
     return JournalRevision(
       id: data.id.present ? data.id.value : this.id,
@@ -1424,10 +1696,10 @@ class JournalRevisionsCompanion extends UpdateCompanion<JournalRevision> {
     required String content,
     required DateTime createdAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        productId = Value(productId),
-        content = Value(content),
-        createdAt = Value(createdAt);
+  }) : id = Value(id),
+       productId = Value(productId),
+       content = Value(content),
+       createdAt = Value(createdAt);
   static Insertable<JournalRevision> custom({
     Expression<String>? id,
     Expression<String>? productId,
@@ -1444,12 +1716,13 @@ class JournalRevisionsCompanion extends UpdateCompanion<JournalRevision> {
     });
   }
 
-  JournalRevisionsCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? productId,
-      Value<String>? content,
-      Value<DateTime>? createdAt,
-      Value<int>? rowid}) {
+  JournalRevisionsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? productId,
+    Value<String>? content,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
     return JournalRevisionsCompanion(
       id: id ?? this.id,
       productId: productId ?? this.productId,
@@ -1502,60 +1775,102 @@ class $AttachmentsTable extends Attachments
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _productIdMeta =
-      const VerificationMeta('productId');
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _productIdMeta = const VerificationMeta(
+    'productId',
+  );
   @override
   late final GeneratedColumn<String> productId = GeneratedColumn<String>(
-      'product_id', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES products (id)'));
-  static const VerificationMeta _eventIdMeta =
-      const VerificationMeta('eventId');
+    'product_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES products (id)',
+    ),
+  );
+  static const VerificationMeta _eventIdMeta = const VerificationMeta(
+    'eventId',
+  );
   @override
   late final GeneratedColumn<String> eventId = GeneratedColumn<String>(
-      'event_id', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES events (id)'));
+    'event_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES events (id)',
+    ),
+  );
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
-      'type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _filePathMeta =
-      const VerificationMeta('filePath');
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _filePathMeta = const VerificationMeta(
+    'filePath',
+  );
   @override
   late final GeneratedColumn<String> filePath = GeneratedColumn<String>(
-      'file_path', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _thumbnailPathMeta =
-      const VerificationMeta('thumbnailPath');
+    'file_path',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _thumbnailPathMeta = const VerificationMeta(
+    'thumbnailPath',
+  );
   @override
   late final GeneratedColumn<String> thumbnailPath = GeneratedColumn<String>(
-      'thumbnail_path', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'thumbnail_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, productId, eventId, type, filePath, thumbnailPath, createdAt];
+  List<GeneratedColumn> get $columns => [
+    id,
+    productId,
+    eventId,
+    type,
+    filePath,
+    thumbnailPath,
+    createdAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'attachments';
   @override
-  VerificationContext validateIntegrity(Insertable<Attachment> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<Attachment> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1564,34 +1879,47 @@ class $AttachmentsTable extends Attachments
       context.missing(_idMeta);
     }
     if (data.containsKey('product_id')) {
-      context.handle(_productIdMeta,
-          productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta));
+      context.handle(
+        _productIdMeta,
+        productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta),
+      );
     }
     if (data.containsKey('event_id')) {
-      context.handle(_eventIdMeta,
-          eventId.isAcceptableOrUnknown(data['event_id']!, _eventIdMeta));
+      context.handle(
+        _eventIdMeta,
+        eventId.isAcceptableOrUnknown(data['event_id']!, _eventIdMeta),
+      );
     }
     if (data.containsKey('type')) {
       context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+        _typeMeta,
+        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
+      );
     } else if (isInserting) {
       context.missing(_typeMeta);
     }
     if (data.containsKey('file_path')) {
-      context.handle(_filePathMeta,
-          filePath.isAcceptableOrUnknown(data['file_path']!, _filePathMeta));
+      context.handle(
+        _filePathMeta,
+        filePath.isAcceptableOrUnknown(data['file_path']!, _filePathMeta),
+      );
     } else if (isInserting) {
       context.missing(_filePathMeta);
     }
     if (data.containsKey('thumbnail_path')) {
       context.handle(
+        _thumbnailPathMeta,
+        thumbnailPath.isAcceptableOrUnknown(
+          data['thumbnail_path']!,
           _thumbnailPathMeta,
-          thumbnailPath.isAcceptableOrUnknown(
-              data['thumbnail_path']!, _thumbnailPathMeta));
+        ),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
@@ -1604,20 +1932,34 @@ class $AttachmentsTable extends Attachments
   Attachment map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Attachment(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      productId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}product_id']),
-      eventId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}event_id']),
-      type: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
-      filePath: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}file_path'])!,
-      thumbnailPath: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}thumbnail_path']),
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      productId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}product_id'],
+      ),
+      eventId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}event_id'],
+      ),
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+      filePath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}file_path'],
+      )!,
+      thumbnailPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}thumbnail_path'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
     );
   }
 
@@ -1635,14 +1977,15 @@ class Attachment extends DataClass implements Insertable<Attachment> {
   final String filePath;
   final String? thumbnailPath;
   final DateTime createdAt;
-  const Attachment(
-      {required this.id,
-      this.productId,
-      this.eventId,
-      required this.type,
-      required this.filePath,
-      this.thumbnailPath,
-      required this.createdAt});
+  const Attachment({
+    required this.id,
+    this.productId,
+    this.eventId,
+    required this.type,
+    required this.filePath,
+    this.thumbnailPath,
+    required this.createdAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1680,8 +2023,10 @@ class Attachment extends DataClass implements Insertable<Attachment> {
     );
   }
 
-  factory Attachment.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory Attachment.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Attachment(
       id: serializer.fromJson<String>(json['id']),
@@ -1707,24 +2052,25 @@ class Attachment extends DataClass implements Insertable<Attachment> {
     };
   }
 
-  Attachment copyWith(
-          {String? id,
-          Value<String?> productId = const Value.absent(),
-          Value<String?> eventId = const Value.absent(),
-          String? type,
-          String? filePath,
-          Value<String?> thumbnailPath = const Value.absent(),
-          DateTime? createdAt}) =>
-      Attachment(
-        id: id ?? this.id,
-        productId: productId.present ? productId.value : this.productId,
-        eventId: eventId.present ? eventId.value : this.eventId,
-        type: type ?? this.type,
-        filePath: filePath ?? this.filePath,
-        thumbnailPath:
-            thumbnailPath.present ? thumbnailPath.value : this.thumbnailPath,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  Attachment copyWith({
+    String? id,
+    Value<String?> productId = const Value.absent(),
+    Value<String?> eventId = const Value.absent(),
+    String? type,
+    String? filePath,
+    Value<String?> thumbnailPath = const Value.absent(),
+    DateTime? createdAt,
+  }) => Attachment(
+    id: id ?? this.id,
+    productId: productId.present ? productId.value : this.productId,
+    eventId: eventId.present ? eventId.value : this.eventId,
+    type: type ?? this.type,
+    filePath: filePath ?? this.filePath,
+    thumbnailPath: thumbnailPath.present
+        ? thumbnailPath.value
+        : this.thumbnailPath,
+    createdAt: createdAt ?? this.createdAt,
+  );
   Attachment copyWithCompanion(AttachmentsCompanion data) {
     return Attachment(
       id: data.id.present ? data.id.value : this.id,
@@ -1755,7 +2101,14 @@ class Attachment extends DataClass implements Insertable<Attachment> {
 
   @override
   int get hashCode => Object.hash(
-      id, productId, eventId, type, filePath, thumbnailPath, createdAt);
+    id,
+    productId,
+    eventId,
+    type,
+    filePath,
+    thumbnailPath,
+    createdAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1797,10 +2150,10 @@ class AttachmentsCompanion extends UpdateCompanion<Attachment> {
     this.thumbnailPath = const Value.absent(),
     required DateTime createdAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        type = Value(type),
-        filePath = Value(filePath),
-        createdAt = Value(createdAt);
+  }) : id = Value(id),
+       type = Value(type),
+       filePath = Value(filePath),
+       createdAt = Value(createdAt);
   static Insertable<Attachment> custom({
     Expression<String>? id,
     Expression<String>? productId,
@@ -1823,15 +2176,16 @@ class AttachmentsCompanion extends UpdateCompanion<Attachment> {
     });
   }
 
-  AttachmentsCompanion copyWith(
-      {Value<String>? id,
-      Value<String?>? productId,
-      Value<String?>? eventId,
-      Value<String>? type,
-      Value<String>? filePath,
-      Value<String?>? thumbnailPath,
-      Value<DateTime>? createdAt,
-      Value<int>? rowid}) {
+  AttachmentsCompanion copyWith({
+    Value<String>? id,
+    Value<String?>? productId,
+    Value<String?>? eventId,
+    Value<String>? type,
+    Value<String>? filePath,
+    Value<String?>? thumbnailPath,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
     return AttachmentsCompanion(
       id: id ?? this.id,
       productId: productId ?? this.productId,
@@ -1899,56 +2253,91 @@ class $WarrantiesTable extends Warranties
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _productIdMeta =
-      const VerificationMeta('productId');
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _productIdMeta = const VerificationMeta(
+    'productId',
+  );
   @override
   late final GeneratedColumn<String> productId = GeneratedColumn<String>(
-      'product_id', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES products (id)'));
-  static const VerificationMeta _eventIdMeta =
-      const VerificationMeta('eventId');
+    'product_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES products (id)',
+    ),
+  );
+  static const VerificationMeta _eventIdMeta = const VerificationMeta(
+    'eventId',
+  );
   @override
   late final GeneratedColumn<String> eventId = GeneratedColumn<String>(
-      'event_id', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES events (id)'));
+    'event_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES events (id)',
+    ),
+  );
   static const VerificationMeta _kindMeta = const VerificationMeta('kind');
   @override
   late final GeneratedColumn<String> kind = GeneratedColumn<String>(
-      'kind', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _expiryDateMeta =
-      const VerificationMeta('expiryDate');
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _expiryDateMeta = const VerificationMeta(
+    'expiryDate',
+  );
   @override
   late final GeneratedColumn<DateTime> expiryDate = GeneratedColumn<DateTime>(
-      'expiry_date', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'expiry_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _reminderDaysBeforeMeta =
       const VerificationMeta('reminderDaysBefore');
   @override
   late final GeneratedColumn<String> reminderDaysBefore =
-      GeneratedColumn<String>('reminder_days_before', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant('30,7,0'));
+      GeneratedColumn<String>(
+        'reminder_days_before',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('30,7,0'),
+      );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, productId, eventId, kind, expiryDate, reminderDaysBefore];
+  List<GeneratedColumn> get $columns => [
+    id,
+    productId,
+    eventId,
+    kind,
+    expiryDate,
+    reminderDaysBefore,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'warranties';
   @override
-  VerificationContext validateIntegrity(Insertable<Warranty> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<Warranty> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1957,32 +2346,41 @@ class $WarrantiesTable extends Warranties
       context.missing(_idMeta);
     }
     if (data.containsKey('product_id')) {
-      context.handle(_productIdMeta,
-          productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta));
+      context.handle(
+        _productIdMeta,
+        productId.isAcceptableOrUnknown(data['product_id']!, _productIdMeta),
+      );
     }
     if (data.containsKey('event_id')) {
-      context.handle(_eventIdMeta,
-          eventId.isAcceptableOrUnknown(data['event_id']!, _eventIdMeta));
+      context.handle(
+        _eventIdMeta,
+        eventId.isAcceptableOrUnknown(data['event_id']!, _eventIdMeta),
+      );
     }
     if (data.containsKey('kind')) {
       context.handle(
-          _kindMeta, kind.isAcceptableOrUnknown(data['kind']!, _kindMeta));
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
     } else if (isInserting) {
       context.missing(_kindMeta);
     }
     if (data.containsKey('expiry_date')) {
       context.handle(
-          _expiryDateMeta,
-          expiryDate.isAcceptableOrUnknown(
-              data['expiry_date']!, _expiryDateMeta));
+        _expiryDateMeta,
+        expiryDate.isAcceptableOrUnknown(data['expiry_date']!, _expiryDateMeta),
+      );
     } else if (isInserting) {
       context.missing(_expiryDateMeta);
     }
     if (data.containsKey('reminder_days_before')) {
       context.handle(
+        _reminderDaysBeforeMeta,
+        reminderDaysBefore.isAcceptableOrUnknown(
+          data['reminder_days_before']!,
           _reminderDaysBeforeMeta,
-          reminderDaysBefore.isAcceptableOrUnknown(
-              data['reminder_days_before']!, _reminderDaysBeforeMeta));
+        ),
+      );
     }
     return context;
   }
@@ -1993,18 +2391,30 @@ class $WarrantiesTable extends Warranties
   Warranty map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Warranty(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      productId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}product_id']),
-      eventId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}event_id']),
-      kind: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
-      expiryDate: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}expiry_date'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      productId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}product_id'],
+      ),
+      eventId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}event_id'],
+      ),
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
+      expiryDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expiry_date'],
+      )!,
       reminderDaysBefore: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}reminder_days_before'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}reminder_days_before'],
+      )!,
     );
   }
 
@@ -2021,13 +2431,14 @@ class Warranty extends DataClass implements Insertable<Warranty> {
   final String kind;
   final DateTime expiryDate;
   final String reminderDaysBefore;
-  const Warranty(
-      {required this.id,
-      this.productId,
-      this.eventId,
-      required this.kind,
-      required this.expiryDate,
-      required this.reminderDaysBefore});
+  const Warranty({
+    required this.id,
+    this.productId,
+    this.eventId,
+    required this.kind,
+    required this.expiryDate,
+    required this.reminderDaysBefore,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2059,8 +2470,10 @@ class Warranty extends DataClass implements Insertable<Warranty> {
     );
   }
 
-  factory Warranty.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory Warranty.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Warranty(
       id: serializer.fromJson<String>(json['id']),
@@ -2068,8 +2481,9 @@ class Warranty extends DataClass implements Insertable<Warranty> {
       eventId: serializer.fromJson<String?>(json['eventId']),
       kind: serializer.fromJson<String>(json['kind']),
       expiryDate: serializer.fromJson<DateTime>(json['expiryDate']),
-      reminderDaysBefore:
-          serializer.fromJson<String>(json['reminderDaysBefore']),
+      reminderDaysBefore: serializer.fromJson<String>(
+        json['reminderDaysBefore'],
+      ),
     );
   }
   @override
@@ -2085,29 +2499,30 @@ class Warranty extends DataClass implements Insertable<Warranty> {
     };
   }
 
-  Warranty copyWith(
-          {String? id,
-          Value<String?> productId = const Value.absent(),
-          Value<String?> eventId = const Value.absent(),
-          String? kind,
-          DateTime? expiryDate,
-          String? reminderDaysBefore}) =>
-      Warranty(
-        id: id ?? this.id,
-        productId: productId.present ? productId.value : this.productId,
-        eventId: eventId.present ? eventId.value : this.eventId,
-        kind: kind ?? this.kind,
-        expiryDate: expiryDate ?? this.expiryDate,
-        reminderDaysBefore: reminderDaysBefore ?? this.reminderDaysBefore,
-      );
+  Warranty copyWith({
+    String? id,
+    Value<String?> productId = const Value.absent(),
+    Value<String?> eventId = const Value.absent(),
+    String? kind,
+    DateTime? expiryDate,
+    String? reminderDaysBefore,
+  }) => Warranty(
+    id: id ?? this.id,
+    productId: productId.present ? productId.value : this.productId,
+    eventId: eventId.present ? eventId.value : this.eventId,
+    kind: kind ?? this.kind,
+    expiryDate: expiryDate ?? this.expiryDate,
+    reminderDaysBefore: reminderDaysBefore ?? this.reminderDaysBefore,
+  );
   Warranty copyWithCompanion(WarrantiesCompanion data) {
     return Warranty(
       id: data.id.present ? data.id.value : this.id,
       productId: data.productId.present ? data.productId.value : this.productId,
       eventId: data.eventId.present ? data.eventId.value : this.eventId,
       kind: data.kind.present ? data.kind.value : this.kind,
-      expiryDate:
-          data.expiryDate.present ? data.expiryDate.value : this.expiryDate,
+      expiryDate: data.expiryDate.present
+          ? data.expiryDate.value
+          : this.expiryDate,
       reminderDaysBefore: data.reminderDaysBefore.present
           ? data.reminderDaysBefore.value
           : this.reminderDaysBefore,
@@ -2167,9 +2582,9 @@ class WarrantiesCompanion extends UpdateCompanion<Warranty> {
     required DateTime expiryDate,
     this.reminderDaysBefore = const Value.absent(),
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        kind = Value(kind),
-        expiryDate = Value(expiryDate);
+  }) : id = Value(id),
+       kind = Value(kind),
+       expiryDate = Value(expiryDate);
   static Insertable<Warranty> custom({
     Expression<String>? id,
     Expression<String>? productId,
@@ -2191,14 +2606,15 @@ class WarrantiesCompanion extends UpdateCompanion<Warranty> {
     });
   }
 
-  WarrantiesCompanion copyWith(
-      {Value<String>? id,
-      Value<String?>? productId,
-      Value<String?>? eventId,
-      Value<String>? kind,
-      Value<DateTime>? expiryDate,
-      Value<String>? reminderDaysBefore,
-      Value<int>? rowid}) {
+  WarrantiesCompanion copyWith({
+    Value<String>? id,
+    Value<String?>? productId,
+    Value<String?>? eventId,
+    Value<String>? kind,
+    Value<DateTime>? expiryDate,
+    Value<String>? reminderDaysBefore,
+    Value<int>? rowid,
+  }) {
     return WarrantiesCompanion(
       id: id ?? this.id,
       productId: productId ?? this.productId,
@@ -2257,1071 +2673,2586 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $ProductsTable products = $ProductsTable(this);
   late final $EventsTable events = $EventsTable(this);
-  late final $JournalRevisionsTable journalRevisions =
-      $JournalRevisionsTable(this);
+  late final $JournalRevisionsTable journalRevisions = $JournalRevisionsTable(
+    this,
+  );
   late final $AttachmentsTable attachments = $AttachmentsTable(this);
   late final $WarrantiesTable warranties = $WarrantiesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [products, events, journalRevisions, attachments, warranties];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+    products,
+    events,
+    journalRevisions,
+    attachments,
+    warranties,
+  ];
 }
 
-typedef $$ProductsTableCreateCompanionBuilder = ProductsCompanion Function({
-  required String id,
-  required String name,
-  Value<String?> category,
-  Value<String?> brand,
-  Value<String?> model,
-  Value<String?> serialNumber,
-  Value<String?> seller,
-  Value<String?> purchaseLocation,
-  Value<double> purchasePrice,
-  required DateTime purchaseDate,
-  Value<DateTime?> warrantyExpiry,
-  Value<String> status,
-  Value<int?> expectedLifetimeMonths,
-  Value<String?> tags,
-  required DateTime createdAt,
-  required DateTime updatedAt,
-  Value<int> rowid,
-});
-typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
-  Value<String> id,
-  Value<String> name,
-  Value<String?> category,
-  Value<String?> brand,
-  Value<String?> model,
-  Value<String?> serialNumber,
-  Value<String?> seller,
-  Value<String?> purchaseLocation,
-  Value<double> purchasePrice,
-  Value<DateTime> purchaseDate,
-  Value<DateTime?> warrantyExpiry,
-  Value<String> status,
-  Value<int?> expectedLifetimeMonths,
-  Value<String?> tags,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
-  Value<int> rowid,
-});
+typedef $$ProductsTableCreateCompanionBuilder =
+    ProductsCompanion Function({
+      required String id,
+      required String name,
+      Value<String?> category,
+      Value<String?> brand,
+      Value<String?> model,
+      Value<String?> serialNumber,
+      Value<String?> seller,
+      Value<String?> purchaseLocation,
+      Value<double> purchasePrice,
+      required DateTime purchaseDate,
+      Value<DateTime?> warrantyExpiry,
+      Value<String> status,
+      Value<int?> expectedLifetimeMonths,
+      Value<String?> tags,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$ProductsTableUpdateCompanionBuilder =
+    ProductsCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<String?> category,
+      Value<String?> brand,
+      Value<String?> model,
+      Value<String?> serialNumber,
+      Value<String?> seller,
+      Value<String?> purchaseLocation,
+      Value<double> purchasePrice,
+      Value<DateTime> purchaseDate,
+      Value<DateTime?> warrantyExpiry,
+      Value<String> status,
+      Value<int?> expectedLifetimeMonths,
+      Value<String?> tags,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
 
-class $$ProductsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $ProductsTable,
-    Product,
-    $$ProductsTableFilterComposer,
-    $$ProductsTableOrderingComposer,
-    $$ProductsTableCreateCompanionBuilder,
-    $$ProductsTableUpdateCompanionBuilder> {
-  $$ProductsTableTableManager(_$AppDatabase db, $ProductsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$ProductsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$ProductsTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<String?> category = const Value.absent(),
-            Value<String?> brand = const Value.absent(),
-            Value<String?> model = const Value.absent(),
-            Value<String?> serialNumber = const Value.absent(),
-            Value<String?> seller = const Value.absent(),
-            Value<String?> purchaseLocation = const Value.absent(),
-            Value<double> purchasePrice = const Value.absent(),
-            Value<DateTime> purchaseDate = const Value.absent(),
-            Value<DateTime?> warrantyExpiry = const Value.absent(),
-            Value<String> status = const Value.absent(),
-            Value<int?> expectedLifetimeMonths = const Value.absent(),
-            Value<String?> tags = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              ProductsCompanion(
-            id: id,
-            name: name,
-            category: category,
-            brand: brand,
-            model: model,
-            serialNumber: serialNumber,
-            seller: seller,
-            purchaseLocation: purchaseLocation,
-            purchasePrice: purchasePrice,
-            purchaseDate: purchaseDate,
-            warrantyExpiry: warrantyExpiry,
-            status: status,
-            expectedLifetimeMonths: expectedLifetimeMonths,
-            tags: tags,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String name,
-            Value<String?> category = const Value.absent(),
-            Value<String?> brand = const Value.absent(),
-            Value<String?> model = const Value.absent(),
-            Value<String?> serialNumber = const Value.absent(),
-            Value<String?> seller = const Value.absent(),
-            Value<String?> purchaseLocation = const Value.absent(),
-            Value<double> purchasePrice = const Value.absent(),
-            required DateTime purchaseDate,
-            Value<DateTime?> warrantyExpiry = const Value.absent(),
-            Value<String> status = const Value.absent(),
-            Value<int?> expectedLifetimeMonths = const Value.absent(),
-            Value<String?> tags = const Value.absent(),
-            required DateTime createdAt,
-            required DateTime updatedAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              ProductsCompanion.insert(
-            id: id,
-            name: name,
-            category: category,
-            brand: brand,
-            model: model,
-            serialNumber: serialNumber,
-            seller: seller,
-            purchaseLocation: purchaseLocation,
-            purchasePrice: purchasePrice,
-            purchaseDate: purchaseDate,
-            warrantyExpiry: warrantyExpiry,
-            status: status,
-            expectedLifetimeMonths: expectedLifetimeMonths,
-            tags: tags,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
-        ));
+final class $$ProductsTableReferences
+    extends BaseReferences<_$AppDatabase, $ProductsTable, Product> {
+  $$ProductsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.events,
+    aliasName: 'products__id__events__product_id',
+  );
+
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager(
+      $_db,
+      $_db.events,
+    ).filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$JournalRevisionsTable, List<JournalRevision>>
+  _journalRevisionsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.journalRevisions,
+    aliasName: 'products__id__journal_revisions__product_id',
+  );
+
+  $$JournalRevisionsTableProcessedTableManager get journalRevisionsRefs {
+    final manager = $$JournalRevisionsTableTableManager(
+      $_db,
+      $_db.journalRevisions,
+    ).filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _journalRevisionsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$AttachmentsTable, List<Attachment>>
+  _attachmentsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.attachments,
+    aliasName: 'products__id__attachments__product_id',
+  );
+
+  $$AttachmentsTableProcessedTableManager get attachmentsRefs {
+    final manager = $$AttachmentsTableTableManager(
+      $_db,
+      $_db.attachments,
+    ).filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_attachmentsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$WarrantiesTable, List<Warranty>>
+  _warrantiesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.warranties,
+    aliasName: 'products__id__warranties__product_id',
+  );
+
+  $$WarrantiesTableProcessedTableManager get warrantiesRefs {
+    final manager = $$WarrantiesTableTableManager(
+      $_db,
+      $_db.warranties,
+    ).filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_warrantiesRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$ProductsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $ProductsTable> {
-  $$ProductsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get category => $composableBuilder(
+    column: $table.category,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get brand => $state.composableBuilder(
-      column: $state.table.brand,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get brand => $composableBuilder(
+    column: $table.brand,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get model => $state.composableBuilder(
-      column: $state.table.model,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get model => $composableBuilder(
+    column: $table.model,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get serialNumber => $state.composableBuilder(
-      column: $state.table.serialNumber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get serialNumber => $composableBuilder(
+    column: $table.serialNumber,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get seller => $state.composableBuilder(
-      column: $state.table.seller,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get seller => $composableBuilder(
+    column: $table.seller,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get purchaseLocation => $state.composableBuilder(
-      column: $state.table.purchaseLocation,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get purchaseLocation => $composableBuilder(
+    column: $table.purchaseLocation,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<double> get purchasePrice => $state.composableBuilder(
-      column: $state.table.purchasePrice,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<double> get purchasePrice => $composableBuilder(
+    column: $table.purchasePrice,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get purchaseDate => $state.composableBuilder(
-      column: $state.table.purchaseDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get purchaseDate => $composableBuilder(
+    column: $table.purchaseDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<int> get expectedLifetimeMonths => $state.composableBuilder(
-      column: $state.table.expectedLifetimeMonths,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<int> get expectedLifetimeMonths => $composableBuilder(
+    column: $table.expectedLifetimeMonths,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get tags => $state.composableBuilder(
-      column: $state.table.tags,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get tags => $composableBuilder(
+    column: $table.tags,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ComposableFilter eventsRefs(
-      ComposableFilter Function($$EventsTableFilterComposer f) f) {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
+  Expression<bool> eventsRefs(
+    Expression<bool> Function($$EventsTableFilterComposer f) f,
+  ) {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableFilterComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
-  ComposableFilter journalRevisionsRefs(
-      ComposableFilter Function($$JournalRevisionsTableFilterComposer f) f) {
-    final $$JournalRevisionsTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.journalRevisions,
-            getReferencedColumn: (t) => t.productId,
-            builder: (joinBuilder, parentComposers) =>
-                $$JournalRevisionsTableFilterComposer(ComposerState($state.db,
-                    $state.db.journalRevisions, joinBuilder, parentComposers)));
+  Expression<bool> journalRevisionsRefs(
+    Expression<bool> Function($$JournalRevisionsTableFilterComposer f) f,
+  ) {
+    final $$JournalRevisionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.journalRevisions,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JournalRevisionsTableFilterComposer(
+            $db: $db,
+            $table: $db.journalRevisions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
-  ComposableFilter attachmentsRefs(
-      ComposableFilter Function($$AttachmentsTableFilterComposer f) f) {
-    final $$AttachmentsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.attachments,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) =>
-            $$AttachmentsTableFilterComposer(ComposerState($state.db,
-                $state.db.attachments, joinBuilder, parentComposers)));
+  Expression<bool> attachmentsRefs(
+    Expression<bool> Function($$AttachmentsTableFilterComposer f) f,
+  ) {
+    final $$AttachmentsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.attachments,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AttachmentsTableFilterComposer(
+            $db: $db,
+            $table: $db.attachments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
-  ComposableFilter warrantiesRefs(
-      ComposableFilter Function($$WarrantiesTableFilterComposer f) f) {
-    final $$WarrantiesTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.warranties,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) =>
-            $$WarrantiesTableFilterComposer(ComposerState($state.db,
-                $state.db.warranties, joinBuilder, parentComposers)));
+  Expression<bool> warrantiesRefs(
+    Expression<bool> Function($$WarrantiesTableFilterComposer f) f,
+  ) {
+    final $$WarrantiesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.warranties,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WarrantiesTableFilterComposer(
+            $db: $db,
+            $table: $db.warranties,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
 class $$ProductsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $ProductsTable> {
-  $$ProductsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get category => $composableBuilder(
+    column: $table.category,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get brand => $state.composableBuilder(
-      column: $state.table.brand,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get brand => $composableBuilder(
+    column: $table.brand,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get model => $state.composableBuilder(
-      column: $state.table.model,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get model => $composableBuilder(
+    column: $table.model,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get serialNumber => $state.composableBuilder(
-      column: $state.table.serialNumber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get serialNumber => $composableBuilder(
+    column: $table.serialNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get seller => $state.composableBuilder(
-      column: $state.table.seller,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get seller => $composableBuilder(
+    column: $table.seller,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get purchaseLocation => $state.composableBuilder(
-      column: $state.table.purchaseLocation,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get purchaseLocation => $composableBuilder(
+    column: $table.purchaseLocation,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<double> get purchasePrice => $state.composableBuilder(
-      column: $state.table.purchasePrice,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<double> get purchasePrice => $composableBuilder(
+    column: $table.purchasePrice,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get purchaseDate => $state.composableBuilder(
-      column: $state.table.purchaseDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get purchaseDate => $composableBuilder(
+    column: $table.purchaseDate,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<int> get expectedLifetimeMonths => $state.composableBuilder(
-      column: $state.table.expectedLifetimeMonths,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get expectedLifetimeMonths => $composableBuilder(
+    column: $table.expectedLifetimeMonths,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get tags => $state.composableBuilder(
-      column: $state.table.tags,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get tags => $composableBuilder(
+    column: $table.tags,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-typedef $$EventsTableCreateCompanionBuilder = EventsCompanion Function({
-  required String id,
-  required String productId,
-  required DateTime date,
-  required String type,
-  Value<double?> cost,
-  Value<DateTime?> warrantyExpiry,
-  Value<String?> markdownNote,
-  required DateTime createdAt,
-  Value<int> rowid,
-});
-typedef $$EventsTableUpdateCompanionBuilder = EventsCompanion Function({
-  Value<String> id,
-  Value<String> productId,
-  Value<DateTime> date,
-  Value<String> type,
-  Value<double?> cost,
-  Value<DateTime?> warrantyExpiry,
-  Value<String?> markdownNote,
-  Value<DateTime> createdAt,
-  Value<int> rowid,
-});
+class $$ProductsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
 
-class $$EventsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $EventsTable,
-    Event,
-    $$EventsTableFilterComposer,
-    $$EventsTableOrderingComposer,
-    $$EventsTableCreateCompanionBuilder,
-    $$EventsTableUpdateCompanionBuilder> {
-  $$EventsTableTableManager(_$AppDatabase db, $EventsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$EventsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$EventsTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> productId = const Value.absent(),
-            Value<DateTime> date = const Value.absent(),
-            Value<String> type = const Value.absent(),
-            Value<double?> cost = const Value.absent(),
-            Value<DateTime?> warrantyExpiry = const Value.absent(),
-            Value<String?> markdownNote = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              EventsCompanion(
-            id: id,
-            productId: productId,
-            date: date,
-            type: type,
-            cost: cost,
-            warrantyExpiry: warrantyExpiry,
-            markdownNote: markdownNote,
-            createdAt: createdAt,
-            rowid: rowid,
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<String> get brand =>
+      $composableBuilder(column: $table.brand, builder: (column) => column);
+
+  GeneratedColumn<String> get model =>
+      $composableBuilder(column: $table.model, builder: (column) => column);
+
+  GeneratedColumn<String> get serialNumber => $composableBuilder(
+    column: $table.serialNumber,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get seller =>
+      $composableBuilder(column: $table.seller, builder: (column) => column);
+
+  GeneratedColumn<String> get purchaseLocation => $composableBuilder(
+    column: $table.purchaseLocation,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get purchasePrice => $composableBuilder(
+    column: $table.purchasePrice,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get purchaseDate => $composableBuilder(
+    column: $table.purchaseDate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get expectedLifetimeMonths => $composableBuilder(
+    column: $table.expectedLifetimeMonths,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get tags =>
+      $composableBuilder(column: $table.tags, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  Expression<T> eventsRefs<T extends Object>(
+    Expression<T> Function($$EventsTableAnnotationComposer a) f,
+  ) {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
           ),
-          createCompanionCallback: ({
-            required String id,
-            required String productId,
-            required DateTime date,
-            required String type,
-            Value<double?> cost = const Value.absent(),
-            Value<DateTime?> warrantyExpiry = const Value.absent(),
-            Value<String?> markdownNote = const Value.absent(),
-            required DateTime createdAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              EventsCompanion.insert(
-            id: id,
-            productId: productId,
-            date: date,
-            type: type,
-            cost: cost,
-            warrantyExpiry: warrantyExpiry,
-            markdownNote: markdownNote,
-            createdAt: createdAt,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$EventsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $EventsTable> {
-  $$EventsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get cost => $state.composableBuilder(
-      column: $state.table.cost,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get markdownNote => $state.composableBuilder(
-      column: $state.table.markdownNote,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  ComposableFilter attachmentsRefs(
-      ComposableFilter Function($$AttachmentsTableFilterComposer f) f) {
-    final $$AttachmentsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.attachments,
-        getReferencedColumn: (t) => t.eventId,
-        builder: (joinBuilder, parentComposers) =>
-            $$AttachmentsTableFilterComposer(ComposerState($state.db,
-                $state.db.attachments, joinBuilder, parentComposers)));
+    );
     return f(composer);
   }
 
-  ComposableFilter warrantiesRefs(
-      ComposableFilter Function($$WarrantiesTableFilterComposer f) f) {
-    final $$WarrantiesTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.warranties,
-        getReferencedColumn: (t) => t.eventId,
-        builder: (joinBuilder, parentComposers) =>
-            $$WarrantiesTableFilterComposer(ComposerState($state.db,
-                $state.db.warranties, joinBuilder, parentComposers)));
+  Expression<T> journalRevisionsRefs<T extends Object>(
+    Expression<T> Function($$JournalRevisionsTableAnnotationComposer a) f,
+  ) {
+    final $$JournalRevisionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.journalRevisions,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$JournalRevisionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.journalRevisions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> attachmentsRefs<T extends Object>(
+    Expression<T> Function($$AttachmentsTableAnnotationComposer a) f,
+  ) {
+    final $$AttachmentsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.attachments,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AttachmentsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.attachments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> warrantiesRefs<T extends Object>(
+    Expression<T> Function($$WarrantiesTableAnnotationComposer a) f,
+  ) {
+    final $$WarrantiesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.warranties,
+      getReferencedColumn: (t) => t.productId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WarrantiesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.warranties,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$ProductsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ProductsTable,
+          Product,
+          $$ProductsTableFilterComposer,
+          $$ProductsTableOrderingComposer,
+          $$ProductsTableAnnotationComposer,
+          $$ProductsTableCreateCompanionBuilder,
+          $$ProductsTableUpdateCompanionBuilder,
+          (Product, $$ProductsTableReferences),
+          Product,
+          PrefetchHooks Function({
+            bool eventsRefs,
+            bool journalRevisionsRefs,
+            bool attachmentsRefs,
+            bool warrantiesRefs,
+          })
+        > {
+  $$ProductsTableTableManager(_$AppDatabase db, $ProductsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ProductsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProductsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProductsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> category = const Value.absent(),
+                Value<String?> brand = const Value.absent(),
+                Value<String?> model = const Value.absent(),
+                Value<String?> serialNumber = const Value.absent(),
+                Value<String?> seller = const Value.absent(),
+                Value<String?> purchaseLocation = const Value.absent(),
+                Value<double> purchasePrice = const Value.absent(),
+                Value<DateTime> purchaseDate = const Value.absent(),
+                Value<DateTime?> warrantyExpiry = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<int?> expectedLifetimeMonths = const Value.absent(),
+                Value<String?> tags = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ProductsCompanion(
+                id: id,
+                name: name,
+                category: category,
+                brand: brand,
+                model: model,
+                serialNumber: serialNumber,
+                seller: seller,
+                purchaseLocation: purchaseLocation,
+                purchasePrice: purchasePrice,
+                purchaseDate: purchaseDate,
+                warrantyExpiry: warrantyExpiry,
+                status: status,
+                expectedLifetimeMonths: expectedLifetimeMonths,
+                tags: tags,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String name,
+                Value<String?> category = const Value.absent(),
+                Value<String?> brand = const Value.absent(),
+                Value<String?> model = const Value.absent(),
+                Value<String?> serialNumber = const Value.absent(),
+                Value<String?> seller = const Value.absent(),
+                Value<String?> purchaseLocation = const Value.absent(),
+                Value<double> purchasePrice = const Value.absent(),
+                required DateTime purchaseDate,
+                Value<DateTime?> warrantyExpiry = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<int?> expectedLifetimeMonths = const Value.absent(),
+                Value<String?> tags = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => ProductsCompanion.insert(
+                id: id,
+                name: name,
+                category: category,
+                brand: brand,
+                model: model,
+                serialNumber: serialNumber,
+                seller: seller,
+                purchaseLocation: purchaseLocation,
+                purchasePrice: purchasePrice,
+                purchaseDate: purchaseDate,
+                warrantyExpiry: warrantyExpiry,
+                status: status,
+                expectedLifetimeMonths: expectedLifetimeMonths,
+                tags: tags,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ProductsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({
+                eventsRefs = false,
+                journalRevisionsRefs = false,
+                attachmentsRefs = false,
+                warrantiesRefs = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (eventsRefs) db.events,
+                    if (journalRevisionsRefs) db.journalRevisions,
+                    if (attachmentsRefs) db.attachments,
+                    if (warrantiesRefs) db.warranties,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (eventsRefs)
+                        await $_getPrefetchedData<
+                          Product,
+                          $ProductsTable,
+                          Event
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProductsTableReferences
+                              ._eventsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProductsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).eventsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.productId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (journalRevisionsRefs)
+                        await $_getPrefetchedData<
+                          Product,
+                          $ProductsTable,
+                          JournalRevision
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProductsTableReferences
+                              ._journalRevisionsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProductsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).journalRevisionsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.productId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (attachmentsRefs)
+                        await $_getPrefetchedData<
+                          Product,
+                          $ProductsTable,
+                          Attachment
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProductsTableReferences
+                              ._attachmentsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProductsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attachmentsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.productId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (warrantiesRefs)
+                        await $_getPrefetchedData<
+                          Product,
+                          $ProductsTable,
+                          Warranty
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProductsTableReferences
+                              ._warrantiesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProductsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).warrantiesRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.productId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$ProductsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ProductsTable,
+      Product,
+      $$ProductsTableFilterComposer,
+      $$ProductsTableOrderingComposer,
+      $$ProductsTableAnnotationComposer,
+      $$ProductsTableCreateCompanionBuilder,
+      $$ProductsTableUpdateCompanionBuilder,
+      (Product, $$ProductsTableReferences),
+      Product,
+      PrefetchHooks Function({
+        bool eventsRefs,
+        bool journalRevisionsRefs,
+        bool attachmentsRefs,
+        bool warrantiesRefs,
+      })
+    >;
+typedef $$EventsTableCreateCompanionBuilder =
+    EventsCompanion Function({
+      required String id,
+      required String productId,
+      required DateTime date,
+      required String type,
+      Value<double?> cost,
+      Value<DateTime?> warrantyExpiry,
+      Value<String?> markdownNote,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$EventsTableUpdateCompanionBuilder =
+    EventsCompanion Function({
+      Value<String> id,
+      Value<String> productId,
+      Value<DateTime> date,
+      Value<String> type,
+      Value<double?> cost,
+      Value<DateTime?> warrantyExpiry,
+      Value<String?> markdownNote,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+final class $$EventsTableReferences
+    extends BaseReferences<_$AppDatabase, $EventsTable, Event> {
+  $$EventsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('events__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager get productId {
+    final $_column = $_itemColumn<String>('product_id')!;
+
+    final manager = $$ProductsTableTableManager(
+      $_db,
+      $_db.products,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$AttachmentsTable, List<Attachment>>
+  _attachmentsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.attachments,
+    aliasName: 'events__id__attachments__event_id',
+  );
+
+  $$AttachmentsTableProcessedTableManager get attachmentsRefs {
+    final manager = $$AttachmentsTableTableManager(
+      $_db,
+      $_db.attachments,
+    ).filter((f) => f.eventId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_attachmentsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$WarrantiesTable, List<Warranty>>
+  _warrantiesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.warranties,
+    aliasName: 'events__id__warranties__event_id',
+  );
+
+  $$WarrantiesTableProcessedTableManager get warrantiesRefs {
+    final manager = $$WarrantiesTableTableManager(
+      $_db,
+      $_db.warranties,
+    ).filter((f) => f.eventId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_warrantiesRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$EventsTableFilterComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get cost => $composableBuilder(
+    column: $table.cost,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get markdownNote => $composableBuilder(
+    column: $table.markdownNote,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ProductsTableFilterComposer get productId {
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableFilterComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> attachmentsRefs(
+    Expression<bool> Function($$AttachmentsTableFilterComposer f) f,
+  ) {
+    final $$AttachmentsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.attachments,
+      getReferencedColumn: (t) => t.eventId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AttachmentsTableFilterComposer(
+            $db: $db,
+            $table: $db.attachments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> warrantiesRefs(
+    Expression<bool> Function($$WarrantiesTableFilterComposer f) f,
+  ) {
+    final $$WarrantiesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.warranties,
+      getReferencedColumn: (t) => t.eventId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WarrantiesTableFilterComposer(
+            $db: $db,
+            $table: $db.warranties,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
 class $$EventsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $EventsTable> {
-  $$EventsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<double> get cost => $state.composableBuilder(
-      column: $state.table.cost,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<double> get cost => $composableBuilder(
+    column: $table.cost,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get markdownNote => $state.composableBuilder(
-      column: $state.table.markdownNote,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get markdownNote => $composableBuilder(
+    column: $table.markdownNote,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableOrderingComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-typedef $$JournalRevisionsTableCreateCompanionBuilder
-    = JournalRevisionsCompanion Function({
-  required String id,
-  required String productId,
-  required String content,
-  required DateTime createdAt,
-  Value<int> rowid,
-});
-typedef $$JournalRevisionsTableUpdateCompanionBuilder
-    = JournalRevisionsCompanion Function({
-  Value<String> id,
-  Value<String> productId,
-  Value<String> content,
-  Value<DateTime> createdAt,
-  Value<int> rowid,
-});
+class $$EventsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
 
-class $$JournalRevisionsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $JournalRevisionsTable,
-    JournalRevision,
-    $$JournalRevisionsTableFilterComposer,
-    $$JournalRevisionsTableOrderingComposer,
-    $$JournalRevisionsTableCreateCompanionBuilder,
-    $$JournalRevisionsTableUpdateCompanionBuilder> {
-  $$JournalRevisionsTableTableManager(
-      _$AppDatabase db, $JournalRevisionsTable table)
-      : super(TableManagerState(
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<double> get cost =>
+      $composableBuilder(column: $table.cost, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get warrantyExpiry => $composableBuilder(
+    column: $table.warrantyExpiry,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get markdownNote => $composableBuilder(
+    column: $table.markdownNote,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> attachmentsRefs<T extends Object>(
+    Expression<T> Function($$AttachmentsTableAnnotationComposer a) f,
+  ) {
+    final $$AttachmentsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.attachments,
+      getReferencedColumn: (t) => t.eventId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AttachmentsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.attachments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> warrantiesRefs<T extends Object>(
+    Expression<T> Function($$WarrantiesTableAnnotationComposer a) f,
+  ) {
+    final $$WarrantiesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.warranties,
+      getReferencedColumn: (t) => t.eventId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WarrantiesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.warranties,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$EventsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $EventsTable,
+          Event,
+          $$EventsTableFilterComposer,
+          $$EventsTableOrderingComposer,
+          $$EventsTableAnnotationComposer,
+          $$EventsTableCreateCompanionBuilder,
+          $$EventsTableUpdateCompanionBuilder,
+          (Event, $$EventsTableReferences),
+          Event,
+          PrefetchHooks Function({
+            bool productId,
+            bool attachmentsRefs,
+            bool warrantiesRefs,
+          })
+        > {
+  $$EventsTableTableManager(_$AppDatabase db, $EventsTable table)
+    : super(
+        TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$JournalRevisionsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$JournalRevisionsTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> productId = const Value.absent(),
-            Value<String> content = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              JournalRevisionsCompanion(
-            id: id,
-            productId: productId,
-            content: content,
-            createdAt: createdAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String productId,
-            required String content,
-            required DateTime createdAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              JournalRevisionsCompanion.insert(
-            id: id,
-            productId: productId,
-            content: content,
-            createdAt: createdAt,
-            rowid: rowid,
-          ),
-        ));
+          createFilteringComposer: () =>
+              $$EventsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$EventsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$EventsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> productId = const Value.absent(),
+                Value<DateTime> date = const Value.absent(),
+                Value<String> type = const Value.absent(),
+                Value<double?> cost = const Value.absent(),
+                Value<DateTime?> warrantyExpiry = const Value.absent(),
+                Value<String?> markdownNote = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => EventsCompanion(
+                id: id,
+                productId: productId,
+                date: date,
+                type: type,
+                cost: cost,
+                warrantyExpiry: warrantyExpiry,
+                markdownNote: markdownNote,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String productId,
+                required DateTime date,
+                required String type,
+                Value<double?> cost = const Value.absent(),
+                Value<DateTime?> warrantyExpiry = const Value.absent(),
+                Value<String?> markdownNote = const Value.absent(),
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => EventsCompanion.insert(
+                id: id,
+                productId: productId,
+                date: date,
+                type: type,
+                cost: cost,
+                warrantyExpiry: warrantyExpiry,
+                markdownNote: markdownNote,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) =>
+                    (e.readTable(table), $$EventsTableReferences(db, table, e)),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({
+                productId = false,
+                attachmentsRefs = false,
+                warrantiesRefs = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (attachmentsRefs) db.attachments,
+                    if (warrantiesRefs) db.warranties,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (productId) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.productId,
+                                    referencedTable: $$EventsTableReferences
+                                        ._productIdTable(db),
+                                    referencedColumn: $$EventsTableReferences
+                                        ._productIdTable(db)
+                                        .id,
+                                  )
+                                  as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (attachmentsRefs)
+                        await $_getPrefetchedData<
+                          Event,
+                          $EventsTable,
+                          Attachment
+                        >(
+                          currentTable: table,
+                          referencedTable: $$EventsTableReferences
+                              ._attachmentsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$EventsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attachmentsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.eventId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (warrantiesRefs)
+                        await $_getPrefetchedData<
+                          Event,
+                          $EventsTable,
+                          Warranty
+                        >(
+                          currentTable: table,
+                          referencedTable: $$EventsTableReferences
+                              ._warrantiesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$EventsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).warrantiesRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.eventId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$EventsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $EventsTable,
+      Event,
+      $$EventsTableFilterComposer,
+      $$EventsTableOrderingComposer,
+      $$EventsTableAnnotationComposer,
+      $$EventsTableCreateCompanionBuilder,
+      $$EventsTableUpdateCompanionBuilder,
+      (Event, $$EventsTableReferences),
+      Event,
+      PrefetchHooks Function({
+        bool productId,
+        bool attachmentsRefs,
+        bool warrantiesRefs,
+      })
+    >;
+typedef $$JournalRevisionsTableCreateCompanionBuilder =
+    JournalRevisionsCompanion Function({
+      required String id,
+      required String productId,
+      required String content,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$JournalRevisionsTableUpdateCompanionBuilder =
+    JournalRevisionsCompanion Function({
+      Value<String> id,
+      Value<String> productId,
+      Value<String> content,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+final class $$JournalRevisionsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $JournalRevisionsTable, JournalRevision> {
+  $$JournalRevisionsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('journal_revisions__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager get productId {
+    final $_column = $_itemColumn<String>('product_id')!;
+
+    final manager = $$ProductsTableTableManager(
+      $_db,
+      $_db.products,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 }
 
 class $$JournalRevisionsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $JournalRevisionsTable> {
-  $$JournalRevisionsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get content => $state.composableBuilder(
-      column: $state.table.content,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get content => $composableBuilder(
+    column: $table.content,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableFilterComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
 class $$JournalRevisionsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $JournalRevisionsTable> {
-  $$JournalRevisionsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get content => $state.composableBuilder(
-      column: $state.table.content,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get content => $composableBuilder(
+    column: $table.content,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableOrderingComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-typedef $$AttachmentsTableCreateCompanionBuilder = AttachmentsCompanion
-    Function({
-  required String id,
-  Value<String?> productId,
-  Value<String?> eventId,
-  required String type,
-  required String filePath,
-  Value<String?> thumbnailPath,
-  required DateTime createdAt,
-  Value<int> rowid,
-});
-typedef $$AttachmentsTableUpdateCompanionBuilder = AttachmentsCompanion
-    Function({
-  Value<String> id,
-  Value<String?> productId,
-  Value<String?> eventId,
-  Value<String> type,
-  Value<String> filePath,
-  Value<String?> thumbnailPath,
-  Value<DateTime> createdAt,
-  Value<int> rowid,
-});
+class $$JournalRevisionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
 
-class $$AttachmentsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $AttachmentsTable,
-    Attachment,
-    $$AttachmentsTableFilterComposer,
-    $$AttachmentsTableOrderingComposer,
-    $$AttachmentsTableCreateCompanionBuilder,
-    $$AttachmentsTableUpdateCompanionBuilder> {
-  $$AttachmentsTableTableManager(_$AppDatabase db, $AttachmentsTable table)
-      : super(TableManagerState(
+  GeneratedColumn<String> get content =>
+      $composableBuilder(column: $table.content, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$JournalRevisionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JournalRevisionsTable,
+          JournalRevision,
+          $$JournalRevisionsTableFilterComposer,
+          $$JournalRevisionsTableOrderingComposer,
+          $$JournalRevisionsTableAnnotationComposer,
+          $$JournalRevisionsTableCreateCompanionBuilder,
+          $$JournalRevisionsTableUpdateCompanionBuilder,
+          (JournalRevision, $$JournalRevisionsTableReferences),
+          JournalRevision,
+          PrefetchHooks Function({bool productId})
+        > {
+  $$JournalRevisionsTableTableManager(
+    _$AppDatabase db,
+    $JournalRevisionsTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$AttachmentsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$AttachmentsTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String?> productId = const Value.absent(),
-            Value<String?> eventId = const Value.absent(),
-            Value<String> type = const Value.absent(),
-            Value<String> filePath = const Value.absent(),
-            Value<String?> thumbnailPath = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              AttachmentsCompanion(
-            id: id,
-            productId: productId,
-            eventId: eventId,
-            type: type,
-            filePath: filePath,
-            thumbnailPath: thumbnailPath,
-            createdAt: createdAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            Value<String?> productId = const Value.absent(),
-            Value<String?> eventId = const Value.absent(),
-            required String type,
-            required String filePath,
-            Value<String?> thumbnailPath = const Value.absent(),
-            required DateTime createdAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              AttachmentsCompanion.insert(
-            id: id,
-            productId: productId,
-            eventId: eventId,
-            type: type,
-            filePath: filePath,
-            thumbnailPath: thumbnailPath,
-            createdAt: createdAt,
-            rowid: rowid,
-          ),
-        ));
+          createFilteringComposer: () =>
+              $$JournalRevisionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JournalRevisionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JournalRevisionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> productId = const Value.absent(),
+                Value<String> content = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => JournalRevisionsCompanion(
+                id: id,
+                productId: productId,
+                content: content,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String productId,
+                required String content,
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => JournalRevisionsCompanion.insert(
+                id: id,
+                productId: productId,
+                content: content,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$JournalRevisionsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({productId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (productId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.productId,
+                                referencedTable:
+                                    $$JournalRevisionsTableReferences
+                                        ._productIdTable(db),
+                                referencedColumn:
+                                    $$JournalRevisionsTableReferences
+                                        ._productIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$JournalRevisionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JournalRevisionsTable,
+      JournalRevision,
+      $$JournalRevisionsTableFilterComposer,
+      $$JournalRevisionsTableOrderingComposer,
+      $$JournalRevisionsTableAnnotationComposer,
+      $$JournalRevisionsTableCreateCompanionBuilder,
+      $$JournalRevisionsTableUpdateCompanionBuilder,
+      (JournalRevision, $$JournalRevisionsTableReferences),
+      JournalRevision,
+      PrefetchHooks Function({bool productId})
+    >;
+typedef $$AttachmentsTableCreateCompanionBuilder =
+    AttachmentsCompanion Function({
+      required String id,
+      Value<String?> productId,
+      Value<String?> eventId,
+      required String type,
+      required String filePath,
+      Value<String?> thumbnailPath,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$AttachmentsTableUpdateCompanionBuilder =
+    AttachmentsCompanion Function({
+      Value<String> id,
+      Value<String?> productId,
+      Value<String?> eventId,
+      Value<String> type,
+      Value<String> filePath,
+      Value<String?> thumbnailPath,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+final class $$AttachmentsTableReferences
+    extends BaseReferences<_$AppDatabase, $AttachmentsTable, Attachment> {
+  $$AttachmentsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('attachments__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager? get productId {
+    final $_column = $_itemColumn<String>('product_id');
+    if ($_column == null) return null;
+    final manager = $$ProductsTableTableManager(
+      $_db,
+      $_db.products,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $EventsTable _eventIdTable(_$AppDatabase db) =>
+      db.events.createAlias('attachments__event_id__events__id');
+
+  $$EventsTableProcessedTableManager? get eventId {
+    final $_column = $_itemColumn<String>('event_id');
+    if ($_column == null) return null;
+    final manager = $$EventsTableTableManager(
+      $_db,
+      $_db.events,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_eventIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 }
 
 class $$AttachmentsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $AttachmentsTable> {
-  $$AttachmentsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get filePath => $state.composableBuilder(
-      column: $state.table.filePath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get thumbnailPath => $state.composableBuilder(
-      column: $state.table.thumbnailPath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get thumbnailPath => $composableBuilder(
+    column: $table.thumbnailPath,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableFilterComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$EventsTableFilterComposer get eventId {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableFilterComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
 class $$AttachmentsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $AttachmentsTable> {
-  $$AttachmentsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get filePath => $state.composableBuilder(
-      column: $state.table.filePath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get thumbnailPath => $state.composableBuilder(
-      column: $state.table.thumbnailPath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get thumbnailPath => $composableBuilder(
+    column: $table.thumbnailPath,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableOrderingComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$EventsTableOrderingComposer get eventId {
-    final $$EventsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$EventsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
+    final $$EventsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableOrderingComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-typedef $$WarrantiesTableCreateCompanionBuilder = WarrantiesCompanion Function({
-  required String id,
-  Value<String?> productId,
-  Value<String?> eventId,
-  required String kind,
-  required DateTime expiryDate,
-  Value<String> reminderDaysBefore,
-  Value<int> rowid,
-});
-typedef $$WarrantiesTableUpdateCompanionBuilder = WarrantiesCompanion Function({
-  Value<String> id,
-  Value<String?> productId,
-  Value<String?> eventId,
-  Value<String> kind,
-  Value<DateTime> expiryDate,
-  Value<String> reminderDaysBefore,
-  Value<int> rowid,
-});
+class $$AttachmentsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
 
-class $$WarrantiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $WarrantiesTable,
-    Warranty,
-    $$WarrantiesTableFilterComposer,
-    $$WarrantiesTableOrderingComposer,
-    $$WarrantiesTableCreateCompanionBuilder,
-    $$WarrantiesTableUpdateCompanionBuilder> {
-  $$WarrantiesTableTableManager(_$AppDatabase db, $WarrantiesTable table)
-      : super(TableManagerState(
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get filePath =>
+      $composableBuilder(column: $table.filePath, builder: (column) => column);
+
+  GeneratedColumn<String> get thumbnailPath => $composableBuilder(
+    column: $table.thumbnailPath,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$EventsTableAnnotationComposer get eventId {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$AttachmentsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AttachmentsTable,
+          Attachment,
+          $$AttachmentsTableFilterComposer,
+          $$AttachmentsTableOrderingComposer,
+          $$AttachmentsTableAnnotationComposer,
+          $$AttachmentsTableCreateCompanionBuilder,
+          $$AttachmentsTableUpdateCompanionBuilder,
+          (Attachment, $$AttachmentsTableReferences),
+          Attachment,
+          PrefetchHooks Function({bool productId, bool eventId})
+        > {
+  $$AttachmentsTableTableManager(_$AppDatabase db, $AttachmentsTable table)
+    : super(
+        TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$WarrantiesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$WarrantiesTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String?> productId = const Value.absent(),
-            Value<String?> eventId = const Value.absent(),
-            Value<String> kind = const Value.absent(),
-            Value<DateTime> expiryDate = const Value.absent(),
-            Value<String> reminderDaysBefore = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              WarrantiesCompanion(
-            id: id,
-            productId: productId,
-            eventId: eventId,
-            kind: kind,
-            expiryDate: expiryDate,
-            reminderDaysBefore: reminderDaysBefore,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            Value<String?> productId = const Value.absent(),
-            Value<String?> eventId = const Value.absent(),
-            required String kind,
-            required DateTime expiryDate,
-            Value<String> reminderDaysBefore = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              WarrantiesCompanion.insert(
-            id: id,
-            productId: productId,
-            eventId: eventId,
-            kind: kind,
-            expiryDate: expiryDate,
-            reminderDaysBefore: reminderDaysBefore,
-            rowid: rowid,
-          ),
-        ));
+          createFilteringComposer: () =>
+              $$AttachmentsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AttachmentsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AttachmentsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String?> productId = const Value.absent(),
+                Value<String?> eventId = const Value.absent(),
+                Value<String> type = const Value.absent(),
+                Value<String> filePath = const Value.absent(),
+                Value<String?> thumbnailPath = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => AttachmentsCompanion(
+                id: id,
+                productId: productId,
+                eventId: eventId,
+                type: type,
+                filePath: filePath,
+                thumbnailPath: thumbnailPath,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                Value<String?> productId = const Value.absent(),
+                Value<String?> eventId = const Value.absent(),
+                required String type,
+                required String filePath,
+                Value<String?> thumbnailPath = const Value.absent(),
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => AttachmentsCompanion.insert(
+                id: id,
+                productId: productId,
+                eventId: eventId,
+                type: type,
+                filePath: filePath,
+                thumbnailPath: thumbnailPath,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$AttachmentsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({productId = false, eventId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (productId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.productId,
+                                referencedTable: $$AttachmentsTableReferences
+                                    ._productIdTable(db),
+                                referencedColumn: $$AttachmentsTableReferences
+                                    ._productIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+                    if (eventId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.eventId,
+                                referencedTable: $$AttachmentsTableReferences
+                                    ._eventIdTable(db),
+                                referencedColumn: $$AttachmentsTableReferences
+                                    ._eventIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$AttachmentsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AttachmentsTable,
+      Attachment,
+      $$AttachmentsTableFilterComposer,
+      $$AttachmentsTableOrderingComposer,
+      $$AttachmentsTableAnnotationComposer,
+      $$AttachmentsTableCreateCompanionBuilder,
+      $$AttachmentsTableUpdateCompanionBuilder,
+      (Attachment, $$AttachmentsTableReferences),
+      Attachment,
+      PrefetchHooks Function({bool productId, bool eventId})
+    >;
+typedef $$WarrantiesTableCreateCompanionBuilder =
+    WarrantiesCompanion Function({
+      required String id,
+      Value<String?> productId,
+      Value<String?> eventId,
+      required String kind,
+      required DateTime expiryDate,
+      Value<String> reminderDaysBefore,
+      Value<int> rowid,
+    });
+typedef $$WarrantiesTableUpdateCompanionBuilder =
+    WarrantiesCompanion Function({
+      Value<String> id,
+      Value<String?> productId,
+      Value<String?> eventId,
+      Value<String> kind,
+      Value<DateTime> expiryDate,
+      Value<String> reminderDaysBefore,
+      Value<int> rowid,
+    });
+
+final class $$WarrantiesTableReferences
+    extends BaseReferences<_$AppDatabase, $WarrantiesTable, Warranty> {
+  $$WarrantiesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('warranties__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager? get productId {
+    final $_column = $_itemColumn<String>('product_id');
+    if ($_column == null) return null;
+    final manager = $$ProductsTableTableManager(
+      $_db,
+      $_db.products,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $EventsTable _eventIdTable(_$AppDatabase db) =>
+      db.events.createAlias('warranties__event_id__events__id');
+
+  $$EventsTableProcessedTableManager? get eventId {
+    final $_column = $_itemColumn<String>('event_id');
+    if ($_column == null) return null;
+    final manager = $$EventsTableTableManager(
+      $_db,
+      $_db.events,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_eventIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 }
 
 class $$WarrantiesTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $WarrantiesTable> {
-  $$WarrantiesTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get kind => $state.composableBuilder(
-      column: $state.table.kind,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get expiryDate => $state.composableBuilder(
-      column: $state.table.expiryDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get expiryDate => $composableBuilder(
+    column: $table.expiryDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get reminderDaysBefore => $state.composableBuilder(
-      column: $state.table.reminderDaysBefore,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get reminderDaysBefore => $composableBuilder(
+    column: $table.reminderDaysBefore,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableFilterComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$EventsTableFilterComposer get eventId {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableFilterComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
 class $$WarrantiesTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $WarrantiesTable> {
-  $$WarrantiesTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get kind => $state.composableBuilder(
-      column: $state.table.kind,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get expiryDate => $state.composableBuilder(
-      column: $state.table.expiryDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get expiryDate => $composableBuilder(
+    column: $table.expiryDate,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get reminderDaysBefore => $state.composableBuilder(
-      column: $state.table.reminderDaysBefore,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get reminderDaysBefore => $composableBuilder(
+    column: $table.reminderDaysBefore,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableOrderingComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$EventsTableOrderingComposer get eventId {
-    final $$EventsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$EventsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
+    final $$EventsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableOrderingComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
+
+class $$WarrantiesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiryDate => $composableBuilder(
+    column: $table.expiryDate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get reminderDaysBefore => $composableBuilder(
+    column: $table.reminderDaysBefore,
+    builder: (column) => column,
+  );
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.productId,
+      referencedTable: $db.products,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProductsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.products,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$EventsTableAnnotationComposer get eventId {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.eventId,
+      referencedTable: $db.events,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$EventsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.events,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$WarrantiesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $WarrantiesTable,
+          Warranty,
+          $$WarrantiesTableFilterComposer,
+          $$WarrantiesTableOrderingComposer,
+          $$WarrantiesTableAnnotationComposer,
+          $$WarrantiesTableCreateCompanionBuilder,
+          $$WarrantiesTableUpdateCompanionBuilder,
+          (Warranty, $$WarrantiesTableReferences),
+          Warranty,
+          PrefetchHooks Function({bool productId, bool eventId})
+        > {
+  $$WarrantiesTableTableManager(_$AppDatabase db, $WarrantiesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$WarrantiesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$WarrantiesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$WarrantiesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String?> productId = const Value.absent(),
+                Value<String?> eventId = const Value.absent(),
+                Value<String> kind = const Value.absent(),
+                Value<DateTime> expiryDate = const Value.absent(),
+                Value<String> reminderDaysBefore = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => WarrantiesCompanion(
+                id: id,
+                productId: productId,
+                eventId: eventId,
+                kind: kind,
+                expiryDate: expiryDate,
+                reminderDaysBefore: reminderDaysBefore,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                Value<String?> productId = const Value.absent(),
+                Value<String?> eventId = const Value.absent(),
+                required String kind,
+                required DateTime expiryDate,
+                Value<String> reminderDaysBefore = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => WarrantiesCompanion.insert(
+                id: id,
+                productId: productId,
+                eventId: eventId,
+                kind: kind,
+                expiryDate: expiryDate,
+                reminderDaysBefore: reminderDaysBefore,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$WarrantiesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({productId = false, eventId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (productId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.productId,
+                                referencedTable: $$WarrantiesTableReferences
+                                    ._productIdTable(db),
+                                referencedColumn: $$WarrantiesTableReferences
+                                    ._productIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+                    if (eventId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.eventId,
+                                referencedTable: $$WarrantiesTableReferences
+                                    ._eventIdTable(db),
+                                referencedColumn: $$WarrantiesTableReferences
+                                    ._eventIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$WarrantiesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $WarrantiesTable,
+      Warranty,
+      $$WarrantiesTableFilterComposer,
+      $$WarrantiesTableOrderingComposer,
+      $$WarrantiesTableAnnotationComposer,
+      $$WarrantiesTableCreateCompanionBuilder,
+      $$WarrantiesTableUpdateCompanionBuilder,
+      (Warranty, $$WarrantiesTableReferences),
+      Warranty,
+      PrefetchHooks Function({bool productId, bool eventId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

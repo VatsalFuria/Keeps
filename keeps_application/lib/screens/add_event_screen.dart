@@ -51,7 +51,7 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             DropdownButtonFormField<String>(
-              value: _useCustomType ? null : _type,
+              initialValue: _useCustomType ? null : _type,
               decoration: const InputDecoration(labelText: 'Type'),
               items: [
                 ..._types.map(
