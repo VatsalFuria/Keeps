@@ -1,29 +1,35 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/database.dart';
 import '../models/stats.dart';
 import 'database_provider.dart';
 
-part 'product_providers.g.dart';
+final allProductsProvider = StreamProvider.autoDispose<List<Product>>(
+  (ref) => ref.watch(databaseProvider).watchAllProducts(),
+  name: 'allProductsProvider',
+);
 
-@riverpod
-Stream<List<Product>> allProducts(AllProductsRef ref) =>
-    ref.watch(databaseProvider).watchAllProducts();
+final productProvider = StreamProvider.autoDispose.family<Product?, String>(
+  (ref, id) => ref.watch(databaseProvider).watchProduct(id),
+  name: 'productProvider',
+);
 
-@riverpod
-Stream<Product?> product(ProductRef ref, String id) =>
-    ref.watch(databaseProvider).watchProduct(id);
+final productEventsProvider =
+    StreamProvider.autoDispose.family<List<Event>, String>(
+  (ref, productId) =>
+      ref.watch(databaseProvider).watchEventsForProduct(productId),
+  name: 'productEventsProvider',
+);
 
-@riverpod
-Stream<List<Event>> productEvents(ProductEventsRef ref, String productId) =>
-    ref.watch(databaseProvider).watchEventsForProduct(productId);
+final journalHistoryProvider =
+    StreamProvider.autoDispose.family<List<JournalRevision>, String>(
+  (ref, productId) =>
+      ref.watch(databaseProvider).watchJournalHistory(productId),
+  name: 'journalHistoryProvider',
+);
 
-@riverpod
-Stream<List<JournalRevision>> journalHistory(JournalHistoryRef ref, String productId) =>
-    ref.watch(databaseProvider).watchJournalHistory(productId);
-
-@riverpod
-Future<ProductStats> productStats(ProductStatsRef ref, String productId) {
+final productStatsProvider =
+    FutureProvider.autoDispose.family<ProductStats, String>((ref, productId) {
   final db = ref.watch(databaseProvider);
   ref.watch(productEventsProvider(productId)); // recompute when events change
   return db.computeStats(productId);
-}
+}, name: 'productStatsProvider');

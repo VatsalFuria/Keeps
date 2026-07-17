@@ -2308,22 +2308,446 @@ typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<int> rowid,
 });
 
+final class $$ProductsTableReferences
+    extends BaseReferences<_$AppDatabase, $ProductsTable, Product> {
+  $$ProductsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$EventsTable, List<Event>> _eventsRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.events,
+          aliasName: 'products__id__events__product_id');
+
+  $$EventsTableProcessedTableManager get eventsRefs {
+    final manager = $$EventsTableTableManager($_db, $_db.events)
+        .filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_eventsRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$JournalRevisionsTable, List<JournalRevision>>
+      _journalRevisionsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.journalRevisions,
+              aliasName: 'products__id__journal_revisions__product_id');
+
+  $$JournalRevisionsTableProcessedTableManager get journalRevisionsRefs {
+    final manager = $$JournalRevisionsTableTableManager(
+            $_db, $_db.journalRevisions)
+        .filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache =
+        $_typedResult.readTableOrNull(_journalRevisionsRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$AttachmentsTable, List<Attachment>>
+      _attachmentsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.attachments,
+              aliasName: 'products__id__attachments__product_id');
+
+  $$AttachmentsTableProcessedTableManager get attachmentsRefs {
+    final manager = $$AttachmentsTableTableManager($_db, $_db.attachments)
+        .filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_attachmentsRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$WarrantiesTable, List<Warranty>>
+      _warrantiesRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.warranties,
+              aliasName: 'products__id__warranties__product_id');
+
+  $$WarrantiesTableProcessedTableManager get warrantiesRefs {
+    final manager = $$WarrantiesTableTableManager($_db, $_db.warranties)
+        .filter((f) => f.productId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_warrantiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$ProductsTableFilterComposer
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get brand => $composableBuilder(
+      column: $table.brand, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get model => $composableBuilder(
+      column: $table.model, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get serialNumber => $composableBuilder(
+      column: $table.serialNumber, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get seller => $composableBuilder(
+      column: $table.seller, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get purchaseLocation => $composableBuilder(
+      column: $table.purchaseLocation,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get purchasePrice => $composableBuilder(
+      column: $table.purchasePrice, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get purchaseDate => $composableBuilder(
+      column: $table.purchaseDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get expectedLifetimeMonths => $composableBuilder(
+      column: $table.expectedLifetimeMonths,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get tags => $composableBuilder(
+      column: $table.tags, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> eventsRefs(
+      Expression<bool> Function($$EventsTableFilterComposer f) f) {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableFilterComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> journalRevisionsRefs(
+      Expression<bool> Function($$JournalRevisionsTableFilterComposer f) f) {
+    final $$JournalRevisionsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.journalRevisions,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalRevisionsTableFilterComposer(
+              $db: $db,
+              $table: $db.journalRevisions,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> attachmentsRefs(
+      Expression<bool> Function($$AttachmentsTableFilterComposer f) f) {
+    final $$AttachmentsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.attachments,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$AttachmentsTableFilterComposer(
+              $db: $db,
+              $table: $db.attachments,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> warrantiesRefs(
+      Expression<bool> Function($$WarrantiesTableFilterComposer f) f) {
+    final $$WarrantiesTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.warranties,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$WarrantiesTableFilterComposer(
+              $db: $db,
+              $table: $db.warranties,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$ProductsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get brand => $composableBuilder(
+      column: $table.brand, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get model => $composableBuilder(
+      column: $table.model, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get serialNumber => $composableBuilder(
+      column: $table.serialNumber,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get seller => $composableBuilder(
+      column: $table.seller, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get purchaseLocation => $composableBuilder(
+      column: $table.purchaseLocation,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get purchasePrice => $composableBuilder(
+      column: $table.purchasePrice,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get purchaseDate => $composableBuilder(
+      column: $table.purchaseDate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get expectedLifetimeMonths => $composableBuilder(
+      column: $table.expectedLifetimeMonths,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get tags => $composableBuilder(
+      column: $table.tags, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$ProductsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProductsTable> {
+  $$ProductsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<String> get brand =>
+      $composableBuilder(column: $table.brand, builder: (column) => column);
+
+  GeneratedColumn<String> get model =>
+      $composableBuilder(column: $table.model, builder: (column) => column);
+
+  GeneratedColumn<String> get serialNumber => $composableBuilder(
+      column: $table.serialNumber, builder: (column) => column);
+
+  GeneratedColumn<String> get seller =>
+      $composableBuilder(column: $table.seller, builder: (column) => column);
+
+  GeneratedColumn<String> get purchaseLocation => $composableBuilder(
+      column: $table.purchaseLocation, builder: (column) => column);
+
+  GeneratedColumn<double> get purchasePrice => $composableBuilder(
+      column: $table.purchasePrice, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get purchaseDate => $composableBuilder(
+      column: $table.purchaseDate, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry, builder: (column) => column);
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get expectedLifetimeMonths => $composableBuilder(
+      column: $table.expectedLifetimeMonths, builder: (column) => column);
+
+  GeneratedColumn<String> get tags =>
+      $composableBuilder(column: $table.tags, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  Expression<T> eventsRefs<T extends Object>(
+      Expression<T> Function($$EventsTableAnnotationComposer a) f) {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> journalRevisionsRefs<T extends Object>(
+      Expression<T> Function($$JournalRevisionsTableAnnotationComposer a) f) {
+    final $$JournalRevisionsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.journalRevisions,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalRevisionsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.journalRevisions,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> attachmentsRefs<T extends Object>(
+      Expression<T> Function($$AttachmentsTableAnnotationComposer a) f) {
+    final $$AttachmentsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.attachments,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$AttachmentsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.attachments,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> warrantiesRefs<T extends Object>(
+      Expression<T> Function($$WarrantiesTableAnnotationComposer a) f) {
+    final $$WarrantiesTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.warranties,
+        getReferencedColumn: (t) => t.productId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$WarrantiesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.warranties,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
 class $$ProductsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $ProductsTable,
     Product,
     $$ProductsTableFilterComposer,
     $$ProductsTableOrderingComposer,
+    $$ProductsTableAnnotationComposer,
     $$ProductsTableCreateCompanionBuilder,
-    $$ProductsTableUpdateCompanionBuilder> {
+    $$ProductsTableUpdateCompanionBuilder,
+    (Product, $$ProductsTableReferences),
+    Product,
+    PrefetchHooks Function(
+        {bool eventsRefs,
+        bool journalRevisionsRefs,
+        bool attachmentsRefs,
+        bool warrantiesRefs})> {
   $$ProductsTableTableManager(_$AppDatabase db, $ProductsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$ProductsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$ProductsTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$ProductsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProductsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProductsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> name = const Value.absent(),
@@ -2400,230 +2824,99 @@ class $$ProductsTableTableManager extends RootTableManager<
             updatedAt: updatedAt,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) =>
+                  (e.readTable(table), $$ProductsTableReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: (
+              {eventsRefs = false,
+              journalRevisionsRefs = false,
+              attachmentsRefs = false,
+              warrantiesRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (eventsRefs) db.events,
+                if (journalRevisionsRefs) db.journalRevisions,
+                if (attachmentsRefs) db.attachments,
+                if (warrantiesRefs) db.warranties
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (eventsRefs)
+                    await $_getPrefetchedData<Product, $ProductsTable, Event>(
+                        currentTable: table,
+                        referencedTable:
+                            $$ProductsTableReferences._eventsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ProductsTableReferences(db, table, p0).eventsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.productId == item.id),
+                        typedResults: items),
+                  if (journalRevisionsRefs)
+                    await $_getPrefetchedData<Product, $ProductsTable,
+                            JournalRevision>(
+                        currentTable: table,
+                        referencedTable: $$ProductsTableReferences
+                            ._journalRevisionsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ProductsTableReferences(db, table, p0)
+                                .journalRevisionsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.productId == item.id),
+                        typedResults: items),
+                  if (attachmentsRefs)
+                    await $_getPrefetchedData<Product, $ProductsTable,
+                            Attachment>(
+                        currentTable: table,
+                        referencedTable:
+                            $$ProductsTableReferences._attachmentsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ProductsTableReferences(db, table, p0)
+                                .attachmentsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.productId == item.id),
+                        typedResults: items),
+                  if (warrantiesRefs)
+                    await $_getPrefetchedData<Product, $ProductsTable,
+                            Warranty>(
+                        currentTable: table,
+                        referencedTable:
+                            $$ProductsTableReferences._warrantiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ProductsTableReferences(db, table, p0)
+                                .warrantiesRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.productId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$ProductsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $ProductsTable> {
-  $$ProductsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get brand => $state.composableBuilder(
-      column: $state.table.brand,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get model => $state.composableBuilder(
-      column: $state.table.model,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get serialNumber => $state.composableBuilder(
-      column: $state.table.serialNumber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get seller => $state.composableBuilder(
-      column: $state.table.seller,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get purchaseLocation => $state.composableBuilder(
-      column: $state.table.purchaseLocation,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get purchasePrice => $state.composableBuilder(
-      column: $state.table.purchasePrice,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get purchaseDate => $state.composableBuilder(
-      column: $state.table.purchaseDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get expectedLifetimeMonths => $state.composableBuilder(
-      column: $state.table.expectedLifetimeMonths,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get tags => $state.composableBuilder(
-      column: $state.table.tags,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ComposableFilter eventsRefs(
-      ComposableFilter Function($$EventsTableFilterComposer f) f) {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter journalRevisionsRefs(
-      ComposableFilter Function($$JournalRevisionsTableFilterComposer f) f) {
-    final $$JournalRevisionsTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.journalRevisions,
-            getReferencedColumn: (t) => t.productId,
-            builder: (joinBuilder, parentComposers) =>
-                $$JournalRevisionsTableFilterComposer(ComposerState($state.db,
-                    $state.db.journalRevisions, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter attachmentsRefs(
-      ComposableFilter Function($$AttachmentsTableFilterComposer f) f) {
-    final $$AttachmentsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.attachments,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) =>
-            $$AttachmentsTableFilterComposer(ComposerState($state.db,
-                $state.db.attachments, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter warrantiesRefs(
-      ComposableFilter Function($$WarrantiesTableFilterComposer f) f) {
-    final $$WarrantiesTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.warranties,
-        getReferencedColumn: (t) => t.productId,
-        builder: (joinBuilder, parentComposers) =>
-            $$WarrantiesTableFilterComposer(ComposerState($state.db,
-                $state.db.warranties, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$ProductsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $ProductsTable> {
-  $$ProductsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get brand => $state.composableBuilder(
-      column: $state.table.brand,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get model => $state.composableBuilder(
-      column: $state.table.model,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get serialNumber => $state.composableBuilder(
-      column: $state.table.serialNumber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get seller => $state.composableBuilder(
-      column: $state.table.seller,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get purchaseLocation => $state.composableBuilder(
-      column: $state.table.purchaseLocation,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get purchasePrice => $state.composableBuilder(
-      column: $state.table.purchasePrice,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get purchaseDate => $state.composableBuilder(
-      column: $state.table.purchaseDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get expectedLifetimeMonths => $state.composableBuilder(
-      column: $state.table.expectedLifetimeMonths,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get tags => $state.composableBuilder(
-      column: $state.table.tags,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$ProductsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ProductsTable,
+    Product,
+    $$ProductsTableFilterComposer,
+    $$ProductsTableOrderingComposer,
+    $$ProductsTableAnnotationComposer,
+    $$ProductsTableCreateCompanionBuilder,
+    $$ProductsTableUpdateCompanionBuilder,
+    (Product, $$ProductsTableReferences),
+    Product,
+    PrefetchHooks Function(
+        {bool eventsRefs,
+        bool journalRevisionsRefs,
+        bool attachmentsRefs,
+        bool warrantiesRefs})>;
 typedef $$EventsTableCreateCompanionBuilder = EventsCompanion Function({
   required String id,
   required String productId,
@@ -2647,22 +2940,316 @@ typedef $$EventsTableUpdateCompanionBuilder = EventsCompanion Function({
   Value<int> rowid,
 });
 
+final class $$EventsTableReferences
+    extends BaseReferences<_$AppDatabase, $EventsTable, Event> {
+  $$EventsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('events__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager get productId {
+    final $_column = $_itemColumn<String>('product_id')!;
+
+    final manager = $$ProductsTableTableManager($_db, $_db.products)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static MultiTypedResultKey<$AttachmentsTable, List<Attachment>>
+      _attachmentsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.attachments,
+              aliasName: 'events__id__attachments__event_id');
+
+  $$AttachmentsTableProcessedTableManager get attachmentsRefs {
+    final manager = $$AttachmentsTableTableManager($_db, $_db.attachments)
+        .filter((f) => f.eventId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_attachmentsRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$WarrantiesTable, List<Warranty>>
+      _warrantiesRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.warranties,
+              aliasName: 'events__id__warranties__event_id');
+
+  $$WarrantiesTableProcessedTableManager get warrantiesRefs {
+    final manager = $$WarrantiesTableTableManager($_db, $_db.warranties)
+        .filter((f) => f.eventId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_warrantiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$EventsTableFilterComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get cost => $composableBuilder(
+      column: $table.cost, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get markdownNote => $composableBuilder(
+      column: $table.markdownNote, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  $$ProductsTableFilterComposer get productId {
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableFilterComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<bool> attachmentsRefs(
+      Expression<bool> Function($$AttachmentsTableFilterComposer f) f) {
+    final $$AttachmentsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.attachments,
+        getReferencedColumn: (t) => t.eventId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$AttachmentsTableFilterComposer(
+              $db: $db,
+              $table: $db.attachments,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> warrantiesRefs(
+      Expression<bool> Function($$WarrantiesTableFilterComposer f) f) {
+    final $$WarrantiesTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.warranties,
+        getReferencedColumn: (t) => t.eventId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$WarrantiesTableFilterComposer(
+              $db: $db,
+              $table: $db.warranties,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$EventsTableOrderingComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get cost => $composableBuilder(
+      column: $table.cost, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get markdownNote => $composableBuilder(
+      column: $table.markdownNote,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  $$ProductsTableOrderingComposer get productId {
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableOrderingComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$EventsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $EventsTable> {
+  $$EventsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<double> get cost =>
+      $composableBuilder(column: $table.cost, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get warrantyExpiry => $composableBuilder(
+      column: $table.warrantyExpiry, builder: (column) => column);
+
+  GeneratedColumn<String> get markdownNote => $composableBuilder(
+      column: $table.markdownNote, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<T> attachmentsRefs<T extends Object>(
+      Expression<T> Function($$AttachmentsTableAnnotationComposer a) f) {
+    final $$AttachmentsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.attachments,
+        getReferencedColumn: (t) => t.eventId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$AttachmentsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.attachments,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> warrantiesRefs<T extends Object>(
+      Expression<T> Function($$WarrantiesTableAnnotationComposer a) f) {
+    final $$WarrantiesTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.warranties,
+        getReferencedColumn: (t) => t.eventId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$WarrantiesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.warranties,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
 class $$EventsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $EventsTable,
     Event,
     $$EventsTableFilterComposer,
     $$EventsTableOrderingComposer,
+    $$EventsTableAnnotationComposer,
     $$EventsTableCreateCompanionBuilder,
-    $$EventsTableUpdateCompanionBuilder> {
+    $$EventsTableUpdateCompanionBuilder,
+    (Event, $$EventsTableReferences),
+    Event,
+    PrefetchHooks Function(
+        {bool productId, bool attachmentsRefs, bool warrantiesRefs})> {
   $$EventsTableTableManager(_$AppDatabase db, $EventsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$EventsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$EventsTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$EventsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$EventsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$EventsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> productId = const Value.absent(),
@@ -2707,137 +3294,92 @@ class $$EventsTableTableManager extends RootTableManager<
             createdAt: createdAt,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) =>
+                  (e.readTable(table), $$EventsTableReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: (
+              {productId = false,
+              attachmentsRefs = false,
+              warrantiesRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (attachmentsRefs) db.attachments,
+                if (warrantiesRefs) db.warranties
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (productId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.productId,
+                    referencedTable:
+                        $$EventsTableReferences._productIdTable(db),
+                    referencedColumn:
+                        $$EventsTableReferences._productIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (attachmentsRefs)
+                    await $_getPrefetchedData<Event, $EventsTable, Attachment>(
+                        currentTable: table,
+                        referencedTable:
+                            $$EventsTableReferences._attachmentsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$EventsTableReferences(db, table, p0)
+                                .attachmentsRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.eventId == item.id),
+                        typedResults: items),
+                  if (warrantiesRefs)
+                    await $_getPrefetchedData<Event, $EventsTable, Warranty>(
+                        currentTable: table,
+                        referencedTable:
+                            $$EventsTableReferences._warrantiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$EventsTableReferences(db, table, p0)
+                                .warrantiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.eventId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$EventsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $EventsTable> {
-  $$EventsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get cost => $state.composableBuilder(
-      column: $state.table.cost,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get markdownNote => $state.composableBuilder(
-      column: $state.table.markdownNote,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  ComposableFilter attachmentsRefs(
-      ComposableFilter Function($$AttachmentsTableFilterComposer f) f) {
-    final $$AttachmentsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.attachments,
-        getReferencedColumn: (t) => t.eventId,
-        builder: (joinBuilder, parentComposers) =>
-            $$AttachmentsTableFilterComposer(ComposerState($state.db,
-                $state.db.attachments, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter warrantiesRefs(
-      ComposableFilter Function($$WarrantiesTableFilterComposer f) f) {
-    final $$WarrantiesTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.warranties,
-        getReferencedColumn: (t) => t.eventId,
-        builder: (joinBuilder, parentComposers) =>
-            $$WarrantiesTableFilterComposer(ComposerState($state.db,
-                $state.db.warranties, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$EventsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $EventsTable> {
-  $$EventsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get cost => $state.composableBuilder(
-      column: $state.table.cost,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get warrantyExpiry => $state.composableBuilder(
-      column: $state.table.warrantyExpiry,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get markdownNote => $state.composableBuilder(
-      column: $state.table.markdownNote,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$EventsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $EventsTable,
+    Event,
+    $$EventsTableFilterComposer,
+    $$EventsTableOrderingComposer,
+    $$EventsTableAnnotationComposer,
+    $$EventsTableCreateCompanionBuilder,
+    $$EventsTableUpdateCompanionBuilder,
+    (Event, $$EventsTableReferences),
+    Event,
+    PrefetchHooks Function(
+        {bool productId, bool attachmentsRefs, bool warrantiesRefs})>;
 typedef $$JournalRevisionsTableCreateCompanionBuilder
     = JournalRevisionsCompanion Function({
   required String id,
@@ -2855,23 +3397,166 @@ typedef $$JournalRevisionsTableUpdateCompanionBuilder
   Value<int> rowid,
 });
 
+final class $$JournalRevisionsTableReferences extends BaseReferences<
+    _$AppDatabase, $JournalRevisionsTable, JournalRevision> {
+  $$JournalRevisionsTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('journal_revisions__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager get productId {
+    final $_column = $_itemColumn<String>('product_id')!;
+
+    final manager = $$ProductsTableTableManager($_db, $_db.products)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$JournalRevisionsTableFilterComposer
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  $$ProductsTableFilterComposer get productId {
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableFilterComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$JournalRevisionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  $$ProductsTableOrderingComposer get productId {
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableOrderingComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$JournalRevisionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JournalRevisionsTable> {
+  $$JournalRevisionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get content =>
+      $composableBuilder(column: $table.content, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$JournalRevisionsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $JournalRevisionsTable,
     JournalRevision,
     $$JournalRevisionsTableFilterComposer,
     $$JournalRevisionsTableOrderingComposer,
+    $$JournalRevisionsTableAnnotationComposer,
     $$JournalRevisionsTableCreateCompanionBuilder,
-    $$JournalRevisionsTableUpdateCompanionBuilder> {
+    $$JournalRevisionsTableUpdateCompanionBuilder,
+    (JournalRevision, $$JournalRevisionsTableReferences),
+    JournalRevision,
+    PrefetchHooks Function({bool productId})> {
   $$JournalRevisionsTableTableManager(
       _$AppDatabase db, $JournalRevisionsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$JournalRevisionsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$JournalRevisionsTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$JournalRevisionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JournalRevisionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JournalRevisionsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> productId = const Value.absent(),
@@ -2900,71 +3585,63 @@ class $$JournalRevisionsTableTableManager extends RootTableManager<
             createdAt: createdAt,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$JournalRevisionsTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({productId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (productId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.productId,
+                    referencedTable:
+                        $$JournalRevisionsTableReferences._productIdTable(db),
+                    referencedColumn: $$JournalRevisionsTableReferences
+                        ._productIdTable(db)
+                        .id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$JournalRevisionsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $JournalRevisionsTable> {
-  $$JournalRevisionsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get content => $state.composableBuilder(
-      column: $state.table.content,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$JournalRevisionsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $JournalRevisionsTable> {
-  $$JournalRevisionsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get content => $state.composableBuilder(
-      column: $state.table.content,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$JournalRevisionsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $JournalRevisionsTable,
+    JournalRevision,
+    $$JournalRevisionsTableFilterComposer,
+    $$JournalRevisionsTableOrderingComposer,
+    $$JournalRevisionsTableAnnotationComposer,
+    $$JournalRevisionsTableCreateCompanionBuilder,
+    $$JournalRevisionsTableUpdateCompanionBuilder,
+    (JournalRevision, $$JournalRevisionsTableReferences),
+    JournalRevision,
+    PrefetchHooks Function({bool productId})>;
 typedef $$AttachmentsTableCreateCompanionBuilder = AttachmentsCompanion
     Function({
   required String id,
@@ -2988,22 +3665,257 @@ typedef $$AttachmentsTableUpdateCompanionBuilder = AttachmentsCompanion
   Value<int> rowid,
 });
 
+final class $$AttachmentsTableReferences
+    extends BaseReferences<_$AppDatabase, $AttachmentsTable, Attachment> {
+  $$AttachmentsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('attachments__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager? get productId {
+    final $_column = $_itemColumn<String>('product_id');
+    if ($_column == null) return null;
+    final manager = $$ProductsTableTableManager($_db, $_db.products)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $EventsTable _eventIdTable(_$AppDatabase db) =>
+      db.events.createAlias('attachments__event_id__events__id');
+
+  $$EventsTableProcessedTableManager? get eventId {
+    final $_column = $_itemColumn<String>('event_id');
+    if ($_column == null) return null;
+    final manager = $$EventsTableTableManager($_db, $_db.events)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_eventIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$AttachmentsTableFilterComposer
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get filePath => $composableBuilder(
+      column: $table.filePath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get thumbnailPath => $composableBuilder(
+      column: $table.thumbnailPath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  $$ProductsTableFilterComposer get productId {
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableFilterComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableFilterComposer get eventId {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableFilterComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$AttachmentsTableOrderingComposer
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get filePath => $composableBuilder(
+      column: $table.filePath, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get thumbnailPath => $composableBuilder(
+      column: $table.thumbnailPath,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  $$ProductsTableOrderingComposer get productId {
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableOrderingComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableOrderingComposer get eventId {
+    final $$EventsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableOrderingComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$AttachmentsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AttachmentsTable> {
+  $$AttachmentsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get filePath =>
+      $composableBuilder(column: $table.filePath, builder: (column) => column);
+
+  GeneratedColumn<String> get thumbnailPath => $composableBuilder(
+      column: $table.thumbnailPath, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableAnnotationComposer get eventId {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$AttachmentsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $AttachmentsTable,
     Attachment,
     $$AttachmentsTableFilterComposer,
     $$AttachmentsTableOrderingComposer,
+    $$AttachmentsTableAnnotationComposer,
     $$AttachmentsTableCreateCompanionBuilder,
-    $$AttachmentsTableUpdateCompanionBuilder> {
+    $$AttachmentsTableUpdateCompanionBuilder,
+    (Attachment, $$AttachmentsTableReferences),
+    Attachment,
+    PrefetchHooks Function({bool productId, bool eventId})> {
   $$AttachmentsTableTableManager(_$AppDatabase db, $AttachmentsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$AttachmentsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$AttachmentsTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$AttachmentsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AttachmentsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AttachmentsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String?> productId = const Value.absent(),
@@ -3044,115 +3956,72 @@ class $$AttachmentsTableTableManager extends RootTableManager<
             createdAt: createdAt,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$AttachmentsTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({productId = false, eventId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (productId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.productId,
+                    referencedTable:
+                        $$AttachmentsTableReferences._productIdTable(db),
+                    referencedColumn:
+                        $$AttachmentsTableReferences._productIdTable(db).id,
+                  ) as T;
+                }
+                if (eventId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.eventId,
+                    referencedTable:
+                        $$AttachmentsTableReferences._eventIdTable(db),
+                    referencedColumn:
+                        $$AttachmentsTableReferences._eventIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$AttachmentsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $AttachmentsTable> {
-  $$AttachmentsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get filePath => $state.composableBuilder(
-      column: $state.table.filePath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get thumbnailPath => $state.composableBuilder(
-      column: $state.table.thumbnailPath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$EventsTableFilterComposer get eventId {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$AttachmentsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $AttachmentsTable> {
-  $$AttachmentsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get type => $state.composableBuilder(
-      column: $state.table.type,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get filePath => $state.composableBuilder(
-      column: $state.table.filePath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get thumbnailPath => $state.composableBuilder(
-      column: $state.table.thumbnailPath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$EventsTableOrderingComposer get eventId {
-    final $$EventsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$EventsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$AttachmentsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $AttachmentsTable,
+    Attachment,
+    $$AttachmentsTableFilterComposer,
+    $$AttachmentsTableOrderingComposer,
+    $$AttachmentsTableAnnotationComposer,
+    $$AttachmentsTableCreateCompanionBuilder,
+    $$AttachmentsTableUpdateCompanionBuilder,
+    (Attachment, $$AttachmentsTableReferences),
+    Attachment,
+    PrefetchHooks Function({bool productId, bool eventId})>;
 typedef $$WarrantiesTableCreateCompanionBuilder = WarrantiesCompanion Function({
   required String id,
   Value<String?> productId,
@@ -3172,22 +4041,249 @@ typedef $$WarrantiesTableUpdateCompanionBuilder = WarrantiesCompanion Function({
   Value<int> rowid,
 });
 
+final class $$WarrantiesTableReferences
+    extends BaseReferences<_$AppDatabase, $WarrantiesTable, Warranty> {
+  $$WarrantiesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProductsTable _productIdTable(_$AppDatabase db) =>
+      db.products.createAlias('warranties__product_id__products__id');
+
+  $$ProductsTableProcessedTableManager? get productId {
+    final $_column = $_itemColumn<String>('product_id');
+    if ($_column == null) return null;
+    final manager = $$ProductsTableTableManager($_db, $_db.products)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_productIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $EventsTable _eventIdTable(_$AppDatabase db) =>
+      db.events.createAlias('warranties__event_id__events__id');
+
+  $$EventsTableProcessedTableManager? get eventId {
+    final $_column = $_itemColumn<String>('event_id');
+    if ($_column == null) return null;
+    final manager = $$EventsTableTableManager($_db, $_db.events)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_eventIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$WarrantiesTableFilterComposer
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get kind => $composableBuilder(
+      column: $table.kind, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get expiryDate => $composableBuilder(
+      column: $table.expiryDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reminderDaysBefore => $composableBuilder(
+      column: $table.reminderDaysBefore,
+      builder: (column) => ColumnFilters(column));
+
+  $$ProductsTableFilterComposer get productId {
+    final $$ProductsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableFilterComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableFilterComposer get eventId {
+    final $$EventsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableFilterComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$WarrantiesTableOrderingComposer
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get kind => $composableBuilder(
+      column: $table.kind, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get expiryDate => $composableBuilder(
+      column: $table.expiryDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reminderDaysBefore => $composableBuilder(
+      column: $table.reminderDaysBefore,
+      builder: (column) => ColumnOrderings(column));
+
+  $$ProductsTableOrderingComposer get productId {
+    final $$ProductsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableOrderingComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableOrderingComposer get eventId {
+    final $$EventsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableOrderingComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$WarrantiesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $WarrantiesTable> {
+  $$WarrantiesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiryDate => $composableBuilder(
+      column: $table.expiryDate, builder: (column) => column);
+
+  GeneratedColumn<String> get reminderDaysBefore => $composableBuilder(
+      column: $table.reminderDaysBefore, builder: (column) => column);
+
+  $$ProductsTableAnnotationComposer get productId {
+    final $$ProductsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.productId,
+        referencedTable: $db.products,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProductsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.products,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$EventsTableAnnotationComposer get eventId {
+    final $$EventsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.eventId,
+        referencedTable: $db.events,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$EventsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.events,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$WarrantiesTableTableManager extends RootTableManager<
     _$AppDatabase,
     $WarrantiesTable,
     Warranty,
     $$WarrantiesTableFilterComposer,
     $$WarrantiesTableOrderingComposer,
+    $$WarrantiesTableAnnotationComposer,
     $$WarrantiesTableCreateCompanionBuilder,
-    $$WarrantiesTableUpdateCompanionBuilder> {
+    $$WarrantiesTableUpdateCompanionBuilder,
+    (Warranty, $$WarrantiesTableReferences),
+    Warranty,
+    PrefetchHooks Function({bool productId, bool eventId})> {
   $$WarrantiesTableTableManager(_$AppDatabase db, $WarrantiesTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$WarrantiesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$WarrantiesTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$WarrantiesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$WarrantiesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$WarrantiesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String?> productId = const Value.absent(),
@@ -3224,104 +4320,72 @@ class $$WarrantiesTableTableManager extends RootTableManager<
             reminderDaysBefore: reminderDaysBefore,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$WarrantiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({productId = false, eventId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (productId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.productId,
+                    referencedTable:
+                        $$WarrantiesTableReferences._productIdTable(db),
+                    referencedColumn:
+                        $$WarrantiesTableReferences._productIdTable(db).id,
+                  ) as T;
+                }
+                if (eventId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.eventId,
+                    referencedTable:
+                        $$WarrantiesTableReferences._eventIdTable(db),
+                    referencedColumn:
+                        $$WarrantiesTableReferences._eventIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$WarrantiesTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $WarrantiesTable> {
-  $$WarrantiesTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get kind => $state.composableBuilder(
-      column: $state.table.kind,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get expiryDate => $state.composableBuilder(
-      column: $state.table.expiryDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get reminderDaysBefore => $state.composableBuilder(
-      column: $state.table.reminderDaysBefore,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableFilterComposer get productId {
-    final $$ProductsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableFilterComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$EventsTableFilterComposer get eventId {
-    final $$EventsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) => $$EventsTableFilterComposer(
-            ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$WarrantiesTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $WarrantiesTable> {
-  $$WarrantiesTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get kind => $state.composableBuilder(
-      column: $state.table.kind,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get expiryDate => $state.composableBuilder(
-      column: $state.table.expiryDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get reminderDaysBefore => $state.composableBuilder(
-      column: $state.table.reminderDaysBefore,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$ProductsTableOrderingComposer get productId {
-    final $$ProductsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.productId,
-        referencedTable: $state.db.products,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ProductsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.products, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$EventsTableOrderingComposer get eventId {
-    final $$EventsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.eventId,
-        referencedTable: $state.db.events,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$EventsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.events, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
+typedef $$WarrantiesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $WarrantiesTable,
+    Warranty,
+    $$WarrantiesTableFilterComposer,
+    $$WarrantiesTableOrderingComposer,
+    $$WarrantiesTableAnnotationComposer,
+    $$WarrantiesTableCreateCompanionBuilder,
+    $$WarrantiesTableUpdateCompanionBuilder,
+    (Warranty, $$WarrantiesTableReferences),
+    Warranty,
+    PrefetchHooks Function({bool productId, bool eventId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

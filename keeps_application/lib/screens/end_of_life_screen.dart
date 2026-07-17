@@ -56,7 +56,7 @@ class _EndOfLifeScreenState extends ConsumerState<EndOfLifeScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           DropdownButtonFormField<String>(
-            value: _status,
+            initialValue: _status,
             decoration: const InputDecoration(labelText: 'What happened?'),
             items: statuses
                 .map((s) => DropdownMenuItem(value: s, child: Text(prettyStatus(s))))
