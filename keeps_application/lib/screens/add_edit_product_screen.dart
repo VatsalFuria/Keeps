@@ -45,7 +45,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: AppColors.accent,
               onPrimary: Colors.white,
               surface: AppColors.bg2,

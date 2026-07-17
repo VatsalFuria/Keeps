@@ -130,7 +130,7 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
             const SizedBox(height: 12),
             
             DropdownButtonFormField<String>(
-              value: _useCustomType ? '__custom__' : _type,
+              initialValue: _useCustomType ? '__custom__' : _type,
               decoration: _buildInputDecoration('Event Type'),
               dropdownColor: AppColors.bg2,
               borderRadius: BorderRadius.circular(12),
