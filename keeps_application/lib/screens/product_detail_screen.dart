@@ -38,7 +38,10 @@ class ProductDetailScreen extends ConsumerWidget {
                 expandedHeight: 150,
                 flexibleSpace: FlexibleSpaceBar(
                   titlePadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  title: Text(product.name, style: const TextStyle(fontSize: 18)),
+                  title: Text(
+                    product.name,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   background: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 56, 16, 0),
                     child: Row(
@@ -49,7 +52,7 @@ class ProductDetailScreen extends ConsumerWidget {
                             [product.brand, product.category]
                                 .where((e) => (e ?? '').isNotEmpty)
                                 .join(' · '),
-                            style: const TextStyle(color: AppColors.text2),
+                            style: const TextStyle(color: AppColors.text2, fontSize: 14),
                           ),
                         ),
                         WarrantyBadge(product: product),
@@ -58,6 +61,8 @@ class ProductDetailScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              
+              // --- STATS DASHBOARD ---
               SliverToBoxAdapter(
                 child: statsAsync.when(
                   data: (stats) => _StatsRow(stats: stats),
@@ -67,71 +72,110 @@ class ProductDetailScreen extends ConsumerWidget {
                       Padding(padding: const EdgeInsets.all(16), child: Text('Stats error: $e')),
                 ),
               ),
+
+              // --- ACTION BUTTONS (Add Event & 2x2 Grid) ---
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
-                  child: Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
                         onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => AddEventScreen(productId: product.id))),
-                        icon: const Icon(Icons.add, size: 18),
-                        label: const Text('Add Event'),
+                        icon: const Icon(Icons.add, size: 20),
+                        label: const Text('Add Event', style: TextStyle(fontSize: 16)),
                       ),
-                      if (product.status == 'Active')
-                        OutlinedButton(
-                          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => EndOfLifeScreen(productId: product.id))),
-                          child: const Text('Mark Complete'),
+                      const SizedBox(height: 12),
+                      GridView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          mainAxisExtent: 48,
                         ),
-                      OutlinedButton(
-                        onPressed: () => _editJournal(context, ref, product.id, latestJournal),
-                        child: const Text('Journal'),
-                      ),
-                      OutlinedButton(
-                        onPressed: () => ExportService.exportProductJson(ref, product.id),
-                        child: const Text('Export JSON'),
-                      ),
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(foregroundColor: AppColors.danger),
-                        onPressed: () async {
-                          final confirm = await showDialog<bool>(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text('Delete product?'),
-                              content: const Text(
-                                  'This deletes the product and all its events. This cannot be undone.'),
-                              actions: [
-                                TextButton(
-                                    onPressed: () => Navigator.pop(context, false),
-                                    child: const Text('Cancel')),
-                                TextButton(
-                                    onPressed: () => Navigator.pop(context, true),
-                                    child: const Text('Delete')),
-                              ],
+                        children: [
+                          if (product.status == 'Active')
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => EndOfLifeScreen(productId: product.id))),
+                              child: const Text('Mark Complete'),
                             ),
-                          );
-                          if (confirm == true) {
-                            await ref.read(databaseProvider).deleteProductCascade(product.id);
-                            if (context.mounted) Navigator.of(context).pop();
-                          }
-                        },
-                        child: const Text('Delete Product'),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () => _editJournal(context, ref, product.id, latestJournal),
+                            child: const Text('Journal'),
+                          ),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () => ExportService.exportProductJson(ref, product.id),
+                            child: const Text('Export JSON'),
+                          ),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: AppColors.danger,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () async {
+                              final confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Delete product?'),
+                                  content: const Text(
+                                      'This deletes the product and all its events. This cannot be undone.'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () => Navigator.pop(context, false),
+                                        child: const Text('Cancel')),
+                                    TextButton(
+                                        style: TextButton.styleFrom(foregroundColor: AppColors.danger),
+                                        onPressed: () => Navigator.pop(context, true),
+                                        child: const Text('Delete')),
+                                  ],
+                                ),
+                              );
+                              if (confirm == true) {
+                                await ref.read(databaseProvider).deleteProductCascade(product.id);
+                                if (context.mounted) Navigator.of(context).pop();
+                              }
+                            },
+                            child: const Text('Delete Product'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
+
+              // --- TIMELINE HEADER ---
               const SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 22, 20, 8),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 12),
                   child: Text('TIMELINE',
-                      style:
-                          TextStyle(fontSize: 13, letterSpacing: 1, color: AppColors.text2)),
+                      style: TextStyle(
+                          fontSize: 13, 
+                          fontWeight: FontWeight.w600, 
+                          letterSpacing: 1.2, 
+                          color: AppColors.text2)),
                 ),
               ),
+
+              // --- TIMELINE EVENTS ---
               eventsAsync.when(
                 data: (events) => SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -160,9 +204,12 @@ class ProductDetailScreen extends ConsumerWidget {
                 ),
                 loading: () =>
                     const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
-                error: (e, _) => SliverToBoxAdapter(child: Text('Error: $e')),
+                error: (e, _) => SliverToBoxAdapter(child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text('Error: $e'),
+                )),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 40)),
+              const SliverToBoxAdapter(child: SizedBox(height: 60)), // Extra bottom padding
             ],
           );
         },
@@ -178,15 +225,38 @@ class ProductDetailScreen extends ConsumerWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (ctx) => Padding(
         padding: EdgeInsets.only(
-            left: 16, right: 16, top: 16, bottom: MediaQuery.of(ctx).viewInsets.bottom + 16),
+            left: 16, right: 16, top: 24, bottom: MediaQuery.of(ctx).viewInsets.bottom + 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(controller: controller, maxLines: 6),
-            const SizedBox(height: 12),
+            const Text(
+              'Update Journal',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: controller, 
+              maxLines: 6,
+              decoration: InputDecoration(
+                hintText: 'Add notes about this product...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
               onPressed: () async {
                 if (controller.text.trim().isEmpty) return;
                 await ref.read(databaseProvider).appendJournalRevision(
@@ -199,7 +269,7 @@ class ProductDetailScreen extends ConsumerWidget {
                     );
                 if (ctx.mounted) Navigator.pop(ctx);
               },
-              child: const Text('Save New Revision'),
+              child: const Text('Save New Revision', style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
@@ -215,24 +285,63 @@ class _StatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final money = NumberFormat.simpleCurrency();
-    Widget stat(String label, String value) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+
+    Widget buildStatCard(String label, String value, {bool isPrimary = false}) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: isPrimary ? 16 : 12, horizontal: 8),
+        decoration: BoxDecoration(
+          color: AppColors.bg2,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            Text(label, style: const TextStyle(fontSize: 12, color: AppColors.text2)),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: isPrimary ? 24 : 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.text2,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
-        );
+        ),
+      );
+    }
+
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      child: Wrap(
-        spacing: 20,
-        runSpacing: 10,
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+      child: Column(
         children: [
-          stat('Owned', '${(stats.ownershipDays / 365).toStringAsFixed(1)}y'),
-          stat('Total cost', money.format(stats.totalCost)),
-          stat('Per day', money.format(stats.costPerDay)),
-          stat('Repairs', '${stats.repairs}'),
-          stat('Maintenance', '${stats.maintenance}'),
+          Row(
+            children: [
+              Expanded(child: buildStatCard('Total Cost', money.format(stats.totalCost), isPrimary: true)),
+              const SizedBox(width: 12),
+              Expanded(child: buildStatCard('Cost per Day', money.format(stats.costPerDay), isPrimary: true)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(child: buildStatCard('Owned', '${(stats.ownershipDays / 365).toStringAsFixed(1)}y')),
+              const SizedBox(width: 12),
+              Expanded(child: buildStatCard('Repairs', '${stats.repairs}')),
+              const SizedBox(width: 12),
+              Expanded(child: buildStatCard('Maintenance', '${stats.maintenance}')),
+            ],
+          ),
         ],
       ),
     );
@@ -307,30 +416,40 @@ class _TimelineTileState extends State<_TimelineTile> {
                           style: const TextStyle(color: AppColors.text2, fontSize: 13)),
                     if (_open) ...[
                       const SizedBox(height: 8),
-                      Text(widget.note?.isNotEmpty == true ? widget.note! : '(no notes)'),
+                      Text(widget.note?.isNotEmpty == true ? widget.note! : '(no notes)',
+                          style: const TextStyle(fontSize: 14)),
                       if (widget.onDelete != null)
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            style: TextButton.styleFrom(foregroundColor: AppColors.danger),
-                            onPressed: () async {
-                              final confirm = await showDialog<bool>(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  title: const Text('Delete this event?'),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () => Navigator.pop(context, false),
-                                        child: const Text('Cancel')),
-                                    TextButton(
-                                        onPressed: () => Navigator.pop(context, true),
-                                        child: const Text('Delete')),
-                                  ],
-                                ),
-                              );
-                              if (confirm == true) widget.onDelete!();
-                            },
-                            child: const Text('Delete Event'),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColors.danger,
+                                padding: EdgeInsets.zero,
+                                minimumSize: const Size(0, 0),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () async {
+                                final confirm = await showDialog<bool>(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                    title: const Text('Delete this event?'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => Navigator.pop(context, false),
+                                          child: const Text('Cancel')),
+                                      TextButton(
+                                          style: TextButton.styleFrom(foregroundColor: AppColors.danger),
+                                          onPressed: () => Navigator.pop(context, true),
+                                          child: const Text('Delete')),
+                                    ],
+                                  ),
+                                );
+                                if (confirm == true) widget.onDelete!();
+                              },
+                              child: const Text('Delete Event'),
+                            ),
                           ),
                         ),
                     ],
