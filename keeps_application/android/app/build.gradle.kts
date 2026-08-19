@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.keeps_application"
+    namespace = "dev.vatsaljf.keeps"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
