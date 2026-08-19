@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
 import '../data/database.dart';
 import '../models/stats.dart';
@@ -481,11 +482,18 @@ class _TimelineTileState extends State<_TimelineTile> {
                               color: AppColors.text2, fontSize: 13)),
                     if (_open) ...[
                       const SizedBox(height: 8),
-                      Text(
-                          widget.note?.isNotEmpty == true
-                              ? widget.note!
-                              : '(no notes)',
-                          style: const TextStyle(fontSize: 14)),
+                      if (widget.note?.trim().isNotEmpty == true)
+                        MarkdownBody(
+                          data: widget.note!.trim(),
+                          styleSheet: MarkdownStyleSheet.fromTheme(
+                            Theme.of(context),
+                          ).copyWith(
+                            p: const TextStyle(fontSize: 14, height: 1.45),
+                          ),
+                        )
+                      else
+                        const Text('(no notes)',
+                            style: TextStyle(fontSize: 14)),
                       if (widget.attachments.isNotEmpty) ...[
                         const SizedBox(height: 10),
                         SizedBox(
