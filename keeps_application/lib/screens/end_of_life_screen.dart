@@ -45,10 +45,11 @@ class _EndOfLifeScreenState extends ConsumerState<EndOfLifeScreen> {
       await db.upsertProduct(
           product.toCompanion(true).copyWith(status: Value(_status), updatedAt: Value(now)));
     }
-    final events = await db.watchEventsForProduct(widget.productId).first;
-    await NotificationService.instance.cancelForProduct(
+
+    final warranties = await db.getWarrantiesForProduct(widget.productId);
+    await NotificationService.instance.cancelWarrantiesForProduct(
       widget.productId,
-      eventIds: events.map((e) => e.id).toList(),
+      warranties: warranties,
     );
     if (mounted) Navigator.of(context).pop();
   }

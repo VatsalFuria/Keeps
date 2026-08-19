@@ -59,18 +59,18 @@ This document defines the architecture, data model, functional scope, and build 
 
 Final stack:
 
-| Layer                   | Choice                                                                                             | Why                                                                                                                                                                                                                                                                                                                                                             |
-| ----------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Framework**           | **Flutter (Dart), stable channel**                                                                 | Single codebase for iOS/Android/desktop later; Skia/Impeller rendering gives frame-accurate control over the custom timeline, spring physics, and "sticky note" animations the design calls for — harder to achieve cleanly in React Native.                                                                                                                    |
-| **State management**    | **Riverpod 2 (code-gen)**                                                                          | Compile-safe, testable, no BuildContext coupling — better long-term maintainability than Bloc's boilerplate for a solo/small-team app of this size.                                                                                                                                                                                                             |
-| **Local database**      | **Drift (SQLite)** — _not Isar_                                                                    | The data is inherently relational (Product 1:N Events, 1:N Attachments, 1:N Warranties, 1:N Journal Revisions) and needs real joins for stats (cost rollups, "average time between events"). Drift gives type-safe SQL, reactive streams (perfect for a live-updating timeline), and trivial schema migrations — a better fit than a NoSQL document store here. |
-| **Reactive queries**    | Drift's `Stream` queries                                                                           | Timeline and stats auto-update the instant an event is added, no manual refresh logic.                                                                                                                                                                                                                                                                          |
-| **Local notifications** | `flutter_local_notifications` + exact alarm scheduling                                             | Powers the 30/7/0-day warranty reminders fully offline.                                                                                                                                                                                                                                                                                                         |
-| **File storage**        | Device filesystem via `path_provider`, referenced by path in DB (not BLOBs)                        | Keeps DB small and fast; attachments (photos, PDFs, invoices) live in app sandbox storage.                                                                                                                                                                                                                                                                      |
-| **Markdown rendering**  | `flutter_markdown` + custom style sheet matching design tokens                                     | Journal & notes render properly rather than as raw text.                                                                                                                                                                                                                                                                                                        |
-| **Animations**          | Flutter's `SpringSimulation` / `implicit animations` + `flutter_animate` for micro-interactions    | Matches the spec's "organic, 250–350ms spring" motion language precisely.                                                                                                                                                                                                                                                                                       |
-| **PDF/Export**          | `pdf` + `printing` packages for PDF export; native `json_encode`/Markdown writer for other formats | [PLANNED NOT IMPLEMENTED] — the current app supports Markdown and JSON export, but PDF export is not yet implemented.                                                                                                                                                                                                                                           |
-| **Backup**              | Manual export/import to a single portable file (SQLite file + attachments zipped)                  | [PLANNED NOT IMPLEMENTED] — the current app supports export of product/library data, but a full restore/import workflow is not yet in place.                                                                                                                                                                                                                    |
+| Layer                   | Choice                                                                                             | Why                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Framework**           | **Flutter (Dart), stable channel**                                                                 | Single codebase for iOS/Android/desktop later; Skia/Impeller rendering gives frame-accurate control over the custom timeline, spring physics, and "sticky note" animations the design calls for — harder to achieve cleanly in React Native.                                                                                             |
+| **State management**    | **Riverpod 2 (code-gen)**                                                                          | Compile-safe, testable, no BuildContext coupling — better long-term maintainability than Bloc's boilerplate for a solo/small-team app of this size.                                                                                                                                                                                      |
+| **Local database**      | **Drift (SQLite)** — _not Isar_                                                                    | The data is inherently relational (Product 1:N Events, 1:N Attachments, 1:N Warranties) and needs real joins for stats (cost rollups, "average time between events"). Drift gives type-safe SQL, reactive streams (perfect for a live-updating timeline), and trivial schema migrations — a better fit than a NoSQL document store here. |
+| **Reactive queries**    | Drift's `Stream` queries                                                                           | Timeline and stats auto-update the instant an event is added, no manual refresh logic.                                                                                                                                                                                                                                                   |
+| **Local notifications** | `flutter_local_notifications` + exact alarm scheduling                                             | Powers the 30/7/0-day warranty reminders fully offline.                                                                                                                                                                                                                                                                                  |
+| **File storage**        | Device filesystem via `path_provider`, referenced by path in DB (not BLOBs)                        | Keeps DB small and fast; attachments (photos, PDFs, invoices) live in app sandbox storage.                                                                                                                                                                                                                                               |
+| **Markdown rendering**  | `flutter_markdown` + custom style sheet matching design tokens                                     | Journal & notes render properly rather than as raw text.                                                                                                                                                                                                                                                                                 |
+| **Animations**          | Flutter's `SpringSimulation` / `implicit animations` + `flutter_animate` for micro-interactions    | Matches the spec's "organic, 250–350ms spring" motion language precisely.                                                                                                                                                                                                                                                                |
+| **PDF/Export**          | `pdf` + `printing` packages for PDF export; native `json_encode`/Markdown writer for other formats | [PLANNED NOT IMPLEMENTED] — the current app supports Markdown and JSON export, but PDF export is not yet implemented.                                                                                                                                                                                                                    |
+| **Backup**              | Manual export/import to a single portable file (SQLite file + attachments zipped)                  | [PLANNED NOT IMPLEMENTED] — the current app supports export of product/library data, but a full restore/import workflow is not yet in place.                                                                                                                                                                                             |
 
 < br>
 | **Optional cloud sync (Phase 3, opt-in)** | Supabase (Postgres + Auth + Storage) | [PLANNED NOT IMPLEMENTED] — this repo is still local-first and has no sync layer in the active app. |
@@ -104,12 +104,6 @@ Event
  ├── createdAt
  └── relations → Attachments (1:N)
 
-JournalRevision   -- preserves Principle 4 (immutable history)
- ├── id, productId (FK)
- ├── content (markdown snapshot)
- ├── createdAt
- └── (editing the journal appends a new revision; the UI always shows history, never silently overwrites)
-
 Attachment
  ├── id, productId or eventId (nullable FK to either)
  ├── type (invoice | manual | photo | warrantyCard | other)
@@ -131,7 +125,7 @@ All monetary/derived fields (ownership duration, total cost, cost/day, repair co
 1. **Product CRUD** — creation flow under 2 minutes; optional fields visually de-emphasized.
 2. **Unified Timeline** — single event stream per product; no separate modules per event type.
 3. **Event Types** — Observation, Repair, Maintenance, Warranty Claim, Upgrade, Accessory Added, Configuration Change, Cleaning, Damage, Reminder, Reflection, Other, **+ user-defined custom types** (stored as free strings, mapped to a default icon).
-4. **Purchase Journal** — immutable, versioned; editing creates a new revision, old versions viewable in a "history" sheet.
+4. **Purchase Journal** — immutable, versioned; editing overwrites.
 5. **Warranty Engine** — tracks product/repair/extended/accessory warranties; local notifications at 30/7/0 days (configurable).
 6. **Attachments** — photos, PDFs, invoices, manuals attached to a Product or a specific Event.
 7. **Statistics Engine** — ownership duration, current age, total/avg costs, cost-per-day, repair/maintenance counts, average time between events — all computed, never entered.
@@ -181,7 +175,7 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
 # 9. Offline-First & Sync Strategy
 
 - **MVP:** 100% local. No backend, no account, no network calls at all.
-- **Phase 3 (opt-in only):** Supabase sync layer. Conflict resolution via event timestamps + a simple version counter per row (last-write-wins with a visible "conflict" banner for the journal, since journal integrity is a stated core value). Sync is additive — the app must remain fully usable if the user never enables it.
+- **Phase 3 (opt-in only):** Supabase sync layer. Conflict resolution via event timestamps + a simple version counter per row. Sync is additive — the app must remain fully usable if the user never enables it.
 
 ---
 
@@ -197,7 +191,7 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
 # 11. Testing Strategy
 
 - **Unit tests:** all derived-stats calculations (cost/day, ownership duration, warranty countdown edge cases like leap years/expired warranties).
-- **Widget tests:** timeline rendering, event add/edit/delete, journal versioning.
+- **Widget tests:** timeline rendering, event add/edit/delete.
 - **Golden tests:** design-token consistency (colors, spacing, typography) across light/dark.
 - **Integration tests:** full flow — create product → add events → mark end-of-life → export.
 
@@ -238,3 +232,12 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
 - Warranty reminders prevent at least one forgotten claim per active user per year (self-reported/anecdotal, no telemetry needed to claim this).
 - Users report consulting past products before new purchases.
 - Timeline naturally grows into a trusted personal ownership history without maintenance fatigue.
+
+## Known limitations
+
+- Human-readable error messages are implemented for product/event save
+  flows only. Export, notification scheduling, and settings actions may
+  still surface technical error text — a systemic pass (shared error
+  mapping) is deferred.
+- Journal history intentionally overwrites on edit rather than versioning
+  (see JournalRevisions table) — deliberate for now, not a bug.

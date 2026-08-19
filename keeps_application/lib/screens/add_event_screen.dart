@@ -146,7 +146,7 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error saving event: $e')),
+          SnackBar(content: Text('Couldn\'t save this event. Check the date and try again: $e')),
         );
         setState(() => _isSaving = false);
       }
@@ -250,7 +250,7 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
                     controller: _cost,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
-                    decoration: _buildInputDecoration('Cost (\$)'),
+                    decoration: _buildInputDecoration('Cost (₹)'),
                   ),
                 ),
                 const SizedBox(width: 12),

@@ -135,10 +135,13 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
       }
 
       if (mounted) Navigator.of(context).pop(id);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('AddEditProductScreen: failed to save product: $e\n$stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error saving product: $e')),
+          const SnackBar(
+            content: Text("Couldn't save this product. Check the required fields and try again."),
+          ),
         );
         setState(() => _isSaving = false);
       }
@@ -224,7 +227,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
               controller: _price,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
-              decoration: _buildInputDecoration('Purchase Price (\$)'),
+              decoration: _buildInputDecoration('Purchase Price (₹)'),
             ),
             const SizedBox(height: 12),
             Row(

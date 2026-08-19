@@ -190,13 +190,6 @@ class ProductDetailScreen extends ConsumerWidget {
                                         productId: product.id))),
                             child: const Text('Mark Complete'),
                           ),
-                          // OutlinedButton(
-                          //   style: OutlinedButton.styleFrom(
-                          //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          //   ),
-                          //   onPressed: () => _editJournal(context, ref, product.id, latestJournal),
-                          //   child: const Text('Journal'),
-                          // ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -207,15 +200,6 @@ class ProductDetailScreen extends ConsumerWidget {
                                     ref, product.id),
                             child: const Text('Export Markdown'),
                           ),
-                          // OutlinedButton(
-                          //   style: OutlinedButton.styleFrom(
-                          //     shape: RoundedRectangleBorder(
-                          //         borderRadius: BorderRadius.circular(10)),
-                          //   ),
-                          //   onPressed: () => ExportService.exportProductJson(
-                          //       ref, product.id),
-                          //   child: const Text('Export JSON'),
-                          // ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               foregroundColor: AppColors.danger,
@@ -245,34 +229,19 @@ class ProductDetailScreen extends ConsumerWidget {
                               );
 
                               if (confirm == true) {
-                                final eventIds = eventsAsync.value
-                                        ?.map((e) => e.id)
-                                        .toList() ??
-                                    const <String>[];
                                 final warranties = warrantiesAsync.value ??
                                     await ref
                                         .read(databaseProvider)
                                         .getWarrantiesForProduct(product.id);
-                                for (final warranty in warranties) {
-                                  final ownerId =
-                                      warranty.eventId ?? warranty.productId;
-                                  if (ownerId == null) continue;
-                                  await NotificationService.instance
-                                      .cancelReminders(
-                                    ownerId,
-                                    reminderDaysBefore: _parseReminderDays(
-                                      warranty.reminderDaysBefore,
-                                    ),
-                                  );
-                                }
                                 await NotificationService.instance
-                                    .cancelForProduct(product.id,
-                                        eventIds: eventIds);
+                                    .cancelWarrantiesForProduct(
+                                  product.id,
+                                  warranties: warranties,
+                                );
                                 await ref
                                     .read(databaseProvider)
                                     .deleteProductCascade(product.id);
-                                if (context.mounted)
-                                  Navigator.of(context).pop();
+                                if (context.mounted) Navigator.of(context).pop();
                               }
                             },
                             child: const Text('Delete Product'),
@@ -327,7 +296,7 @@ class ProductDetailScreen extends ConsumerWidget {
                         onDelete: () async {
                           await NotificationService.instance.cancelReminders(
                             e.id,
-                            reminderDaysBefore: _parseReminderDays(
+                            reminderDaysBefore: NotificationService.parseReminderDays(
                               eventWarranty?.reminderDaysBefore,
                             ),
                           );
@@ -356,74 +325,6 @@ class ProductDetailScreen extends ConsumerWidget {
       ),
     );
   }
-
-  // void _editJournal(
-  //     BuildContext context, WidgetRef ref, String productId, String currentContent) {
-  //   final controller = TextEditingController(text: currentContent);
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     shape: const RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //     ),
-  //     builder: (ctx) => Padding(
-  //       padding: EdgeInsets.only(
-  //           left: 16, right: 16, top: 24, bottom: MediaQuery.of(ctx).viewInsets.bottom + 24),
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         crossAxisAlignment: CrossAxisAlignment.stretch,
-  //         children: [
-  //           const Text(
-  //             'Update Journal',
-  //             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //             textAlign: TextAlign.center,
-  //           ),
-  //           const SizedBox(height: 16),
-  //           TextField(
-  //             controller: controller,
-  //             maxLines: 6,
-  //             decoration: InputDecoration(
-  //               hintText: 'Add notes about this product...',
-  //               border: OutlineInputBorder(
-  //                 borderRadius: BorderRadius.circular(12),
-  //               ),
-  //             ),
-  //           ),
-  //           const SizedBox(height: 16),
-  //           ElevatedButton(
-  //             style: ElevatedButton.styleFrom(
-  //               padding: const EdgeInsets.symmetric(vertical: 14),
-  //               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  //             ),
-  //             onPressed: () async {
-  //               if (controller.text.trim().isEmpty) return;
-  //               await ref.read(databaseProvider).appendJournalRevision(
-  //                     JournalRevisionsCompanion.insert(
-  //                       id: DateTime.now().microsecondsSinceEpoch.toString(),
-  //                       productId: productId,
-  //                       content: controller.text.trim(),
-  //                       createdAt: DateTime.now(),
-  //                     ),
-  //                   );
-  //               if (ctx.mounted) Navigator.pop(ctx);
-  //             },
-  //             child: const Text('Save New Revision', style: TextStyle(fontSize: 16)),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-}
-
-List<int> _parseReminderDays(String? raw) {
-  final days = raw
-      ?.split(',')
-      .map((value) => int.tryParse(value.trim()))
-      .whereType<int>()
-      .where((value) => value >= 0)
-      .toList();
-  return days == null || days.isEmpty ? const [30, 7, 0] : days;
 }
 
 class _StatsRow extends StatelessWidget {

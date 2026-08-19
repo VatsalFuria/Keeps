@@ -67,6 +67,18 @@ class NotificationService {
     }
   }
 
+  /// Parses a warranty's stored comma-separated `reminderDaysBefore` back into
+  /// day-before values, falling back to the default schedule if missing/empty.
+  static List<int> parseReminderDays(String? raw) {
+    final days = raw
+        ?.split(',')
+        .map((value) => int.tryParse(value.trim()))
+        .whereType<int>()
+        .where((value) => value >= 0)
+        .toList();
+    return days == null || days.isEmpty ? const [30, 7, 0] : days;
+  }
+
   DateTime _reminderDateFor(DateTime expiry, int daysBefore) {
     final reminderDate = expiry.subtract(Duration(days: daysBefore));
     return DateTime(
@@ -103,9 +115,9 @@ class NotificationService {
       final ownerId = warranty.eventId ?? warranty.productId;
       if (ownerId == null) continue;
 
-      final productName = warranty.productId != null
-          ? (productMap[warranty.productId!]?.name ?? 'Product')
-          : 'Product';
+      // Don't reschedule reminders for products the user no longer owns.
+      final product = warranty.productId != null ? productMap[warranty.productId!] : null;
+      if (product == null || product.status != 'Active') continue;
 
       final warrantyLabel = switch (warranty.kind) {
         'repair' => 'repair warranty',
@@ -115,22 +127,28 @@ class NotificationService {
 
       await scheduleWarrantyReminders(
         ownerId: ownerId,
-        productName: productName,
+        productName: product.name,
         expiry: warranty.expiryDate,
         reminderDaysBefore: reminderDays,
         warrantyLabel: warrantyLabel,
       );
     }
   }
-
-  /// Cancels a product's own reminders plus every one of its events' reminders.
-  Future<void> cancelForProduct(
+  
+  /// Cancels every reminder tied to a product — its own warranty plus each
+  /// event-level warranty — using each warranty's *actual* stored reminder
+  /// schedule, never the app default.
+  Future<void> cancelWarrantiesForProduct(
     String productId, {
-    List<String> eventIds = const [],
+    required List<Warranty> warranties,
   }) async {
-    await cancelReminders(productId);
-    for (final eventId in eventIds) {
-      await cancelReminders(eventId);
+    for (final warranty in warranties) {
+      final ownerId = warranty.eventId ?? warranty.productId;
+      if (ownerId == null) continue;
+      await cancelReminders(
+        ownerId,
+        reminderDaysBefore: parseReminderDays(warranty.reminderDaysBefore),
+      );
     }
   }
 
