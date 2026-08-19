@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const bg = Color(0xFFF7F4ED);
@@ -23,9 +23,9 @@ ThemeData buildKeepsTheme() {
       surface: AppColors.bg2,
       error: AppColors.danger,
     ),
-    textTheme: GoogleFonts.loraTextTheme(base.textTheme).copyWith(
-      bodyMedium: GoogleFonts.inter(color: AppColors.text, fontSize: 15),
-      bodySmall: GoogleFonts.inter(color: AppColors.text2, fontSize: 13),
+    textTheme: base.textTheme.apply(fontFamily: 'Lora').copyWith(
+     bodyMedium: const TextStyle(fontFamily: 'Inter', color: AppColors.text, fontSize: 15),
+     bodySmall: const TextStyle(fontFamily: 'Inter', color: AppColors.text2, fontSize: 13),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,

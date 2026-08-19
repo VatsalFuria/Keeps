@@ -11,6 +11,8 @@ import '../widgets/warranty_badge.dart';
 import 'add_event_screen.dart';
 import 'end_of_life_screen.dart';
 import '../services/export_service.dart';
+import '../services/notification_service.dart';
+import 'add_edit_product_screen.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
   final String productId;
@@ -86,7 +88,7 @@ class ProductDetailScreen extends ConsumerWidget {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                         onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => AddEventScreen(productId: product.id))),
+                            builder: (_) => AddEventScreen(productId: product.id, productName: product.name))),
                         icon: const Icon(Icons.add, size: 20),
                         label: const Text('Add Event', style: TextStyle(fontSize: 16)),
                       ),
@@ -103,6 +105,14 @@ class ProductDetailScreen extends ConsumerWidget {
                         ),
                         children: [
                           if (product.status == 'Active')
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => AddEditProductScreen(product: product))),
+                              child: const Text('Edit'),
+                            ),
                             OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -148,7 +158,10 @@ class ProductDetailScreen extends ConsumerWidget {
                                   ],
                                 ),
                               );
+                              
                               if (confirm == true) {
+                                final eventIds = eventsAsync.value?.map((e) => e.id).toList() ?? const <String>[];
+                                await NotificationService.instance.cancelForProduct(product.id, eventIds: eventIds);
                                 await ref.read(databaseProvider).deleteProductCascade(product.id);
                                 if (context.mounted) Navigator.of(context).pop();
                               }

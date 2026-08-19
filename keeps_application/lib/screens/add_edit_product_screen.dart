@@ -9,22 +9,44 @@ import '../services/notification_service.dart';
 import '../theme/app_theme.dart';
 
 class AddEditProductScreen extends ConsumerStatefulWidget {
-  const AddEditProductScreen({super.key});
+  final Product? product; // null = create, non-null = edit
+  const AddEditProductScreen({super.key, this.product});
+
   @override
-  ConsumerState<AddEditProductScreen> createState() => _AddEditProductScreenState();
+  ConsumerState<AddEditProductScreen> createState() =>
+      _AddEditProductScreenState();
 }
 
 class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _name = TextEditingController();
-  final _category = TextEditingController();
-  final _brand = TextEditingController();
-  final _price = TextEditingController();
-  final _journal = TextEditingController();
-  
-  DateTime _purchaseDate = DateTime.now();
+  late final TextEditingController _name;
+  late final TextEditingController _category;
+  late final TextEditingController _brand;
+  late final TextEditingController _price;
+  late final TextEditingController _journal;
+
+  late DateTime _purchaseDate;
   DateTime? _warrantyExpiry;
   bool _isSaving = false;
+
+  bool get _isEditing => widget.product != null;
+
+  @override
+  void initState() {
+    super.initState();
+    final p = widget.product;
+    _name = TextEditingController(text: p?.name ?? '');
+    _category = TextEditingController(text: p?.category ?? '');
+    _brand = TextEditingController(text: p?.brand ?? '');
+    _price = TextEditingController(
+        text: (p != null && p.purchasePrice != 0)
+            ? p.purchasePrice.toString()
+            : '');
+    _journal =
+        TextEditingController(); // journal is append-only: always starts blank
+    _purchaseDate = p?.purchaseDate ?? DateTime.now();
+    _warrantyExpiry = p?.warrantyExpiry;
+  }
 
   @override
   void dispose() {
@@ -39,7 +61,8 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
   Future<void> _pickDate({required bool isWarranty}) async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: isWarranty ? (_warrantyExpiry ?? DateTime.now()) : _purchaseDate,
+      initialDate:
+          isWarranty ? (_warrantyExpiry ?? DateTime.now()) : _purchaseDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
       builder: (context, child) {
@@ -56,30 +79,30 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
       },
     );
     if (picked != null) {
-      setState(() => isWarranty ? _warrantyExpiry = picked : _purchaseDate = picked);
+      setState(
+          () => isWarranty ? _warrantyExpiry = picked : _purchaseDate = picked);
     }
   }
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
-    
     setState(() => _isSaving = true);
-    
+
     try {
       final db = ref.read(databaseProvider);
-      final id = const Uuid().v4();
       final now = DateTime.now();
+      final id = widget.product?.id ?? const Uuid().v4();
 
-      await db.upsertProduct(ProductsCompanion.insert(
-        id: id,
-        name: _name.text.trim(),
+      await db.upsertProduct(ProductsCompanion(
+        id: Value(id),
+        name: Value(_name.text.trim()),
         category: Value(_category.text.trim()),
         brand: Value(_brand.text.trim()),
         purchasePrice: Value(double.tryParse(_price.text) ?? 0),
-        purchaseDate: _purchaseDate,
+        purchaseDate: Value(_purchaseDate),
         warrantyExpiry: Value(_warrantyExpiry),
-        createdAt: now,
-        updatedAt: now,
+        createdAt: Value(widget.product?.createdAt ?? now),
+        updatedAt: Value(now),
       ));
 
       if (_journal.text.trim().isNotEmpty) {
@@ -93,15 +116,15 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
 
       if (_warrantyExpiry != null) {
         await NotificationService.instance.scheduleWarrantyReminders(
-          productId: id,
+          ownerId: id,
           productName: _name.text.trim(),
           expiry: _warrantyExpiry!,
         );
+      } else if (_isEditing) {
+        await NotificationService.instance.cancelReminders(id);
       }
 
-      // Automatically close the page after successful submission
       if (mounted) Navigator.of(context).pop(id);
-      
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -136,7 +159,8 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Product', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(_isEditing ? 'Edit Product' : 'New Product',
+            style: const TextStyle(fontWeight: FontWeight.bold)),
         elevation: 0,
       ),
       body: Form(
@@ -144,14 +168,19 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           children: [
-            const Text('PRODUCT DETAILS', 
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: AppColors.text2)),
+            const Text('PRODUCT DETAILS',
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                    color: AppColors.text2)),
             const SizedBox(height: 12),
             TextFormField(
               controller: _name,
               textCapitalization: TextCapitalization.words,
               decoration: _buildInputDecoration('Name *'),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+              validator: (v) =>
+                  (v == null || v.trim().isEmpty) ? 'Required' : null,
             ),
             const SizedBox(height: 12),
             Row(
@@ -173,19 +202,21 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                 ),
               ],
             ),
-            
             const SizedBox(height: 24),
-            const Text('PURCHASE INFO', 
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: AppColors.text2)),
+            const Text('PURCHASE INFO',
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                    color: AppColors.text2)),
             const SizedBox(height: 12),
-            
             TextFormField(
               controller: _price,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               decoration: _buildInputDecoration('Purchase Price (\$)'),
             ),
             const SizedBox(height: 12),
-            
             Row(
               children: [
                 Expanded(
@@ -194,7 +225,8 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                     borderRadius: BorderRadius.circular(12),
                     child: InputDecorator(
                       decoration: _buildInputDecoration('Purchase Date *'),
-                      child: Text(df.format(_purchaseDate), style: const TextStyle(fontSize: 15)),
+                      child: Text(df.format(_purchaseDate),
+                          style: const TextStyle(fontSize: 15)),
                     ),
                   ),
                 ),
@@ -206,10 +238,13 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                     child: InputDecorator(
                       decoration: _buildInputDecoration('Warranty Expiry'),
                       child: Text(
-                        _warrantyExpiry == null ? 'Not set' : df.format(_warrantyExpiry!),
+                        _warrantyExpiry == null
+                            ? 'Not set'
+                            : df.format(_warrantyExpiry!),
                         style: TextStyle(
-                          fontSize: 15, 
-                          color: _warrantyExpiry == null ? AppColors.text2 : null,
+                          fontSize: 15,
+                          color:
+                              _warrantyExpiry == null ? AppColors.text2 : null,
                         ),
                       ),
                     ),
@@ -217,22 +252,25 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                 ),
               ],
             ),
-
             const SizedBox(height: 24),
-            const Text('INITIAL THOUGHTS', 
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: AppColors.text2)),
+            Text(_isEditing ? 'ADD A JOURNAL ENTRY' : 'INITIAL THOUGHTS',
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                    color: AppColors.text2)),
             const SizedBox(height: 12),
-            
             TextFormField(
               controller: _journal,
               maxLines: 5,
               textCapitalization: TextCapitalization.sentences,
               decoration: _buildInputDecoration(
-                'Purchase Journal', 
-                hint: 'Why did you buy it? Alternatives, expectations, concerns...',
+                _isEditing ? 'Journal note (optional)' : 'Purchase Journal',
+                hint: _isEditing
+                    ? 'Anything new worth recording?'
+                    : 'Why did you buy it? Alternatives, expectations, concerns...',
               ),
             ),
-            
             const SizedBox(height: 32),
             Row(
               children: [
@@ -240,9 +278,11 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
-                    onPressed: _isSaving ? null : () => Navigator.of(context).pop(),
+                    onPressed:
+                        _isSaving ? null : () => Navigator.of(context).pop(),
                     child: const Text('Cancel', style: TextStyle(fontSize: 16)),
                   ),
                 ),
@@ -251,15 +291,18 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
                     onPressed: _isSaving ? null : _save,
-                    child: _isSaving 
+                    child: _isSaving
                         ? const SizedBox(
-                            height: 20, 
-                            width: 20, 
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                        : const Text('Save Product', style: TextStyle(fontSize: 16)),
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                                strokeWidth: 2, color: Colors.white))
+                        : Text(_isEditing ? 'Save Changes' : 'Save Product',
+                            style: const TextStyle(fontSize: 16)),
                   ),
                 ),
               ],

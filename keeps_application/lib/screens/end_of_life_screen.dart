@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import '../data/database.dart';
 import '../providers/database_provider.dart';
 import '../models/event_types.dart';
+import '../services/notification_service.dart';
 
 class EndOfLifeScreen extends ConsumerStatefulWidget {
   final String productId;
@@ -44,6 +45,11 @@ class _EndOfLifeScreenState extends ConsumerState<EndOfLifeScreen> {
       await db.upsertProduct(
           product.toCompanion(true).copyWith(status: Value(_status), updatedAt: Value(now)));
     }
+    final events = await db.watchEventsForProduct(widget.productId).first;
+    await NotificationService.instance.cancelForProduct(
+      widget.productId,
+      eventIds: events.map((e) => e.id).toList(),
+    );
     if (mounted) Navigator.of(context).pop();
   }
 
