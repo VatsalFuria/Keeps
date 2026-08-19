@@ -2,6 +2,22 @@
 
 ## Technical & Product Specification (v1)
 
+## Current implementation snapshot
+
+This document reflects the intended product direction as well as the current implementation state. Items that are still in the roadmap but not yet shipped in the app are tagged as [PLANNED NOT IMPLEMENTED].
+
+The app currently includes the core functionality for local product lifecycle tracking:
+
+- Product CRUD flow
+- Timeline-based event tracking
+- Search and product detail views
+- Warranty reminders using local notifications
+- Local attachment storage
+- Settings reminder configuration
+- Export to Markdown and JSON
+
+The following larger roadmap items are not yet implemented in the current build and remain intentionally deferred: PDF export, backup restore, iOS release support, sync features, encrypted backups, CI/CD, and other future platform expansion.
+
 ---
 
 # 1. Executive Summary
@@ -32,9 +48,10 @@ This document defines the architecture, data model, functional scope, and build 
 
 # 3. Target Platforms
 
-| Platform                       | Priority | Notes                 |
-| ------------------------------ | -------- | --------------------- |
-| Android (API 26+ / Android 8+) | P0       | Primary design target |
+| Platform                       | Priority                  | Notes                                    |
+| ------------------------------ | ------------------------- | ---------------------------------------- |
+| Android (API 26+ / Android 8+) | P0                        | Primary design target                    |
+| iOS                            | [PLANNED NOT IMPLEMENTED] | Not yet shipped in the current app build |
 
 ---
 
@@ -52,13 +69,13 @@ Final stack:
 | **File storage**        | Device filesystem via `path_provider`, referenced by path in DB (not BLOBs)                        | Keeps DB small and fast; attachments (photos, PDFs, invoices) live in app sandbox storage.                                                                                                                                                                                                                                                                      |
 | **Markdown rendering**  | `flutter_markdown` + custom style sheet matching design tokens                                     | Journal & notes render properly rather than as raw text.                                                                                                                                                                                                                                                                                                        |
 | **Animations**          | Flutter's `SpringSimulation` / `implicit animations` + `flutter_animate` for micro-interactions    | Matches the spec's "organic, 250–350ms spring" motion language precisely.                                                                                                                                                                                                                                                                                       |
-| **PDF/Export**          | `pdf` + `printing` packages for PDF export; native `json_encode`/Markdown writer for other formats | Fulfils Export requirement (Markdown, PDF, JSON) fully, not just JSON as in the prototype.                                                                                                                                                                                                                                                                      |
-| **Backup**              | Manual export/import to a single portable file (SQLite file + attachments zipped)                  | Local-first; no forced cloud dependency.                                                                                                                                                                                                                                                                                                                        |
+| **PDF/Export**          | `pdf` + `printing` packages for PDF export; native `json_encode`/Markdown writer for other formats | [PLANNED NOT IMPLEMENTED] — the current app supports Markdown and JSON export, but PDF export is not yet implemented.                                                                                                                                                                                                                                           |
+| **Backup**              | Manual export/import to a single portable file (SQLite file + attachments zipped)                  | [PLANNED NOT IMPLEMENTED] — the current app supports export of product/library data, but a full restore/import workflow is not yet in place.                                                                                                                                                                                                                    |
 
 < br>
-| **Optional cloud sync (Phase 3, opt-in)** | Supabase (Postgres + Auth + Storage) | Chosen over Firebase for open-source portability and SQL parity with the local Drift schema, easing conflict resolution logic. |
-| **CI/CD** | GitHub Actions + Codemagic | Automated builds, signing, and TestFlight/Play internal testing tracks. |
-| **Crash/telemetry** | None by default; **opt-in, anonymized** Sentry only if user enables it in Settings | Preserves the "privacy-first" principle as a hard default, not just a claim. |
+| **Optional cloud sync (Phase 3, opt-in)** | Supabase (Postgres + Auth + Storage) | [PLANNED NOT IMPLEMENTED] — this repo is still local-first and has no sync layer in the active app. |
+| **CI/CD** | GitHub Actions + Codemagic | [PLANNED NOT IMPLEMENTED] — not yet configured in the current project. |
+| **Crash/telemetry** | None by default; **opt-in, anonymized** Sentry only if user enables it in Settings | [PLANNED NOT IMPLEMENTED] — there is no telemetry or crash reporting layer enabled in the current build. |
 
 **Why not React Native / native Swift+Kotlin:** RN would require Reanimated + Skia-adjacent libraries to hit the same animation fidelity, adding complexity without a clear benefit given team size. Fully native (separate Swift/Kotlin codebases) doubles maintenance for a single-developer-scale product — not justified at this stage.
 
@@ -123,6 +140,7 @@ All monetary/derived fields (ownership duration, total cost, cost/day, repair co
 10. **Export** — per-product or full-library export to Markdown, PDF, and JSON.
 11. **Backup/Restore** — single-file local backup (DB + attachments), manually triggered.
 12. **Settings** — reminder schedule, theme (light/warm default), export/backup, data reset.
+    > Current scope note: the settings screen is implemented for reminder configuration and export actions. Theme customization, backup restore, and broader reset tooling remain [PLANNED NOT IMPLEMENTED].
 
 ---
 
@@ -195,9 +213,9 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
 
 # 13. Roadmap
 
-**Phase 1 — MVP (this spec's core scope):** Sections 6.1–6.12 above, iOS + Android.
-**Phase 2:** iPad responsive layout, backup encryption, custom event-type icon picker, PDF export polish.
-**Phase 3:** Optional Supabase sync, desktop/web builds, OCR invoice import, AI-generated ownership summaries (opt-in, clearly labeled), brand/category reliability analytics.
+**Phase 1 — MVP (this spec's core scope):** Sections 6.1–6.12 above, iOS + Android. [PLANNED NOT IMPLEMENTED] for iOS shipping in the current app build.
+**Phase 2:** iPad responsive layout, backup encryption, custom event-type icon picker, PDF export polish. [PLANNED NOT IMPLEMENTED]
+**Phase 3:** Optional Supabase sync, desktop/web builds, OCR invoice import, AI-generated ownership summaries (opt-in, clearly labeled), brand/category reliability analytics. [PLANNED NOT IMPLEMENTED]
 
 ---
 
