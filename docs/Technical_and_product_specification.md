@@ -32,9 +32,9 @@ This document defines the architecture, data model, functional scope, and build 
 
 # 3. Target Platforms
 
-| Platform                       | Priority | Notes                                   |
-| ------------------------------ | -------- | --------------------------------------- |
-| Android (API 26+ / Android 8+) | P0       | Primary design target                   |
+| Platform                       | Priority | Notes                 |
+| ------------------------------ | -------- | --------------------- |
+| Android (API 26+ / Android 8+) | P0       | Primary design target |
 
 ---
 

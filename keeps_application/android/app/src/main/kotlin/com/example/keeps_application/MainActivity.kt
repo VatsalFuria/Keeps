@@ -1,4 +1,4 @@
-package com.example.keeps_application
+package dev.vatsaljf.keeps
 
 import io.flutter.embedding.android.FlutterActivity
 
