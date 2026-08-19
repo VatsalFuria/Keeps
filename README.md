@@ -9,14 +9,14 @@ It stores more than purchase details. Each product has a timeline where you can 
 The app currently includes the core local-first product journal flow:
 
 - Add, edit, and delete products
-- Search products from the home screen
+- Search products from the home screen (in-memory filter by name/brand/category/status)
 - Timeline for purchases and events
 - Event types including repairs, observations, and custom entries
-- Product journal and end-of-life flow
-- Warranty tracking with local reminder notifications
-- Photos and attachments saved locally
+- Product journal and end-of-life reflection flow
+- Warranty tracking with local, battery-friendly reminder notifications
+- Photos saved locally and attached to events
 - Settings for reminder schedule
-- Export to JSON and Markdown
+- Export to Markdown (per product) and JSON (full library)
 - Fully local/offline data storage with SQLite via Drift
 
 ## Features
@@ -24,9 +24,18 @@ The app currently includes the core local-first product journal flow:
 - Add and organize products
 - Record events over time
 - Track warranties and receive local reminders
-- Store photos, invoices, and manuals
+- Store photos on events
 - Write notes and reflections
 - Works completely offline
+
+## Known implementation notes
+
+A few things exist in the schema or dependency list but aren't fully wired into the UI yet. None of these block day-to-day use — noted here so they read as deliberate choices, not surprises:
+
+- **Extended product fields** — `model`, `serialNumber`, `seller`, `purchaseLocation`, `tags`, and `expectedLifetimeMonths` exist in the database schema but have no fields in the Add/Edit Product screen yet.
+- **Markdown rendering** — `flutter_markdown` is a dependency, but event and journal notes currently render as plain text rather than formatted Markdown.
+- **Per-product JSON export** — the export service supports it, but only per-product Markdown export and full-library JSON export are exposed in the UI.
+- **Journal history** — editing the journal replaces the previous note rather than keeping prior revisions. This is an intentional simplification for now (see the technical spec's Known Limitations).
 
 ## Tech Stack
 

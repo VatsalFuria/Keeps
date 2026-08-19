@@ -65,9 +65,9 @@ Final stack:
 | **State management**    | **Riverpod 2 (code-gen)**                                                                          | Compile-safe, testable, no BuildContext coupling — better long-term maintainability than Bloc's boilerplate for a solo/small-team app of this size.                                                                                                                                                                                      |
 | **Local database**      | **Drift (SQLite)** — _not Isar_                                                                    | The data is inherently relational (Product 1:N Events, 1:N Attachments, 1:N Warranties) and needs real joins for stats (cost rollups, "average time between events"). Drift gives type-safe SQL, reactive streams (perfect for a live-updating timeline), and trivial schema migrations — a better fit than a NoSQL document store here. |
 | **Reactive queries**    | Drift's `Stream` queries                                                                           | Timeline and stats auto-update the instant an event is added, no manual refresh logic.                                                                                                                                                                                                                                                   |
-| **Local notifications** | `flutter_local_notifications` + exact alarm scheduling                                             | Powers the 30/7/0-day warranty reminders fully offline.                                                                                                                                                                                                                                                                                  |
+| **Local notifications** | `flutter_local_notifications` + exact alarm scheduling                                             | flutter_local_notifications, scheduled with AndroidScheduleMode.inexactAllowWhileIdle for battery-friendly delivery — powers the 30/7/0-day warranty reminders fully offline. Not using Android's exact-alarm API by design.                                                                                                             |
 | **File storage**        | Device filesystem via `path_provider`, referenced by path in DB (not BLOBs)                        | Keeps DB small and fast; attachments (photos, PDFs, invoices) live in app sandbox storage.                                                                                                                                                                                                                                               |
-| **Markdown rendering**  | `flutter_markdown` + custom style sheet matching design tokens                                     | Journal & notes render properly rather than as raw text.                                                                                                                                                                                                                                                                                 |
+| **Markdown rendering**  | `flutter_markdown` + custom style sheet matching design tokens                                     | flutter_markdown is included as a dependency; [PLANNED NOT IMPLEMENTED] — notes and journal entries currently render as plain text, not formatted Markdown.                                                                                                                                                                              |
 | **Animations**          | Flutter's `SpringSimulation` / `implicit animations` + `flutter_animate` for micro-interactions    | Matches the spec's "organic, 250–350ms spring" motion language precisely.                                                                                                                                                                                                                                                                |
 | **PDF/Export**          | `pdf` + `printing` packages for PDF export; native `json_encode`/Markdown writer for other formats | [PLANNED NOT IMPLEMENTED] — the current app supports Markdown and JSON export, but PDF export is not yet implemented.                                                                                                                                                                                                                    |
 | **Backup**              | Manual export/import to a single portable file (SQLite file + attachments zipped)                  | [PLANNED NOT IMPLEMENTED] — the current app supports export of product/library data, but a full restore/import workflow is not yet in place.                                                                                                                                                                                             |
@@ -95,6 +95,7 @@ Product
  ├── tags (comma-separated or join table)
  ├── createdAt, updatedAt
  └── relations → Events (1:N), Attachments (1:N), Warranties (1:N), JournalRevisions (1:N)
+* model, serialNumber, seller, purchaseLocation, tags, and expectedLifetimeMonths are present in the schema but [PLANNED NOT IMPLEMENTED] in the Add/Edit Product UI.
 
 Event
  ├── id (uuid, PK), productId (FK)
@@ -131,7 +132,7 @@ All monetary/derived fields (ownership duration, total cost, cost/day, repair co
 7. **Statistics Engine** — ownership duration, current age, total/avg costs, cost-per-day, repair/maintenance counts, average time between events — all computed, never entered.
 8. **End-of-Life Flow** — status change + guided reflection (would buy again? surprises? strengths/weaknesses?) → becomes the final timeline event.
 9. **Search** — product name, brand, category, status (simple, non-faceted, per spec).
-10. **Export** — per-product or full-library export to Markdown, PDF, and JSON.
+10. **Export** — Export — per-product Markdown export and full-library JSON export are wired into the UI. Per-product JSON export exists in ExportService but has no UI entry point yet [PLANNED NOT IMPLEMENTED]. PDF export is not implemented.
 11. **Backup/Restore** — single-file local backup (DB + attachments), manually triggered.
 12. **Settings** — reminder schedule, theme (light/warm default), export/backup, data reset.
     > Current scope note: the settings screen is implemented for reminder configuration and export actions. Theme customization, backup restore, and broader reset tooling remain [PLANNED NOT IMPLEMENTED].
@@ -165,7 +166,7 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
 # 8. Performance & Optimization
 
 - **Cold start < 500ms:** deferred provider initialization, lazy-loaded fonts/images, no synchronous DB work on the first frame.
-- **Search < 100ms:** indexed columns (name, brand, category, status) in SQLite.
+- **Search:** current implementation filters the fully-loaded product list client-side (Dart .where) against name/brand/category/status — fine at personal-library scale (tens to low hundreds of products); SQL-indexed search is deferred until/if library sizes warrant it.
 - **Timeline scrolling:** `ListView.builder`/slivers with viewport-based virtualization; images lazy-decoded and cached (`cached_network_image`-style local cache) at thumbnail resolution.
 - **Battery/notification efficiency:** batch-scheduled local notifications recalculated only when a warranty date changes, not on every app open.
 - **Storage growth:** attachments stored as files (not DB blobs) to keep the SQLite file itself small and fast to back up/restore.
@@ -241,3 +242,6 @@ Warm Cream `#F7F4ED`, Soft Beige `#EEE7DA`, Olive `#657153`, Wood Brown `#8B6B4C
   mapping) is deferred.
 - Journal history intentionally overwrites on edit rather than versioning
   (see JournalRevisions table) — deliberate for now, not a bug.
+- Event-save error handling currently surfaces the raw exception message to the user (add_event_screen.dart), unlike
+  product-save, which logs details and shows a clean message. Should be aligned to match.
+- productStatsProvider recomputes on event-stream changes only, not on direct product-row changes (e.g. status updates from the end-of-life flow). In practice both writes complete before the UI rebuilds, but this hasn't been stress-tested for races.
