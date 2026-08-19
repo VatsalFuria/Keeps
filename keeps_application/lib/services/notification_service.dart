@@ -2,6 +2,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tzdata;
 
+import '../data/database.dart';
+
 class NotificationService {
   NotificationService._();
   static final instance = NotificationService._();
@@ -11,7 +13,8 @@ class NotificationService {
   Future<void> init() async {
     tzdata.initializeTimeZones();
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
-    await _plugin.initialize(const InitializationSettings(android: androidInit));
+    await _plugin
+        .initialize(const InitializationSettings(android: androidInit));
 
     final android = _plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
@@ -81,6 +84,42 @@ class NotificationService {
       {List<int> reminderDaysBefore = const [30, 7, 0]}) async {
     for (final days in reminderDaysBefore) {
       await _plugin.cancel(('$ownerId-$days').hashCode & 0x7fffffff);
+    }
+  }
+
+  Future<void> rescheduleAllWarranties({
+    required AppDatabase db,
+    required List<int> reminderDays,
+  }) async {
+    await _plugin.cancelAll();
+
+    final warranties = await db.getAllWarranties();
+    if (warranties.isEmpty) return;
+
+    final products = await db.getAllProducts();
+    final productMap = {for (final product in products) product.id: product};
+
+    for (final warranty in warranties) {
+      final ownerId = warranty.eventId ?? warranty.productId;
+      if (ownerId == null) continue;
+
+      final productName = warranty.productId != null
+          ? (productMap[warranty.productId!]?.name ?? 'Product')
+          : 'Product';
+
+      final warrantyLabel = switch (warranty.kind) {
+        'repair' => 'repair warranty',
+        'product' => 'warranty',
+        _ => '${warranty.kind} warranty',
+      };
+
+      await scheduleWarrantyReminders(
+        ownerId: ownerId,
+        productName: productName,
+        expiry: warranty.expiryDate,
+        reminderDaysBefore: reminderDays,
+        warrantyLabel: warrantyLabel,
+      );
     }
   }
 

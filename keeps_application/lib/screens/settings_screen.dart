@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../providers/database_provider.dart';
 import '../services/export_service.dart';
+import '../services/notification_service.dart';
 import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 
@@ -49,6 +51,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     setState(() => _saving = true);
     await SettingsService.instance.saveReminderDaysBefore(days);
+    final db = ref.read(databaseProvider);
+    await NotificationService.instance.rescheduleAllWarranties(
+      db: db,
+      reminderDays: days,
+    );
     if (!mounted) return;
     setState(() {
       _reminderDays.text = days.join(', ');

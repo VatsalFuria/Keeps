@@ -50,7 +50,7 @@ class ExportService {
     final attachments = await db.getAttachmentsForProduct(productId);
     final warranties = await db.getWarrantiesForProduct(productId);
     final df = DateFormat.yMMMd();
-    final money = NumberFormat.simpleCurrency();
+    final money = NumberFormat.currency(locale: 'en_IN', symbol: '₹');
     final buffer = StringBuffer()
       ..writeln('# ${product.name}')
       ..writeln()
@@ -93,8 +93,9 @@ class ExportService {
       ..writeln('- Cost: ${money.format(product.purchasePrice)}');
 
     for (final event in events) {
-      final eventAttachments =
-          attachments.where((attachment) => attachment.eventId == event.id).toList();
+      final eventAttachments = attachments
+          .where((attachment) => attachment.eventId == event.id)
+          .toList();
       buffer
         ..writeln()
         ..writeln('### ${event.type} - ${df.format(event.date)}');
@@ -102,7 +103,8 @@ class ExportService {
         buffer.writeln('- Cost: ${money.format(event.cost)}');
       }
       if (event.warrantyExpiry != null) {
-        buffer.writeln('- Warranty expires: ${df.format(event.warrantyExpiry!)}');
+        buffer
+            .writeln('- Warranty expires: ${df.format(event.warrantyExpiry!)}');
       }
       if (event.markdownNote?.trim().isNotEmpty == true) {
         buffer

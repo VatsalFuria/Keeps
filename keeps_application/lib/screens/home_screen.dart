@@ -5,6 +5,7 @@ import '../widgets/product_card.dart';
 import '../theme/app_theme.dart';
 import 'add_edit_product_screen.dart';
 import 'product_detail_screen.dart';
+import 'settings_screen.dart';
 import 'package:flutter/foundation.dart';
 import '../services/notification_service.dart';
 
@@ -61,7 +62,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 NotificationService.instance.scheduleDebugTestNotification();
                 Navigator.pop(ctx);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Test fires in ~10s — lock the screen to see it.')),
+                  const SnackBar(
+                      content: Text(
+                          'Test fires in ~10s — lock the screen to see it.')),
                 );
               },
               child: const Text('Fire test notification in 10s'),
@@ -92,6 +95,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
         centerTitle: false,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: 'Settings',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const SettingsScreen()),
+            ),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(64),
           child: Padding(

@@ -1,4 +1,4 @@
-
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:keeps/main.dart';
@@ -9,5 +9,13 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Keeps'), findsOneWidget);
+  });
+
+  testWidgets('Home screen exposes settings navigation',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const ProviderScope(child: KeepsApp()));
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.settings_outlined), findsOneWidget);
   });
 }

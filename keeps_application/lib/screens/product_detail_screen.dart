@@ -16,6 +16,10 @@ import '../services/export_service.dart';
 import '../services/notification_service.dart';
 import 'add_edit_product_screen.dart';
 
+String _formatCurrency(double value) =>
+    NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 2)
+        .format(value);
+
 class ProductDetailScreen extends ConsumerWidget {
   final String productId;
   const ProductDetailScreen({super.key, required this.productId});
@@ -31,39 +35,85 @@ class ProductDetailScreen extends ConsumerWidget {
     return Scaffold(
       body: productAsync.when(
         data: (product) {
-          if (product == null) return const Center(child: Text('Product not found'));
-          final latestJournal =
-              journalAsync.value?.isNotEmpty == true ? journalAsync.value!.first.content : '';
+          if (product == null)
+            return const Center(child: Text('Product not found'));
+          final latestJournal = journalAsync.value?.isNotEmpty == true
+              ? journalAsync.value!.first.content
+              : '';
 
           return CustomScrollView(
             slivers: [
+              // SliverAppBar(
+              //   pinned: true,
+              //   backgroundColor: AppColors.bg2,
+              //   expandedHeight: 150,
+              //   flexibleSpace: FlexibleSpaceBar(
+              //     titlePadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              //     title: Text(
+              //       product.name,
+              //       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              //     ),
+              //     background: Padding(
+              //       padding: const EdgeInsets.fromLTRB(16, 56, 16, 0),
+              //       child: Row(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Expanded(
+              //             child: Text(
+              //               [product.brand, product.category]
+              //                   .where((e) => (e ?? '').isNotEmpty)
+              //                   .join(' · '),
+              //               style: const TextStyle(
+              //                   color: AppColors.text2, fontSize: 14),
+              //             ),
+              //           ),
+              //           WarrantyBadge(product: product),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               SliverAppBar(
                 pinned: true,
                 backgroundColor: AppColors.bg2,
                 expandedHeight: 150,
                 flexibleSpace: FlexibleSpaceBar(
                   titlePadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  title: Text(
-                    product.name,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  background: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 56, 16, 0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            [product.brand, product.category]
-                                .where((e) => (e ?? '').isNotEmpty)
-                                .join(' · '),
-                            style: const TextStyle(
-                                color: AppColors.text2, fontSize: 14),
+                  // Group everything inside a Column in the title
+                  title: Column(
+                    mainAxisSize: MainAxisSize.min, // Hugs the children tightly
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // Product Name (On top)
+                      Text(
+                        product.name,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 4), // Small controlled gap
+
+                      // Brand, Category, and Badge (Below)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              [product.brand, product.category]
+                                  .where((e) => (e ?? '').isNotEmpty)
+                                  .join(' · '),
+                              style: const TextStyle(
+                                color: AppColors.text2,
+                                fontSize:
+                                    12, // Reduced slightly so it scales well
+                              ),
+                            ),
                           ),
-                        ),
-                        WarrantyBadge(product: product),
-                      ],
-                    ),
+                          WarrantyBadge(product: product),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -152,19 +202,20 @@ class ProductDetailScreen extends ConsumerWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: () => ExportService.exportProductMarkdown(
-                                ref, product.id),
+                            onPressed: () =>
+                                ExportService.exportProductMarkdown(
+                                    ref, product.id),
                             child: const Text('Export Markdown'),
                           ),
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                            onPressed: () => ExportService.exportProductJson(
-                                ref, product.id),
-                            child: const Text('Export JSON'),
-                          ),
+                          // OutlinedButton(
+                          //   style: OutlinedButton.styleFrom(
+                          //     shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(10)),
+                          //   ),
+                          //   onPressed: () => ExportService.exportProductJson(
+                          //       ref, product.id),
+                          //   child: const Text('Export JSON'),
+                          // ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               foregroundColor: AppColors.danger,
@@ -381,7 +432,8 @@ class _StatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final money = NumberFormat.simpleCurrency();
+    final money =
+        NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0);
 
     Widget buildStatCard(String label, String value, {bool isPrimary = false}) {
       return Container(
@@ -515,7 +567,7 @@ class _TimelineTileState extends State<_TimelineTile> {
                             fontSize: 12, color: AppColors.text2)),
                     Text(
                       widget.cost != null
-                          ? '${widget.type} · \$${widget.cost!.toStringAsFixed(2)}'
+                          ? '${widget.type} · ${_formatCurrency(widget.cost!)}'
                           : widget.type,
                       style: const TextStyle(
                           fontWeight: FontWeight.w600, fontSize: 15),
@@ -536,7 +588,7 @@ class _TimelineTileState extends State<_TimelineTile> {
                       if (widget.attachments.isNotEmpty) ...[
                         const SizedBox(height: 10),
                         SizedBox(
-                          height: 72,
+                          height: 250,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: widget.attachments.length,
@@ -546,12 +598,12 @@ class _TimelineTileState extends State<_TimelineTile> {
                               borderRadius: BorderRadius.circular(8),
                               child: Image.file(
                                 File(widget.attachments[index].filePath),
-                                width: 72,
-                                height: 72,
+                                width: 250,
+                                height: 250,
                                 fit: BoxFit.cover,
                                 errorBuilder: (_, __, ___) => Container(
-                                  width: 72,
-                                  height: 72,
+                                  width: 250,
+                                  height: 250,
                                   color: AppColors.bg,
                                   alignment: Alignment.center,
                                   child: const Icon(
