@@ -6,11 +6,13 @@ import 'package:drift/drift.dart' hide Column;
 import '../data/database.dart';
 import '../providers/database_provider.dart';
 import '../services/notification_service.dart';
+import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 
 class AddEditProductScreen extends ConsumerStatefulWidget {
   final Product? product; // null = create, non-null = edit
-  const AddEditProductScreen({super.key, this.product});
+  final String initialJournal;
+  const AddEditProductScreen({super.key, this.product, this.initialJournal = ''});
 
   @override
   ConsumerState<AddEditProductScreen> createState() =>
@@ -42,8 +44,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
         text: (p != null && p.purchasePrice != 0)
             ? p.purchasePrice.toString()
             : '');
-    _journal =
-        TextEditingController(); // journal is append-only: always starts blank
+    _journal = TextEditingController(text: widget.initialJournal);
     _purchaseDate = p?.purchaseDate ?? DateTime.now();
     _warrantyExpiry = p?.warrantyExpiry;
   }
@@ -105,23 +106,32 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
         updatedAt: Value(now),
       ));
 
-      if (_journal.text.trim().isNotEmpty) {
-        await db.appendJournalRevision(JournalRevisionsCompanion.insert(
+      await db.setProductJournal(
           id: const Uuid().v4(),
           productId: id,
           content: _journal.text.trim(),
           createdAt: now,
-        ));
-      }
+      );
 
       if (_warrantyExpiry != null) {
+        final reminderDays =
+            await SettingsService.instance.reminderDaysBefore();
+        await db.upsertWarranty(WarrantiesCompanion.insert(
+          id: 'product-$id',
+          productId: Value(id),
+          kind: 'product',
+          expiryDate: _warrantyExpiry!,
+          reminderDaysBefore: Value(reminderDays.join(',')),
+        ));
         await NotificationService.instance.scheduleWarrantyReminders(
           ownerId: id,
           productName: _name.text.trim(),
           expiry: _warrantyExpiry!,
+          reminderDaysBefore: reminderDays,
         );
       } else if (_isEditing) {
         await NotificationService.instance.cancelReminders(id);
+        await db.deleteWarranty('product-$id');
       }
 
       if (mounted) Navigator.of(context).pop(id);
@@ -253,7 +263,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
               ],
             ),
             const SizedBox(height: 24),
-            Text(_isEditing ? 'ADD A JOURNAL ENTRY' : 'INITIAL THOUGHTS',
+            Text(_isEditing ? 'JOURNAL' : 'INITIAL THOUGHTS',
                 style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -267,7 +277,7 @@ class _AddEditProductScreenState extends ConsumerState<AddEditProductScreen> {
               decoration: _buildInputDecoration(
                 _isEditing ? 'Journal note (optional)' : 'Purchase Journal',
                 hint: _isEditing
-                    ? 'Anything new worth recording?'
+                    ? 'Current notes about this product...'
                     : 'Why did you buy it? Alternatives, expectations, concerns...',
               ),
             ),

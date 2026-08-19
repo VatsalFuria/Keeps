@@ -40,8 +40,7 @@ class Events extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-/// Journal is append-only: editing creates a new revision rather than
-/// overwriting, per Principle 4 (immutable history) in the spec.
+/// Stores the current product journal note. Older revisions are replaced.
 class JournalRevisions extends Table {
   TextColumn get id => text()();
   TextColumn get productId => text().references(Products, #id)();
@@ -88,6 +87,9 @@ class AppDatabase extends _$AppDatabase {
   Stream<List<Product>> watchAllProducts() =>
       (select(products)..orderBy([(p) => OrderingTerm.desc(p.updatedAt)])).watch();
 
+  Future<List<Product>> getAllProducts() =>
+      (select(products)..orderBy([(p) => OrderingTerm.desc(p.updatedAt)])).get();
+
   Future<Product?> getProduct(String id) =>
       (select(products)..where((p) => p.id.equals(id))).getSingleOrNull();
 
@@ -98,6 +100,13 @@ class AppDatabase extends _$AppDatabase {
       into(products).insertOnConflictUpdate(product);
 
   Future<void> deleteProductCascade(String id) => transaction(() async {
+        final eventIds = await (select(events)..where((e) => e.productId.equals(id)))
+            .map((e) => e.id)
+            .get();
+        for (final eventId in eventIds) {
+          await (delete(attachments)..where((a) => a.eventId.equals(eventId))).go();
+          await (delete(warranties)..where((w) => w.eventId.equals(eventId))).go();
+        }
         await (delete(events)..where((e) => e.productId.equals(id))).go();
         await (delete(journalRevisions)..where((j) => j.productId.equals(id))).go();
         await (delete(attachments)..where((a) => a.productId.equals(id))).go();
@@ -114,10 +123,13 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> insertEvent(EventsCompanion event) => into(events).insert(event);
 
-  Future<void> deleteEvent(String id) =>
-      (delete(events)..where((e) => e.id.equals(id))).go();
+  Future<void> deleteEvent(String id) => transaction(() async {
+        await (delete(attachments)..where((a) => a.eventId.equals(id))).go();
+        await (delete(warranties)..where((w) => w.eventId.equals(id))).go();
+        await (delete(events)..where((e) => e.id.equals(id))).go();
+      });
 
-  // ---- Journal (versioned, never overwritten) ----
+  // ---- Journal ----
   Stream<List<JournalRevision>> watchJournalHistory(String productId) =>
       (select(journalRevisions)
             ..where((j) => j.productId.equals(productId))
@@ -126,6 +138,66 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> appendJournalRevision(JournalRevisionsCompanion revision) =>
       into(journalRevisions).insert(revision);
+
+  Future<void> setProductJournal({
+    required String id,
+    required String productId,
+    required String content,
+    required DateTime createdAt,
+  }) => transaction(() async {
+        await (delete(journalRevisions)..where((j) => j.productId.equals(productId))).go();
+        if (content.trim().isEmpty) return;
+        await into(journalRevisions).insert(JournalRevisionsCompanion.insert(
+          id: id,
+          productId: productId,
+          content: content.trim(),
+          createdAt: createdAt,
+        ));
+      });
+
+  // ---- Attachments ----
+  Stream<List<Attachment>> watchAttachmentsForEvent(String eventId) =>
+      (select(attachments)
+            ..where((a) => a.eventId.equals(eventId))
+            ..orderBy([(a) => OrderingTerm.asc(a.createdAt)]))
+          .watch();
+
+  Future<List<Attachment>> getAttachmentsForEvent(String eventId) =>
+      (select(attachments)
+            ..where((a) => a.eventId.equals(eventId))
+            ..orderBy([(a) => OrderingTerm.asc(a.createdAt)]))
+          .get();
+
+  Future<List<Attachment>> getAttachmentsForProduct(String productId) =>
+      (select(attachments)
+            ..where((a) => a.productId.equals(productId))
+            ..orderBy([(a) => OrderingTerm.asc(a.createdAt)]))
+          .get();
+
+  Future<void> insertAttachment(AttachmentsCompanion attachment) =>
+      into(attachments).insert(attachment);
+
+  // ---- Warranties ----
+  Stream<List<Warranty>> watchWarrantiesForProduct(String productId) =>
+      (select(warranties)
+            ..where((w) => w.productId.equals(productId))
+            ..orderBy([(w) => OrderingTerm.asc(w.expiryDate)]))
+          .watch();
+
+  Future<List<Warranty>> getWarrantiesForProduct(String productId) =>
+      (select(warranties)
+            ..where((w) => w.productId.equals(productId))
+            ..orderBy([(w) => OrderingTerm.asc(w.expiryDate)]))
+          .get();
+
+  Future<List<Warranty>> getAllWarranties() =>
+      (select(warranties)..orderBy([(w) => OrderingTerm.asc(w.expiryDate)])).get();
+
+  Future<void> upsertWarranty(WarrantiesCompanion warranty) =>
+      into(warranties).insertOnConflictUpdate(warranty);
+
+  Future<void> deleteWarranty(String id) =>
+      (delete(warranties)..where((w) => w.id.equals(id))).go();
 
   // ---- Derived stats — computed at query time, never stored (Principle 5) ----
   Future<ProductStats> computeStats(String productId) async {

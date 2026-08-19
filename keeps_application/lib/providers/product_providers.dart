@@ -27,6 +27,20 @@ final journalHistoryProvider =
   name: 'journalHistoryProvider',
 );
 
+final eventAttachmentsProvider =
+    StreamProvider.autoDispose.family<List<Attachment>, String>(
+  (ref, eventId) =>
+      ref.watch(databaseProvider).watchAttachmentsForEvent(eventId),
+  name: 'eventAttachmentsProvider',
+);
+
+final productWarrantiesProvider =
+    StreamProvider.autoDispose.family<List<Warranty>, String>(
+  (ref, productId) =>
+      ref.watch(databaseProvider).watchWarrantiesForProduct(productId),
+  name: 'productWarrantiesProvider',
+);
+
 final productStatsProvider =
     FutureProvider.autoDispose.family<ProductStats, String>((ref, productId) {
   final db = ref.watch(databaseProvider);

@@ -1,0 +1,21 @@
+Your spec/README promise several things that don't exist in code at all. For a personal project, you don't have to build everything — but you do have to make the docs match reality, or a recruiter comparing README to code will lose trust fast.
+
+Claimed	Reality	Recommendation
+Attachments table (photos/invoices/manuals)	Table defined in schema, zero UI, no image_picker/file_picker dependency	Either implement a minimal photo-attach flow on Add Event, or drop the table + remove from docs until you build it
+Warranties table (product/repair/extended/accessory kinds)	Table defined, never inserted into anywhere — app only uses the single warrantyExpiry fields on Product/Event	Same call: wire it up (needed if you want per-repair warranty tracking) or delete the table and simplify the schema per your own "Simplicity over cleverness" principle
+Markdown + PDF export	Only JSON export works; pdf/printing packages are dependencies doing nothing	Finish Markdown export (cheap — you already have the payload), drop PDF claim + dependency if out of scope for now
+Journal "history sheet" (view past revisions)	Revisions are stored correctly, but there's no UI to ever see old ones — only "add new revision"	Small win: add a simple bottom-sheet list of journalHistoryProvider entries
+Settings screen (reminder days, backup/restore, data reset)	Doesn't exist	Biggest real gap. At minimum: a Settings screen with "Export all data" (full-library backup) and a way to change the 30/7/0 reminder schedule
+Notifications screen (3-tab nav: Home/Notifications/Settings)	Doesn't exist — there's no tab bar at all, just push navigation from Home	Either build it, or update the spec/README to describe the nav you actually built
+iPadOS/desktop support	No ios/ folder visible in the repo	Confirm it actually exists (flutter create --platforms=ios . if not), or scope the README down to "Android (MVP), iOS planned"
+
+
+Tasks For Agent
+
+Implement photo attach flow, 
+we want per repair warranty tracking (or any alternative =. the basic intent is for a notification before the repair warranty ends. )
+Yes implement markdown export. dropping the pdf claim. 
+I dont think we need a journal history at all. no need to store the previous versions. 
+
+implement settings screen. as per your suggestion
+implement notification screen. 

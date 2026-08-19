@@ -5,6 +5,8 @@ import '../widgets/product_card.dart';
 import '../theme/app_theme.dart';
 import 'add_edit_product_screen.dart';
 import 'product_detail_screen.dart';
+import 'package:flutter/foundation.dart';
+import '../services/notification_service.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +24,72 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
+  Future<void> _showNotificationDebugSheet(BuildContext context) async {
+    final pending = await NotificationService.instance.pendingRequests();
+    if (!context.mounted) return;
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${pending.length} pending notification(s)',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 8),
+            if (pending.isEmpty)
+              const Text(
+                'Nothing scheduled yet.',
+                style: TextStyle(color: AppColors.text2),
+              ),
+            ...pending.map((p) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Text(
+                    '#${p.id}  ${p.title ?? ''}\n${p.body ?? ''}',
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                )),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                NotificationService.instance.scheduleDebugTestNotification();
+                Navigator.pop(ctx);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Test fires in ~10s — lock the screen to see it.')),
+                );
+              },
+              child: const Text('Fire test notification in 10s'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsAsync = ref.watch(allProductsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Keeps', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: kDebugMode
+            ? GestureDetector(
+                onLongPress: () => _showNotificationDebugSheet(context),
+                child: const Text(
+                  'Keeps',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )
+            : const Text(
+                'KEEPS',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
         centerTitle: false,
         elevation: 0,
         bottom: PreferredSize(
@@ -52,7 +113,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     : null,
                 filled: true,
                 fillColor: AppColors.bg2,
-                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                   borderSide: BorderSide.none,
@@ -82,14 +144,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      _query.isEmpty ? Icons.inventory_2_outlined : Icons.search_off_outlined,
+                      _query.isEmpty
+                          ? Icons.inventory_2_outlined
+                          : Icons.search_off_outlined,
                       size: 64,
                       color: AppColors.text2.withOpacity(0.5),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       _query.isEmpty ? 'No products yet' : 'No matches found',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -97,7 +164,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ? 'Tap the + button below to add your first item.'
                           : 'Try adjusting your search terms.',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: AppColors.text2, fontSize: 14),
+                      style: const TextStyle(
+                        color: AppColors.text2,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +26,7 @@ class ProductDetailScreen extends ConsumerWidget {
     final eventsAsync = ref.watch(productEventsProvider(productId));
     final statsAsync = ref.watch(productStatsProvider(productId));
     final journalAsync = ref.watch(journalHistoryProvider(productId));
+    final warrantiesAsync = ref.watch(productWarrantiesProvider(productId));
 
     return Scaffold(
       body: productAsync.when(
@@ -54,7 +57,8 @@ class ProductDetailScreen extends ConsumerWidget {
                             [product.brand, product.category]
                                 .where((e) => (e ?? '').isNotEmpty)
                                 .join(' · '),
-                            style: const TextStyle(color: AppColors.text2, fontSize: 14),
+                            style: const TextStyle(
+                                color: AppColors.text2, fontSize: 14),
                           ),
                         ),
                         WarrantyBadge(product: product),
@@ -63,15 +67,17 @@ class ProductDetailScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              
+
               // --- STATS DASHBOARD ---
               SliverToBoxAdapter(
                 child: statsAsync.when(
                   data: (stats) => _StatsRow(stats: stats),
                   loading: () => const Padding(
-                      padding: EdgeInsets.all(16), child: LinearProgressIndicator()),
-                  error: (e, _) =>
-                      Padding(padding: const EdgeInsets.all(16), child: Text('Stats error: $e')),
+                      padding: EdgeInsets.all(16),
+                      child: LinearProgressIndicator()),
+                  error: (e, _) => Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text('Stats error: $e')),
                 ),
               ),
 
@@ -85,19 +91,25 @@ class ProductDetailScreen extends ConsumerWidget {
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
                         ),
-                        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => AddEventScreen(productId: product.id, productName: product.name))),
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => AddEventScreen(
+                                    productId: product.id,
+                                    productName: product.name))),
                         icon: const Icon(Icons.add, size: 20),
-                        label: const Text('Add Event', style: TextStyle(fontSize: 16)),
+                        label: const Text('Add Event',
+                            style: TextStyle(fontSize: 16)),
                       ),
                       const SizedBox(height: 12),
                       GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 12,
@@ -107,38 +119,57 @@ class ProductDetailScreen extends ConsumerWidget {
                           if (product.status == 'Active')
                             OutlinedButton(
                               style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
                               ),
-                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => AddEditProductScreen(product: product))),
+                              onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => AddEditProductScreen(
+                                          product: product,
+                                          initialJournal: latestJournal))),
                               child: const Text('Edit'),
-                            ),
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              ),
-                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => EndOfLifeScreen(productId: product.id))),
-                              child: const Text('Mark Complete'),
                             ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: () => _editJournal(context, ref, product.id, latestJournal),
-                            child: const Text('Journal'),
+                            onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) => EndOfLifeScreen(
+                                        productId: product.id))),
+                            child: const Text('Mark Complete'),
+                          ),
+                          // OutlinedButton(
+                          //   style: OutlinedButton.styleFrom(
+                          //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          //   ),
+                          //   onPressed: () => _editJournal(context, ref, product.id, latestJournal),
+                          //   child: const Text('Journal'),
+                          // ),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () => ExportService.exportProductMarkdown(
+                                ref, product.id),
+                            child: const Text('Export Markdown'),
                           ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: () => ExportService.exportProductJson(ref, product.id),
+                            onPressed: () => ExportService.exportProductJson(
+                                ref, product.id),
                             child: const Text('Export JSON'),
                           ),
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               foregroundColor: AppColors.danger,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                             onPressed: () async {
                               final confirm = await showDialog<bool>(
@@ -149,21 +180,48 @@ class ProductDetailScreen extends ConsumerWidget {
                                       'This deletes the product and all its events. This cannot be undone.'),
                                   actions: [
                                     TextButton(
-                                        onPressed: () => Navigator.pop(context, false),
+                                        onPressed: () =>
+                                            Navigator.pop(context, false),
                                         child: const Text('Cancel')),
                                     TextButton(
-                                        style: TextButton.styleFrom(foregroundColor: AppColors.danger),
-                                        onPressed: () => Navigator.pop(context, true),
+                                        style: TextButton.styleFrom(
+                                            foregroundColor: AppColors.danger),
+                                        onPressed: () =>
+                                            Navigator.pop(context, true),
                                         child: const Text('Delete')),
                                   ],
                                 ),
                               );
-                              
+
                               if (confirm == true) {
-                                final eventIds = eventsAsync.value?.map((e) => e.id).toList() ?? const <String>[];
-                                await NotificationService.instance.cancelForProduct(product.id, eventIds: eventIds);
-                                await ref.read(databaseProvider).deleteProductCascade(product.id);
-                                if (context.mounted) Navigator.of(context).pop();
+                                final eventIds = eventsAsync.value
+                                        ?.map((e) => e.id)
+                                        .toList() ??
+                                    const <String>[];
+                                final warranties = warrantiesAsync.value ??
+                                    await ref
+                                        .read(databaseProvider)
+                                        .getWarrantiesForProduct(product.id);
+                                for (final warranty in warranties) {
+                                  final ownerId =
+                                      warranty.eventId ?? warranty.productId;
+                                  if (ownerId == null) continue;
+                                  await NotificationService.instance
+                                      .cancelReminders(
+                                    ownerId,
+                                    reminderDaysBefore: _parseReminderDays(
+                                      warranty.reminderDaysBefore,
+                                    ),
+                                  );
+                                }
+                                await NotificationService.instance
+                                    .cancelForProduct(product.id,
+                                        eventIds: eventIds);
+                                await ref
+                                    .read(databaseProvider)
+                                    .deleteProductCascade(product.id);
+                                if (context.mounted)
+                                  Navigator.of(context).pop();
                               }
                             },
                             child: const Text('Delete Product'),
@@ -181,9 +239,9 @@ class ProductDetailScreen extends ConsumerWidget {
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 12),
                   child: Text('TIMELINE',
                       style: TextStyle(
-                          fontSize: 13, 
-                          fontWeight: FontWeight.w600, 
-                          letterSpacing: 1.2, 
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.2,
                           color: AppColors.text2)),
                 ),
               ),
@@ -203,26 +261,42 @@ class ProductDetailScreen extends ConsumerWidget {
                         );
                       }
                       final e = events[i - 1];
+                      final attachmentsAsync =
+                          ref.watch(eventAttachmentsProvider(e.id));
+                      final eventWarranty = warrantiesAsync.value
+                          ?.where((w) => w.eventId == e.id)
+                          .firstOrNull;
                       return _TimelineTile(
                         icon: iconFor(e.type),
                         date: e.date,
                         type: e.type,
                         cost: e.cost,
                         note: e.markdownNote,
-                        onDelete: () => ref.read(databaseProvider).deleteEvent(e.id),
+                        attachments: attachmentsAsync.value ?? const [],
+                        onDelete: () async {
+                          await NotificationService.instance.cancelReminders(
+                            e.id,
+                            reminderDaysBefore: _parseReminderDays(
+                              eventWarranty?.reminderDaysBefore,
+                            ),
+                          );
+                          await ref.read(databaseProvider).deleteEvent(e.id);
+                        },
                       );
                     },
                     childCount: events.length + 1,
                   ),
                 ),
-                loading: () =>
-                    const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
-                error: (e, _) => SliverToBoxAdapter(child: Padding(
+                loading: () => const SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator())),
+                error: (e, _) => SliverToBoxAdapter(
+                    child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text('Error: $e'),
                 )),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 60)), // Extra bottom padding
+              const SliverToBoxAdapter(
+                  child: SizedBox(height: 60)), // Extra bottom padding
             ],
           );
         },
@@ -232,63 +306,73 @@ class ProductDetailScreen extends ConsumerWidget {
     );
   }
 
-  void _editJournal(
-      BuildContext context, WidgetRef ref, String productId, String currentContent) {
-    final controller = TextEditingController(text: currentContent);
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(
-            left: 16, right: 16, top: 24, bottom: MediaQuery.of(ctx).viewInsets.bottom + 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Update Journal',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: controller, 
-              maxLines: 6,
-              decoration: InputDecoration(
-                hintText: 'Add notes about this product...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              onPressed: () async {
-                if (controller.text.trim().isEmpty) return;
-                await ref.read(databaseProvider).appendJournalRevision(
-                      JournalRevisionsCompanion.insert(
-                        id: DateTime.now().microsecondsSinceEpoch.toString(),
-                        productId: productId,
-                        content: controller.text.trim(),
-                        createdAt: DateTime.now(),
-                      ),
-                    );
-                if (ctx.mounted) Navigator.pop(ctx);
-              },
-              child: const Text('Save New Revision', style: TextStyle(fontSize: 16)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // void _editJournal(
+  //     BuildContext context, WidgetRef ref, String productId, String currentContent) {
+  //   final controller = TextEditingController(text: currentContent);
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (ctx) => Padding(
+  //       padding: EdgeInsets.only(
+  //           left: 16, right: 16, top: 24, bottom: MediaQuery.of(ctx).viewInsets.bottom + 24),
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         crossAxisAlignment: CrossAxisAlignment.stretch,
+  //         children: [
+  //           const Text(
+  //             'Update Journal',
+  //             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //             textAlign: TextAlign.center,
+  //           ),
+  //           const SizedBox(height: 16),
+  //           TextField(
+  //             controller: controller,
+  //             maxLines: 6,
+  //             decoration: InputDecoration(
+  //               hintText: 'Add notes about this product...',
+  //               border: OutlineInputBorder(
+  //                 borderRadius: BorderRadius.circular(12),
+  //               ),
+  //             ),
+  //           ),
+  //           const SizedBox(height: 16),
+  //           ElevatedButton(
+  //             style: ElevatedButton.styleFrom(
+  //               padding: const EdgeInsets.symmetric(vertical: 14),
+  //               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  //             ),
+  //             onPressed: () async {
+  //               if (controller.text.trim().isEmpty) return;
+  //               await ref.read(databaseProvider).appendJournalRevision(
+  //                     JournalRevisionsCompanion.insert(
+  //                       id: DateTime.now().microsecondsSinceEpoch.toString(),
+  //                       productId: productId,
+  //                       content: controller.text.trim(),
+  //                       createdAt: DateTime.now(),
+  //                     ),
+  //                   );
+  //               if (ctx.mounted) Navigator.pop(ctx);
+  //             },
+  //             child: const Text('Save New Revision', style: TextStyle(fontSize: 16)),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+}
+
+List<int> _parseReminderDays(String? raw) {
+  final days = raw
+      ?.split(',')
+      .map((value) => int.tryParse(value.trim()))
+      .whereType<int>()
+      .where((value) => value >= 0)
+      .toList();
+  return days == null || days.isEmpty ? const [30, 7, 0] : days;
 }
 
 class _StatsRow extends StatelessWidget {
@@ -301,7 +385,8 @@ class _StatsRow extends StatelessWidget {
 
     Widget buildStatCard(String label, String value, {bool isPrimary = false}) {
       return Container(
-        padding: EdgeInsets.symmetric(vertical: isPrimary ? 16 : 12, horizontal: 8),
+        padding:
+            EdgeInsets.symmetric(vertical: isPrimary ? 16 : 12, horizontal: 8),
         decoration: BoxDecoration(
           color: AppColors.bg2,
           borderRadius: BorderRadius.circular(12),
@@ -340,19 +425,28 @@ class _StatsRow extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: buildStatCard('Total Cost', money.format(stats.totalCost), isPrimary: true)),
+              Expanded(
+                  child: buildStatCard(
+                      'Total Cost', money.format(stats.totalCost),
+                      isPrimary: true)),
               const SizedBox(width: 12),
-              Expanded(child: buildStatCard('Cost per Day', money.format(stats.costPerDay), isPrimary: true)),
+              Expanded(
+                  child: buildStatCard(
+                      'Cost per Day', money.format(stats.costPerDay),
+                      isPrimary: true)),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              Expanded(child: buildStatCard('Owned', '${(stats.ownershipDays / 365).toStringAsFixed(1)}y')),
+              Expanded(
+                  child: buildStatCard('Owned',
+                      '${(stats.ownershipDays / 365).toStringAsFixed(1)}y')),
               const SizedBox(width: 12),
               Expanded(child: buildStatCard('Repairs', '${stats.repairs}')),
               const SizedBox(width: 12),
-              Expanded(child: buildStatCard('Maintenance', '${stats.maintenance}')),
+              Expanded(
+                  child: buildStatCard('Maintenance', '${stats.maintenance}')),
             ],
           ),
         ],
@@ -367,7 +461,8 @@ class _TimelineTile extends StatefulWidget {
   final String type;
   final double? cost;
   final String? note;
-  final VoidCallback? onDelete;
+  final List<Attachment> attachments;
+  final Future<void> Function()? onDelete;
 
   const _TimelineTile({
     required this.icon,
@@ -375,6 +470,7 @@ class _TimelineTile extends StatefulWidget {
     required this.type,
     this.cost,
     this.note,
+    this.attachments = const [],
     this.onDelete,
   });
 
@@ -415,22 +511,59 @@ class _TimelineTileState extends State<_TimelineTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(df.format(widget.date),
-                        style: const TextStyle(fontSize: 12, color: AppColors.text2)),
+                        style: const TextStyle(
+                            fontSize: 12, color: AppColors.text2)),
                     Text(
                       widget.cost != null
                           ? '${widget.type} · \$${widget.cost!.toStringAsFixed(2)}'
                           : widget.type,
-                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 15),
                     ),
                     if (!_open && (widget.note ?? '').isNotEmpty)
                       Text(widget.note!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: AppColors.text2, fontSize: 13)),
+                          style: const TextStyle(
+                              color: AppColors.text2, fontSize: 13)),
                     if (_open) ...[
                       const SizedBox(height: 8),
-                      Text(widget.note?.isNotEmpty == true ? widget.note! : '(no notes)',
+                      Text(
+                          widget.note?.isNotEmpty == true
+                              ? widget.note!
+                              : '(no notes)',
                           style: const TextStyle(fontSize: 14)),
+                      if (widget.attachments.isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 72,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.attachments.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(width: 8),
+                            itemBuilder: (context, index) => ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                File(widget.attachments[index].filePath),
+                                width: 72,
+                                height: 72,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, __, ___) => Container(
+                                  width: 72,
+                                  height: 72,
+                                  color: AppColors.bg,
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    Icons.broken_image_outlined,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                       if (widget.onDelete != null)
                         Align(
                           alignment: Alignment.centerLeft,
@@ -450,16 +583,20 @@ class _TimelineTileState extends State<_TimelineTile> {
                                     title: const Text('Delete this event?'),
                                     actions: [
                                       TextButton(
-                                          onPressed: () => Navigator.pop(context, false),
+                                          onPressed: () =>
+                                              Navigator.pop(context, false),
                                           child: const Text('Cancel')),
                                       TextButton(
-                                          style: TextButton.styleFrom(foregroundColor: AppColors.danger),
-                                          onPressed: () => Navigator.pop(context, true),
+                                          style: TextButton.styleFrom(
+                                              foregroundColor:
+                                                  AppColors.danger),
+                                          onPressed: () =>
+                                              Navigator.pop(context, true),
                                           child: const Text('Delete')),
                                     ],
                                   ),
                                 );
-                                if (confirm == true) widget.onDelete!();
+                                if (confirm == true) await widget.onDelete!();
                               },
                               child: const Text('Delete Event'),
                             ),

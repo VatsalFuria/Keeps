@@ -1,13 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:drift/drift.dart' hide Column;
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import '../data/database.dart';
 import '../providers/database_provider.dart';
 import '../models/event_types.dart';
 import '../theme/app_theme.dart';
 import '../services/notification_service.dart';
+import '../services/settings_service.dart';
 
 class AddEventScreen extends ConsumerStatefulWidget {
   final String productId;
@@ -30,8 +36,15 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
   DateTime? _warrantyExpiry;
   bool _useCustomType = false;
   bool _isSaving = false;
+  final List<XFile> _selectedPhotos = [];
 
   final _types = kEventIcons.keys.toList();
+
+  Future<void> _pickPhotos() async {
+    final photos = await ImagePicker().pickMultiImage(imageQuality: 85);
+    if (photos.isEmpty) return;
+    setState(() => _selectedPhotos.addAll(photos));
+  }
 
   @override
   void dispose() {
@@ -86,11 +99,46 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
         createdAt: DateTime.now(),
       ));
 
+      for (final photo in _selectedPhotos) {
+        final attachmentId = const Uuid().v4();
+        final dir = await getApplicationDocumentsDirectory();
+        final attachmentsDir = Directory('${dir.path}/attachments');
+        if (!await attachmentsDir.exists()) {
+          await attachmentsDir.create(recursive: true);
+        }
+        final extension = p.extension(photo.path).isEmpty
+            ? '.jpg'
+            : p.extension(photo.path);
+        final savedFile = File('${attachmentsDir.path}/$attachmentId$extension');
+        await File(photo.path).copy(savedFile.path);
+        await db.insertAttachment(AttachmentsCompanion.insert(
+          id: attachmentId,
+          productId: Value(widget.productId),
+          eventId: Value(eventId),
+          type: 'photo',
+          filePath: savedFile.path,
+          createdAt: DateTime.now(),
+        ));
+      }
+
       if (_warrantyExpiry != null) {
+        final reminderDays =
+            await SettingsService.instance.reminderDaysBefore();
+        final isRepair = type.toLowerCase() == 'repair';
+        await db.upsertWarranty(WarrantiesCompanion.insert(
+          id: 'event-$eventId',
+          productId: Value(widget.productId),
+          eventId: Value(eventId),
+          kind: isRepair ? 'repair' : 'event',
+          expiryDate: _warrantyExpiry!,
+          reminderDaysBefore: Value(reminderDays.join(',')),
+        ));
         await NotificationService.instance.scheduleWarrantyReminders(
           ownerId: eventId,
           productName: widget.productName,
           expiry: _warrantyExpiry!,
+          reminderDaysBefore: reminderDays,
+          warrantyLabel: isRepair ? 'repair warranty' : '$type warranty',
         );
       }
 
@@ -242,6 +290,69 @@ class _AddEventScreenState extends ConsumerState<AddEventScreen> {
               decoration: _buildInputDecoration('Notes',
                   hint: 'Add details about this event...'),
             ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '${_selectedPhotos.length} photo${_selectedPhotos.length == 1 ? '' : 's'} attached',
+                    style: const TextStyle(color: AppColors.text2),
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: _isSaving ? null : _pickPhotos,
+                  icon: const Icon(Icons.photo_library_outlined, size: 18),
+                  label: const Text('Add Photos'),
+                ),
+              ],
+            ),
+            if (_selectedPhotos.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 76,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _selectedPhotos.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  itemBuilder: (context, index) => Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(_selectedPhotos[index].path),
+                          width: 76,
+                          height: 76,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        top: 2,
+                        right: 2,
+                        child: InkWell(
+                          onTap: _isSaving
+                              ? null
+                              : () => setState(
+                                    () => _selectedPhotos.removeAt(index),
+                                  ),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black54,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: const EdgeInsets.all(2),
+                            child: const Icon(
+                              Icons.close,
+                              size: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
             const SizedBox(height: 32),
             Row(
               children: [
