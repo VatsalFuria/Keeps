@@ -35,8 +35,6 @@ This document defines the architecture, data model, functional scope, and build 
 | Platform                       | Priority | Notes                                   |
 | ------------------------------ | -------- | --------------------------------------- |
 | Android (API 26+ / Android 8+) | P0       | Primary design target                   |
-| iPadOS                         | P1       | Responsive layout, not a separate build |
-| Desktop (macOS/Windows) & Web  | P2       | Phase 3, same codebase                  |
 
 ---
 

@@ -11,6 +11,9 @@ class NotificationService {
     tzdata.initializeTimeZones();
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
     await _plugin.initialize(const InitializationSettings(android: androidInit));
+
+    final android = _plugin.resolvePlatformSpecificImplementationAndroidFlutterLocalNotificationsPlugin>();
+    await android?.requestNotificationsPermission();
   }
 
   /// Schedules 30/7/0-day-before reminders for a warranty expiry, matching
