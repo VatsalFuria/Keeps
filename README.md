@@ -100,3 +100,14 @@ These items are still planned and are not yet implemented in the current app:
 - Desktop/web build targets
 
 These items are still part of the roadmap and should be treated as future work rather than current functionality.
+
+Images
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 42 PM" src="https://github.com/user-attachments/assets/d0af256a-8ca9-4d3a-a1dc-44353a9ca3d4" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 42 PM (1)" src="https://github.com/user-attachments/assets/d8551a3c-fb68-456e-bc72-6737ce3ed275" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 42 PM (2)" src="https://github.com/user-attachments/assets/ab41e543-4094-4ed0-948d-2e1c6cd55b55" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 42 PM (3)" src="https://github.com/user-attachments/assets/7ba083de-13ce-4bc3-aa88-f72818e6ccbe" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 43 PM" src="https://github.com/user-attachments/assets/1b32b135-a159-4a25-ab88-2181cff920ce" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 43 PM (1)" src="https://github.com/user-attachments/assets/a05290ad-0734-44c8-b131-0cf2ffa35490" />
+<img width="750" height="1599" alt="WhatsApp Image 2026-08-21 at 4 04 43 PM (2)" src="https://github.com/user-attachments/assets/e8a1fb1e-a9d3-4c84-a68f-41996a5759f8" />
+
+
